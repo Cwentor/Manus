@@ -7,6 +7,9 @@
   <title>{{PROFILE_NAME}} · 工作台</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fontsapi.zeoseven.com" crossorigin>
+  <!-- 霞鹜文楷（博客迁移品牌字体；加载失败自动回退系统字体栈） -->
+  <link rel="stylesheet" href="https://fontsapi.zeoseven.com/292/main/result.css">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/components.css">
@@ -26,8 +29,6 @@
       <div class="nav-links">
         <a class="nav-link" href="index.html">主页</a>
         <a class="nav-link is-active" href="workspace.html" aria-current="page">工作台</a>
-        <a class="nav-link" href="index.html#products">产品</a>
-        <a class="nav-link" href="index.html#blog">长文</a>
         <button class="theme-toggle" aria-label="切换主题" type="button">
           <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.73 12.73 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -66,6 +67,10 @@
         <button class="doc-search-clear" aria-label="清空查找" type="button">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
+
+        <!-- 搜索结果面板（Zensical 风格：结果计数 + 面包屑 + 关键词高亮摘要，app.js 渲染；
+             作为 .doc-search 的绝对定位子元素悬挂在查找框正下方） -->
+        <div class="search-results" id="search-results" hidden></div>
       </div>
 
       <div class="filter-bar" data-target="docs">
@@ -83,9 +88,13 @@
   <!-- ================================================================== -->
   <footer class="footer">
     <div class="container">
+      <p class="footer-hitokoto" data-hitokoto hidden></p>
       <p class="footer-text">{{BUILD_META}}</p>
     </div>
   </footer>
+
+  <!-- 正文搜索索引（构建期生成：slug -> 纯文本正文，前端零请求匹配） -->
+  <script type="application/json" id="doc-search-index">{{SEARCH_INDEX}}</script>
 
   <!-- 文档行点击后直接进入 /articles/<slug>.html 整页阅读 -->
 

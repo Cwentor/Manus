@@ -5,10 +5,15 @@
      1) 主题切换（localStorage 持久化 + 系统偏好兜底）
      2) 阅读抽屉（点击卡片 -> 从内容池 <template> 即时注入，0 延迟秒开）
      3) 图片灯箱（点击放大预览）
-     4) 动态筛选（产品状态 / 博客标签）
+     4) 动态筛选（产品状态 / 博客标签；工作台查找为 Zensical 风格结果面板）
      5) 产品卡片 3D 悬浮微光（tilt + 光斑跟随）
      6) 滚动显现（IntersectionObserver）
      7) 统一 ESC 键监听
+     —— 以下迁移自 Cat-Drink 博客（Zensical）的 UI/UX，按本站风格适配 ——
+     8) 时段问候语条          9) GitHub 贡献热力图
+     10) Hero 交互网格 Canvas 11) 代码块复制按钮
+     12) 点击爱心漂浮         13) 标签页切换彩蛋
+     14) 页脚一言（hitokoto）
    ========================================================================== */
 (() => {
   'use strict';
@@ -200,6 +205,7 @@
     drawerTitle.textContent = article.dataset.title || '';
     drawerBody.replaceChildren(article);
     drawerBody.scrollTop = 0;
+    decorateCode(drawerBody); // 抽屉正文里的代码块补复制按钮
 
     body.classList.add('drawer-open', 'scroll-locked');
     drawer.setAttribute('aria-hidden', 'false');
@@ -267,25 +273,48 @@
   onScroll();
 
   /* ================================================================== */
-  /* 3.5 Hero 打字机（尊重 prefers-reduced-motion）                      */
+  /* 3.5 Hero 打字机（博客迁移：多句循环 = 打完停顿 → 回删 → 下一句）      */
+  /*     短语来自构建期注入的 data-phrases；仅一句时保持单次打字           */
   /* ================================================================== */
   const typeEl = $('#hero-typewriter');
   if (typeEl) {
-    const fullText = typeEl.textContent.trim();
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduceMotion && fullText) {
+    let phrases = [];
+    try {
+      const raw = JSON.parse(typeEl.dataset.phrases || '[]');
+      if (Array.isArray(raw)) phrases = raw.map(String).filter(Boolean);
+    } catch { /* 数据损坏则退回单句 */ }
+    if (!phrases.length) phrases = [typeEl.textContent.trim()];
+    phrases = [...new Set(phrases)];
+
+    if (!reduceMotion && phrases[0]) {
       typeEl.textContent = '';
       typeEl.classList.add('is-typing');
-      let i = 0;
-      const tick = () => {
-        typeEl.textContent = fullText.slice(0, ++i);
-        if (i < fullText.length) {
-          setTimeout(tick, 55 + Math.random() * 70);
+      let phraseIdx = 0;
+      let charIdx = 0;
+      let deleting = false;
+
+      const loop = () => {
+        const current = phrases[phraseIdx];
+        charIdx += deleting ? -1 : 1;
+        typeEl.textContent = current.slice(0, charIdx);
+
+        if (!deleting && charIdx === current.length) {
+          if (phrases.length === 1) {
+            typeEl.classList.remove('is-typing'); // 单句：打完即止（原行为）
+            return;
+          }
+          deleting = true;
+          setTimeout(loop, 2200); // 完整句停留
+        } else if (deleting && charIdx === 0) {
+          deleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          setTimeout(loop, 500); // 删完换句
         } else {
-          typeEl.classList.remove('is-typing');
+          setTimeout(loop, deleting ? 42 : 55 + Math.random() * 70);
         }
       };
-      setTimeout(tick, 450);
+      setTimeout(loop, 450);
     }
   }
 
@@ -314,17 +343,14 @@
   /* 4. 动态筛选（产品状态 / 博客标签 / 工作台分类）                      */
   /* ================================================================== */
 
-  /* 工作台文档的过滤状态：分类 chips 与查找框叠加生效 */
+  /* 工作台文档的分类筛选（搜索面板激活时列表明板二选一，见模块 4.5） */
   const docFilter = {
     category: 'all',
-    query: '',
     apply() {
       const rows = $$('.doc-row');
       let visible = 0;
       rows.forEach((row) => {
-        const byCat = this.category === 'all' || row.dataset.kind === this.category;
-        const byText = !this.query || row.textContent.toLowerCase().includes(this.query);
-        const show = byCat && byText;
+        const show = this.category === 'all' || row.dataset.kind === this.category;
         row.classList.toggle('is-hidden', !show);
         if (show) visible += 1;
       });
@@ -362,32 +388,134 @@
   });
 
   /* ================================================================== */
-  /* 4.5 工作台查找（Ctrl+K 聚焦，与分类筛选叠加）                       */
+  /* 4.5 工作台查找（Zensical 风格结果面板：计数 + 面包屑 + 高亮摘要）     */
+  /*     索引来自构建期嵌入的 JSON；多词 AND 匹配；↑↓ 选择、回车打开      */
   /* ================================================================== */
+  const searchEntries = (() => {
+    try {
+      const raw = JSON.parse($('#doc-search-index')?.textContent || '[]');
+      return Array.isArray(raw) ? raw.filter((e) => e?.slug && typeof e.text === 'string') : [];
+    } catch {
+      return []; // 索引损坏则始终空态
+    }
+  })();
+
   const searchBox = $('#doc-search');
   if (searchBox) {
     const input = $('.doc-search-input', searchBox);
     const clearBtn = $('.doc-search-clear', searchBox);
+    const searchPanel = $('#search-results');
+    const filterBar = $('.filter-bar[data-target="docs"]');
+    const docList = $('.doc-list');
+    const emptyTip = $('#doc-empty');
 
-    const syncQuery = () => {
-      docFilter.query = input.value.trim().toLowerCase();
-      searchBox.classList.toggle('has-text', !!docFilter.query);
+    const escapeHtml = (s) =>
+      String(s).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      }[c]));
+    const escapeReg = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    /** 在已转义的文本片段里高亮所有关键词（先转义再匹配，保证标签安全） */
+    const highlight = (escaped, terms) => {
+      let out = escaped;
+      for (const t of terms) {
+        out = out.replace(new RegExp(escapeReg(escapeHtml(t)), 'gi'), (m) => `<mark>${m}</mark>`);
+      }
+      return out;
+    };
+
+    /** 围绕首个命中位置截取正文摘要窗口，并高亮窗口内全部命中 */
+    const makeExcerpt = (text, terms) => {
+      const lower = text.toLowerCase();
+      let first = -1;
+      for (const t of terms) {
+        const i = lower.indexOf(t);
+        if (i >= 0 && (first < 0 || i < first)) first = i;
+      }
+      const PAD_BEFORE = 60;
+      const WINDOW = 180;
+      const start = Math.max(0, (first < 0 ? 0 : first) - PAD_BEFORE);
+      const end = Math.min(text.length, start + WINDOW);
+      const head = start > 0 ? '…' : '';
+      const tail = end < text.length ? '…' : '';
+      return head + highlight(escapeHtml(text.slice(start, end)), terms) + tail;
+    };
+
+    /** 退出搜索态：隐藏面板，恢复列表 / 筛选条 / 空态 */
+    const exitSearchMode = () => {
+      if (searchPanel) searchPanel.hidden = true;
+      filterBar?.classList.remove('is-hidden');
+      docList?.classList.remove('is-hidden');
+      emptyTip?.classList.add('is-hidden');
       docFilter.apply();
     };
 
-    input.addEventListener('input', syncQuery);
+    /** 进入搜索态：隐藏列表，渲染结果面板 */
+    const enterSearchMode = (terms) => {
+      filterBar?.classList.add('is-hidden');
+      docList?.classList.add('is-hidden');
+      emptyTip?.classList.add('is-hidden');
+      if (!searchPanel) return;
+
+      const results = searchEntries.filter((entry) => {
+        const hay = `${entry.title} ${entry.desc} ${entry.text}`.toLowerCase();
+        return terms.every((t) => hay.includes(t));
+      });
+
+      const items = results
+        .map((entry, i) => {
+          const crumb = [entry.kind, entry.date].filter(Boolean).join(' · ');
+          return (
+            `<a class="search-result${i === 0 ? ' is-active' : ''}" href="/articles/${encodeURIComponent(entry.slug)}.html">` +
+            `<p class="search-result-crumb">${escapeHtml(crumb)}</p>` +
+            `<h3 class="search-result-title">${highlight(escapeHtml(entry.title), terms)}</h3>` +
+            `<p class="search-result-excerpt">${makeExcerpt(entry.text, terms)}</p>` +
+            `</a>`
+          );
+        })
+        .join('');
+
+      searchPanel.innerHTML =
+        `<p class="search-results-head">${results.length} 个结果</p>` +
+        (items || `<p class="search-empty">没有匹配的文档 —— 换个关键词试试。</p>`);
+      searchPanel.hidden = false;
+    };
+
+    const syncSearch = () => {
+      const raw = input.value.trim();
+      searchBox.classList.toggle('has-text', !!raw);
+      const terms = raw.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!terms.length) exitSearchMode();
+      else enterSearchMode(terms);
+    };
+
+    input.addEventListener('input', syncSearch);
 
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         input.value = '';
-        syncQuery();
+        syncSearch();
         input.blur();
+        return;
+      }
+      if (!searchPanel || searchPanel.hidden) return;
+      const items = $$('.search-result', searchPanel);
+      if (!items.length) return;
+      let idx = items.findIndex((el) => el.classList.contains('is-active'));
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        idx = e.key === 'ArrowDown' ? (idx + 1) % items.length : (idx - 1 + items.length) % items.length;
+        items.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+        items[idx].scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        (items[Math.max(idx, 0)] || items[0])?.click();
       }
     });
 
     clearBtn.addEventListener('click', () => {
       input.value = '';
-      syncQuery();
+      syncSearch();
       input.focus();
     });
 
@@ -487,6 +615,352 @@
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     closeDrawer();
+  });
+
+  /* ================================================================== */
+  /* 8. 时段问候语条（博客迁移：按钟点切换问候与 emoji）                  */
+  /* ================================================================== */
+  const greetingEl = $('#hero-greeting');
+  if (greetingEl) {
+    const GREETINGS = [
+      [0, 5, '夜深了，注意休息', '🌙'],
+      [5, 7, '早安，新的一天开始啦', '🌅'],
+      [7, 9, '早上好，开始美好的一天', '☀️'],
+      [9, 11, '上午好，保持专注', '✨'],
+      [11, 13, '中午好，该休息一下了', '🍲'],
+      [13, 15, '午后时光，继续加油', '☕'],
+      [15, 18, '下午好，别忘了喝水', '🌤️'],
+      [18, 20, '傍晚好，放松一下吧', '🌆'],
+      [20, 22, '晚上好，享受宁静时光', '🌃'],
+      [22, 24, '夜深了，早点休息哦', '🌠'],
+    ];
+    const hour = new Date().getHours();
+    const [, , text, emoji] = GREETINGS.find(([s, e]) => hour >= s && hour < e) || GREETINGS[0];
+    const emojiEl = document.createElement('span');
+    emojiEl.className = 'greeting-emoji';
+    emojiEl.textContent = emoji;
+    greetingEl.replaceChildren(emojiEl, document.createTextNode(text));
+  }
+
+  /* ================================================================== */
+  /* 9. GitHub 贡献热力图（博客迁移：jogruber API + SVG 热力格 + tooltip） */
+  /* ================================================================== */
+  const heatmapSection = $('[data-github-section]');
+  if (heatmapSection) {
+    const heatmapCard = $('.heatmap-card', heatmapSection);
+    const username = (heatmapCard?.dataset.username || '').trim();
+    const heatmapSvg = $('[data-heatmap-svg]', heatmapSection);
+    const heatmapCount = $('[data-heatmap-count]', heatmapSection);
+    const heatmapEmpty = $('[data-heatmap-empty]', heatmapSection);
+    const heatmapTip = $('[data-heatmap-tooltip]', heatmapSection);
+    const heatmapTipText = $('[data-heatmap-tooltip-text]', heatmapSection);
+
+    if (!username) {
+      heatmapSection.hidden = true; // 未配置 github_username 时整块不渲染
+    } else {
+      const NS = 'http://www.w3.org/2000/svg';
+      const CELL = 11;
+      const GAP = 3;
+      const ROWS = 7;
+      const LABEL_OFFSET = 28;
+      const HEADER_OFFSET = 16;
+      const LEVELS = ['lvl-0', 'lvl-1', 'lvl-2', 'lvl-3', 'lvl-4'];
+      const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const WEEKDAYS = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
+
+      const fmtDay = (dateStr) => {
+        const d = new Date(dateStr);
+        return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+      };
+
+      const makeText = (attrs) => {
+        const el = document.createElementNS(NS, 'text');
+        el.setAttribute('class', 'heatmap-label');
+        for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+        return el;
+      };
+
+      const hideTip = () => heatmapTip?.classList.remove('is-visible');
+
+      const showTip = (day, cellEl) => {
+        if (!heatmapTip) return;
+        heatmapTipText.textContent = day.count > 0
+          ? `${fmtDay(day.date)}：${day.count} 次贡献`
+          : `${fmtDay(day.date)}：无贡献`;
+        heatmapTip.classList.add('is-visible');
+
+        const cellRect = cellEl.getBoundingClientRect();
+        const tipRect = heatmapTip.getBoundingClientRect();
+        const margin = 8;
+        const gap = 8;
+        let x = cellRect.left + cellRect.width / 2 - tipRect.width / 2;
+        x = Math.max(margin, Math.min(x, window.innerWidth - tipRect.width - margin));
+        let y = cellRect.top - tipRect.height - gap;
+        let above = true;
+        if (y < margin) {
+          y = cellRect.bottom + gap;
+          above = false;
+        }
+        heatmapTip.style.left = `${x}px`;
+        heatmapTip.style.top = `${y}px`;
+        heatmapTip.classList.toggle('is-above', above);
+        heatmapTip.classList.toggle('is-below', !above);
+        heatmapTip.style.setProperty('--arrow-x', `${Math.round(cellRect.left + cellRect.width / 2 - x)}px`);
+      };
+
+      fetch(`https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(username)}?y=last`)
+        .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
+        .then((data) => {
+          const contribs = Array.isArray(data?.contributions) ? data.contributions : [];
+          if (!contribs.length) throw new Error('empty');
+
+          heatmapCount.textContent = data.total?.lastYear ?? '--';
+          const weeks = Math.ceil(contribs.length / ROWS);
+          heatmapSvg.setAttribute(
+            'viewBox',
+            `0 0 ${LABEL_OFFSET + weeks * (CELL + GAP)} ${HEADER_OFFSET + ROWS * (CELL + GAP)}`
+          );
+
+          // 顶部月份标签（月份变化处标注一次）
+          let lastMonth = -1;
+          for (let w = 0; w < weeks; w++) {
+            const item = contribs[w * ROWS];
+            if (!item) break;
+            const month = new Date(item.date).getMonth();
+            if (month !== lastMonth) {
+              heatmapSvg.appendChild(makeText({
+                x: LABEL_OFFSET + w * (CELL + GAP),
+                y: 10,
+              })).textContent = MONTHS[month];
+              lastMonth = month;
+            }
+          }
+
+          // 左侧星期标签
+          WEEKDAYS.forEach((d, i) => {
+            if (!d) return;
+            heatmapSvg.appendChild(makeText({
+              x: 0,
+              y: HEADER_OFFSET + i * (CELL + GAP) + CELL - 1,
+            })).textContent = d;
+          });
+
+          // 热力格
+          contribs.forEach((day, idx) => {
+            const col = Math.floor(idx / ROWS);
+            const row = idx % ROWS;
+            const rect = document.createElementNS(NS, 'rect');
+            rect.setAttribute('x', LABEL_OFFSET + col * (CELL + GAP));
+            rect.setAttribute('y', HEADER_OFFSET + row * (CELL + GAP));
+            rect.setAttribute('width', CELL);
+            rect.setAttribute('height', CELL);
+            rect.setAttribute('rx', 2.5);
+            rect.setAttribute('ry', 2.5);
+            rect.setAttribute('class', `heatmap-cell ${LEVELS[Math.min(day.level, 4)]}`);
+            rect.addEventListener('mouseenter', () => showTip(day, rect));
+            rect.addEventListener('mouseleave', hideTip);
+            heatmapSvg.appendChild(rect);
+          });
+        })
+        .catch(() => {
+          // 接口不可达：隐藏 SVG 显示空态文案
+          heatmapSvg.classList.add('is-hidden');
+          heatmapEmpty?.classList.remove('is-hidden');
+        });
+
+      // 滚动时收起 tooltip，避免残影悬空
+      window.addEventListener('scroll', hideTip, { passive: true });
+    }
+  }
+
+  /* ================================================================== */
+  /* 10. Hero 交互网格（博客迁移：Canvas 网格顶点随鼠标距离被推开）        */
+  /* ================================================================== */
+  const gridCanvas = $('#hero-grid');
+  if (gridCanvas && gridCanvas.parentElement) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    if (reduceMotion || coarsePointer) {
+      gridCanvas.remove(); // 移动端 / 减动效：不启用交互网格
+    } else {
+      const hero = gridCanvas.parentElement;
+      const gtx = gridCanvas.getContext('2d');
+      const GRID = 50;        // 网格间距（px）
+      const RADIUS = 150;     // 鼠标影响半径
+      const DISPLACE = 8;     // 最大位移
+      let mouseX = -9999;
+      let mouseY = -9999;
+      let rafPending = false;
+      let dpr = 1;
+
+      const strokeFor = () =>
+        root.dataset.theme === 'dark' ? 'rgba(255, 255, 255, 0.09)' : 'rgba(15, 23, 42, 0.1)';
+
+      const drawGrid = () => {
+        rafPending = false;
+        const w = gridCanvas.width / dpr;
+        const h = gridCanvas.height / dpr;
+        gtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        gtx.clearRect(0, 0, w, h);
+        gtx.strokeStyle = strokeFor();
+        gtx.lineWidth = 1;
+
+        // 垂直线：顶点被鼠标沿水平方向推开
+        for (let x = 0; x <= w; x += GRID) {
+          gtx.beginPath();
+          for (let y = 0; y <= h; y += 5) {
+            const dx = x - mouseX;
+            const dy = y - mouseY;
+            const dist = Math.hypot(dx, dy);
+            const offset = dist < RADIUS ? (dx / (dist || 1)) * (1 - dist / RADIUS) * DISPLACE : 0;
+            if (y === 0) gtx.moveTo(x + offset, y);
+            else gtx.lineTo(x + offset, y);
+          }
+          gtx.stroke();
+        }
+
+        // 水平线：顶点被鼠标沿垂直方向推开
+        for (let y = 0; y <= h; y += GRID) {
+          gtx.beginPath();
+          for (let x = 0; x <= w; x += 5) {
+            const dx = x - mouseX;
+            const dy = y - mouseY;
+            const dist = Math.hypot(dx, dy);
+            const offset = dist < RADIUS ? (dy / (dist || 1)) * (1 - dist / RADIUS) * DISPLACE : 0;
+            if (x === 0) gtx.moveTo(x, y + offset);
+            else gtx.lineTo(x, y + offset);
+          }
+          gtx.stroke();
+        }
+      };
+
+      const scheduleDraw = () => {
+        if (!rafPending) {
+          rafPending = true;
+          requestAnimationFrame(drawGrid);
+        }
+      };
+
+      const resizeGrid = () => {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const rect = hero.getBoundingClientRect();
+        gridCanvas.width = Math.max(1, Math.round(rect.width * dpr));
+        gridCanvas.height = Math.max(1, Math.round(rect.height * dpr));
+        scheduleDraw();
+      };
+
+      document.addEventListener('mousemove', (e) => {
+        const rect = gridCanvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        if (mouseY > -RADIUS && mouseY < rect.height + RADIUS) scheduleDraw();
+      });
+      window.addEventListener('resize', resizeGrid);
+      // 主题切换时同步网格线颜色
+      new MutationObserver(scheduleDraw).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+      resizeGrid();
+    }
+  }
+
+  /* ================================================================== */
+  /* 11. 代码块复制按钮（博客 content.code.copy 迁移：注入 + 状态反馈）   */
+  /* ================================================================== */
+  const ICON_COPY = '<svg class="ic-copy" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+  const ICON_CHECK = '<svg class="ic-check" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+
+  function decorateCode(scope = document) {
+    $$('pre.shiki', scope).forEach((pre) => {
+      if (pre.querySelector('.code-copy')) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'code-copy';
+      btn.setAttribute('aria-label', '复制代码');
+      btn.title = '复制代码';
+      btn.innerHTML = ICON_COPY + ICON_CHECK;
+      btn.addEventListener('click', async () => {
+        const code = pre.querySelector('code');
+        const text = code ? code.innerText : pre.innerText;
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          // 剪贴板 API 不可用（非安全上下文等）时退回 execCommand
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+        }
+        btn.classList.add('is-copied');
+        setTimeout(() => btn.classList.remove('is-copied'), 1600);
+      });
+      pre.appendChild(btn);
+    });
+  }
+
+  decorateCode(document); // 文章整页 / 内容池中已渲染的代码块
+
+  /* ================================================================== */
+  /* 12. 点击爱心漂浮（博客迁移：点击处生成随机主题色爱心，上浮消散）      */
+  /* ================================================================== */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const HEART_SVG = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+    const HEART_COLORS = ['#a78bfa', '#22d3ee', '#f472b6', '#fbbf24', '#4ade80'];
+
+    document.addEventListener('click', (e) => {
+      const heart = document.createElement('span');
+      heart.className = 'click-heart';
+      heart.style.left = `${e.clientX}px`;
+      heart.style.top = `${e.clientY}px`;
+      heart.style.color = HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)];
+      heart.innerHTML = HEART_SVG;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+  }
+
+  /* ================================================================== */
+  /* 13. 标签页切换彩蛋（博客迁移：离开页面"崩溃"，回来"恢复"）           */
+  /* ================================================================== */
+  const originTitle = document.title;
+  let titleTimer = 0;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      document.title = '╭(°A°`)╮ 页面崩溃啦 ~';
+      clearTimeout(titleTimer);
+    } else {
+      document.title = '(ฅ>ω<*ฅ) 噫又好啦 ~' + originTitle;
+      titleTimer = setTimeout(() => {
+        document.title = originTitle;
+      }, 2000);
+    }
+  });
+
+  /* ================================================================== */
+  /* 14. 页脚一言（博客迁移：hitokoto 接口，失败保持隐藏）                */
+  /* ================================================================== */
+  $$('[data-hitokoto]').forEach(async (el) => {
+    try {
+      const res = await fetch('https://v1.hitokoto.cn/?c=i&c=k&max_length=36');
+      if (!res.ok) throw new Error(String(res.status));
+      const data = await res.json();
+      if (!data?.hitokoto) return;
+      const quote = document.createElement('span');
+      quote.textContent = `「${data.hitokoto}」`;
+      const parts = [quote];
+      if (data.from) {
+        const source = document.createElement('span');
+        source.className = 'hitokoto-source';
+        source.textContent = `—— ${data.from}`;
+        parts.push(source);
+      }
+      el.replaceChildren(...parts);
+      el.hidden = false;
+    } catch {
+      /* 接口不可达：一言保持隐藏 */
+    }
   });
 
   /* ================================================================== */

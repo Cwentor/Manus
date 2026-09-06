@@ -99,6 +99,24 @@ function extractUrl(raw) {
   return m ? m[1] : s;
 }
 
+/** HTML 转纯文本（用于工作台正文搜索索引）：剥标签 + 还原实体 + 压缩空白 */
+function htmlToText(html) {
+  return String(html ?? '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** JSON 安全嵌入 <script type="application/json">：仅需防止提前闭合标签 */
+function jsonForScriptTag(value) {
+  return JSON.stringify(value).replace(/<\//g, '<\\/');
+}
+
 /* ---------------------------------------------------------------------------
  * 图标库（内联 SVG，避免引入图标字体；元数据中只存图标名）
  * ------------------------------------------------------------------------- */
@@ -368,6 +386,11 @@ async function main() {
       `<span class="stat-item"><b class="stat-num" data-count="${posts.length + products.length}">0</b><span>文档</span></span>`,
     ].join('');
 
+    /* Hero 多句循环打字机短语（profile.typewriter 未配置时退化为单句 tagline） */
+    const typewriterPhrases = Array.isArray(profile.typewriter) && profile.typewriter.length
+      ? profile.typewriter.map(String)
+      : [profile.tagline];
+
     const html = applyTokens(indexTpl, {
       PROFILE_NAME: escHtml(profile.name),
       PROFILE_HANDLE: escHtml(profile.handle || ''),
@@ -379,6 +402,8 @@ async function main() {
       PROFILE_AVAILABLE: escHtml(profile.available_for || ''),
       PROFILE_SOCIALS: socialsHtml,
       HERO_STATS: heroStats,
+      TYPEWRITER_PHRASES: escAttr(JSON.stringify(typewriterPhrases)),
+      GITHUB_USERNAME: escAttr(profile.github_username || ''),
       PRODUCTS: productCards,
       PRODUCT_FILTERS: statusChips,
       BLOG: blogCards,
@@ -404,6 +429,7 @@ async function main() {
         date: String(p.data.date || ''),
         side: String(p.data.status || 'Active'),
         href: `/articles/${p.slug}.html`,
+        text: htmlToText(p.html),
       })),
       ...posts.map((p) => ({
         kind: 'blog',
@@ -413,6 +439,7 @@ async function main() {
         date: String(p.data.date || ''),
         side: String(p.data.read_time || ''),
         href: `/articles/${p.slug}.html`,
+        text: htmlToText(p.html),
       })),
     ];
     docItems.sort((a, b) => toTime(b.date) - toTime(a.date));
@@ -429,7 +456,7 @@ async function main() {
           (d.date ? `<time class="doc-date">${escHtml(d.date)}</time>` : '') +
           (d.side ? `<span class="doc-meta">${escHtml(d.side)}</span>` : '') +
           `</div>`;
-        return `<a class="doc-row" data-kind="${d.kind}" href="${escAttr(d.href)}" aria-label="查看：${escAttr(d.title)}">${inner}</a>`;
+        return `<a class="doc-row" data-kind="${d.kind}" data-slug="${escAttr(d.slug)}" href="${escAttr(d.href)}" aria-label="查看：${escAttr(d.title)}">${inner}</a>`;
       })
       .join('\n');
 
@@ -443,11 +470,25 @@ async function main() {
       `<span class="stat-chip">✍️ 长文 ${posts.length}</span>`,
     ].join('');
 
+    /* 工作台搜索索引：构建期抽取纯文本，前端零请求匹配（含标题/分类/日期供结果面板展示） */
+    const KIND_LABEL_FULL = { product: '产品', blog: '长文' };
+    const searchIndex = jsonForScriptTag(
+      docItems.map((d) => ({
+        slug: d.slug,
+        kind: KIND_LABEL_FULL[d.kind] || d.kind,
+        title: d.title,
+        desc: d.desc,
+        date: d.date,
+        text: d.text,
+      }))
+    );
+
     const workspaceHtml = applyTokens(loadTemplate('workspace.html'), {
       PROFILE_NAME: escHtml(profile.name),
       WORKSPACE_STATS: workspaceStats,
       DOC_FILTERS: docFilters,
       DOCS: docRows,
+      SEARCH_INDEX: searchIndex,
       BUILD_META: escHtml(buildMeta),
     });
     fs.writeFileSync(path.join(DIR.dist, 'workspace.html'), workspaceHtml, 'utf8');

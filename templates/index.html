@@ -7,6 +7,9 @@
   <title>{{PROFILE_NAME}} · Showcase</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fontsapi.zeoseven.com" crossorigin>
+  <!-- 霞鹜文楷（博客迁移品牌字体；加载失败自动回退系统字体栈） -->
+  <link rel="stylesheet" href="https://fontsapi.zeoseven.com/292/main/result.css">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/components.css">
@@ -35,8 +38,6 @@
       <a class="nav-logo" href="#hero">{{PROFILE_NAME}}</a>
       <div class="nav-links">
         <a class="nav-link" href="workspace.html">工作台</a>
-        <a class="nav-link" href="#products">产品</a>
-        <a class="nav-link" href="#blog">长文</a>
         <button class="theme-toggle" aria-label="切换主题" type="button">
           <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.73 12.73 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -53,7 +54,10 @@
   <!-- Hero 区域 —— 个人信息（内容由 build.js 注入）                       -->
   <!-- ================================================================== -->
   <section id="hero" class="hero">
+    <!-- 交互网格（博客迁移：Canvas 网格随鼠标起伏，app.js 绘制） -->
+    <canvas id="hero-grid" class="hero-grid" aria-hidden="true"></canvas>
     <div class="hero-inner container">
+      <p class="hero-greeting" id="hero-greeting" aria-live="polite"></p>
       <div class="hero-avatar-flip" tabindex="0" aria-label="头像（悬停或聚焦翻转查看背面）">
         <div class="hero-avatar-inner">
           <img class="hero-avatar-face hero-avatar-front" src="{{PROFILE_AVATAR}}" alt="{{PROFILE_NAME}}" width="96" height="96" loading="eager">
@@ -64,7 +68,7 @@
         </div>
       </div>
       <h1 class="hero-name">{{PROFILE_NAME}} <span class="hero-handle">{{PROFILE_HANDLE}}</span></h1>
-      <p class="hero-tagline" id="hero-typewriter">{{PROFILE_TAGLINE}}</p>
+      <p class="hero-tagline" id="hero-typewriter" data-phrases="{{TYPEWRITER_PHRASES}}">{{PROFILE_TAGLINE}}</p>
       <div class="hero-status">
         <span class="status-dot" aria-hidden="true"></span>
         <span class="status-text">{{PROFILE_STATUS_EMOJI}} {{PROFILE_STATUS}}</span>
@@ -72,6 +76,42 @@
       </div>
       <div class="hero-socials">{{PROFILE_SOCIALS}}</div>
       <div class="hero-stats">{{HERO_STATS}}</div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- GitHub 贡献热力图（博客迁移：玻璃卡 + SVG 热力格，app.js 拉取渲染） -->
+  <!-- ================================================================== -->
+  <section class="github-section" id="github" data-github-section>
+    <div class="container">
+      <div class="heatmap-card" data-username="{{GITHUB_USERNAME}}">
+        <div class="heatmap-head">
+          <h2 class="heatmap-title">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </h2>
+          <span class="heatmap-stats">过去一年 <strong data-heatmap-count>--</strong> 次贡献</span>
+        </div>
+        <div class="heatmap-scroll">
+          <svg class="heatmap-svg" data-heatmap-svg preserveAspectRatio="xMidYMid meet" role="img" aria-label="GitHub 贡献热力图"></svg>
+          <p class="heatmap-empty is-hidden" data-heatmap-empty>贡献数据暂时不可用 —— 稍后再来看看。</p>
+        </div>
+        <div class="heatmap-foot">
+          <div class="heatmap-legend" aria-hidden="true">
+            <span>少</span>
+            <span class="legend-cell lvl-0"></span>
+            <span class="legend-cell lvl-1"></span>
+            <span class="legend-cell lvl-2"></span>
+            <span class="legend-cell lvl-3"></span>
+            <span class="legend-cell lvl-4"></span>
+            <span>多</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 贡献详情 tooltip（箭头方向由 JS 依视口空间切换） -->
+    <div class="heatmap-tooltip" data-heatmap-tooltip>
+      <div class="heatmap-tooltip-body"><span class="heatmap-tooltip-arrow"></span><span data-heatmap-tooltip-text></span></div>
     </div>
   </section>
 
@@ -110,6 +150,7 @@
   <!-- ================================================================== -->
   <footer class="footer">
     <div class="container">
+      <p class="footer-hitokoto" data-hitokoto hidden></p>
       <p class="footer-text">{{BUILD_META}}</p>
     </div>
   </footer>
