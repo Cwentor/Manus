@@ -133,11 +133,12 @@ const ICONS = {
 
 /* ---------------------------------------------------------------------------
  * Markdown 渲染器
- *   原则：html: false —— 内容层禁止任何原始 HTML，从根上保证「内容与 UI 分离」
+ *   html: true —— 知识库迁移文档含大量原始 HTML（<table>/<audio>/<span> 等），
+ *   内容为单作者可信来源，放开以保证正文按原样渲染
  * ------------------------------------------------------------------------- */
 function createMarkdownRenderer({ breaks = false } = {}) {
   const md = new MarkdownIt({
-    html: false,       // 拒绝 Markdown 中的原始 HTML / 内联样式
+    html: true,        // 允许 Markdown 中的原始 HTML（内容层为本人维护的可信文档）
     linkify: true,     // 裸链接自动转 <a>
     breaks,            // 朋友圈：单换行即换行
     typographer: true,
@@ -189,25 +190,92 @@ let highlighter = null;
  * 内容读取与解析
  * ------------------------------------------------------------------------- */
 
-/** 读取目录下所有 .md，剥离 Front-matter，返回原始记录 */
+/**
+ * 读取目录下所有 .md（递归含子目录），剥离 Front-matter，返回原始记录。
+ * slug：优先 front-matter 的 slug；其次文件名；重名组整组回退到目录路径派生，保证全局唯一。
+ */
 function readMarkdownFiles(dir) {
   if (!fs.existsSync(dir)) {
-    log.warn(`目录不存在，跳过：${path.relative(ROOT, dir)}`);
+    console.warn(`目录不存在，跳过：${path.relative(ROOT, dir)}`);
     return [];
   }
-  return fs.readdirSync(dir)
-    .filter((f) => f.endsWith('.md'))
-    .map((file) => {
-      const full = path.join(dir, file);
+  const records = [];
+  const walk = (cur) => {
+    for (const name of fs.readdirSync(cur).sort()) {
+      const full = path.join(cur, name);
+      if (fs.statSync(full).isDirectory()) { walk(full); continue; }
+      if (!name.endsWith('.md')) continue;
+      const relPath = path.relative(dir, full).replace(/\\/g, '/');
       const raw = fs.readFileSync(full, 'utf8');
       const { data, content } = matter(raw);
-      return {
-        slug: slugify(data.slug || file.replace(/\.md$/, '')),
-        file,
-        data,
-        body: content,
-      };
-    });
+      records.push({ relPath, file: name, data, body: content });
+    }
+  };
+  walk(dir);
+
+  const byStem = new Map();
+  for (const r of records) {
+    r.stemSlug = slugify(r.file.replace(/\.md$/, ''));
+    if (!byStem.has(r.stemSlug)) byStem.set(r.stemSlug, []);
+    byStem.get(r.stemSlug).push(r);
+  }
+  const used = new Set();
+  for (const r of records) {
+    const group = byStem.get(r.stemSlug);
+    let candidate = String(r.data.slug || '').trim();
+    if (!candidate) {
+      candidate = group.length === 1
+        ? r.stemSlug
+        : slugify([...r.relPath.split('/').slice(0, -1), r.file.replace(/\.md$/, '')].join('-'));
+    }
+    if (!candidate) candidate = 'post';
+    let final = candidate;
+    let n = 2;
+    while (used.has(final)) final = `${candidate}-${n++}`;
+    used.add(final);
+    r.slug = final;
+  }
+  return records;
+}
+
+/**
+ * 复制 content/blog 下的非 Markdown 附件（图片 / 音频 / PDF 等）到 dist/blog/<相对路径>，
+ * 与源站 /blog/... 的 URL 结构保持一致，正文中的绝对引用（如 /blog/audio/...）才能命中。
+ */
+function copyBlogAssets() {
+  const src = path.join(DIR.content, 'blog');
+  if (!fs.existsSync(src)) return;
+  const walk = (cur) => {
+    for (const name of fs.readdirSync(cur)) {
+      const full = path.join(cur, name);
+      if (fs.statSync(full).isDirectory()) { walk(full); continue; }
+      if (name.endsWith('.md')) continue;
+      const rel = path.relative(src, full);
+      const dest = path.join(DIR.dist, 'blog', rel);
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.copyFileSync(full, dest);
+    }
+  };
+  walk(src);
+}
+
+/**
+ * 把渲染后 HTML 中指向站内附件的相对引用（如 ./media/x.png）改写为 /blog/<文档目录>/... 绝对路径，
+ * 使 /articles/<slug>.html 整页里的相对图片 / 音频引用正确命中 dist/blog 下的附件。
+ * 仅当目标文件真实存在于 content/blog 下时改写；站内 .md 互链不改写。
+ */
+function rewriteRelativeAssets(html, relDir) {
+  return html.replace(/(src|href)="([^"]+)"/g, (m, attr, url) => {
+    if (/^(https?:|\/\/|\/|#|data:|mailto:)/.test(url)) return m;
+    if (/\.md($|[?#])/.test(url)) return m;
+    const clean = url.split('#')[0].split('?')[0];
+    const base = path.join(DIR.content, 'blog', relDir);
+    const asset = path.resolve(base, clean);
+    if (!asset.startsWith(path.join(DIR.content, 'blog'))) return m;
+    if (!fs.existsSync(asset) || !fs.statSync(asset).isFile()) return m;
+    const rel = path.relative(path.join(DIR.content, 'blog'), asset).replace(/\\/g, '/');
+    return `${attr}="/blog/${encodeURI(rel)}"`;
+  });
 }
 
 /** 读取并校验 profile.json（个人信息配置） */
@@ -230,6 +298,19 @@ function readProfile() {
   return profile;
 }
 
+/* 工作台分类（key = content/blog 一级目录名，与 scripts/normalize-blog.js 写出的 category 一致） */
+const CATEGORY_LABEL = {
+  blog: '长文',
+  job: '求职',
+  knowledge: '知识库',
+  draft: '随笔',
+  podcast: '播客',
+  relax: '闲聊',
+  web: '资源分享',
+  skills: '技能',
+  about: '关于',
+};
+
 /* ---------------------------------------------------------------------------
  * 卡片片段渲染（数据 -> 模板 -> HTML 字符串）
  * ------------------------------------------------------------------------- */
@@ -240,11 +321,25 @@ function loadTemplate(name) {
 }
 
 /** 产品卡片 */
+const DEMO_ICON = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+
 function renderProductCard(tpl, product, index) {
   const status = String(product.data.status || 'Active').toLowerCase();
   const techChips = (product.data.tech_stack || [])
     .map((t) => `<span class="chip">${escHtml(t)}</span>`)
     .join('');
+  const demoUrl = extractUrl(product.data.demo_url);
+  const repoUrl = extractUrl(product.data.repo_url);
+
+  /* 操作按钮按需渲染：未配置的链接不出按钮 */
+  const actions =
+    (demoUrl
+      ? `<a class="btn btn-text" href="${escAttr(demoUrl)}" target="_blank" rel="noopener noreferrer">${DEMO_ICON}<span>Demo</span></a>`
+      : '') +
+    (repoUrl
+      ? `<a class="btn btn-text" href="${escAttr(repoUrl)}" target="_blank" rel="noopener noreferrer">${ICONS.github}<span>GitHub</span></a>`
+      : '') +
+    `<button class="btn btn-primary" data-open-article="${escAttr(product.slug)}" type="button"><span>了解详情</span></button>`;
 
   return applyTokens(tpl, {
     INDEX: index,
@@ -255,8 +350,7 @@ function renderProductCard(tpl, product, index) {
     STATUS: escHtml(product.data.status || 'Active'),
     STATUS_CLASS: status.replace(/[^a-z0-9-]/g, ''),
     TECH: techChips,
-    DEMO_URL: escAttr(extractUrl(product.data.demo_url)),
-    REPO_URL: escAttr(extractUrl(product.data.repo_url)),
+    ACTIONS: actions,
   });
 }
 
@@ -317,6 +411,16 @@ async function main() {
     const products = readMarkdownFiles(path.join(DIR.content, 'products'));
     const posts = readMarkdownFiles(path.join(DIR.content, 'blog'));
 
+    /* 分类标注（category 由 front-matter 提供，缺省为根目录「长文」） */
+    for (const p of posts) {
+      p.category = String(p.data.category || 'blog');
+      p.categoryLabel = CATEGORY_LABEL[p.category] || p.category;
+    }
+
+    /* -- 4.5 复制知识库附件（图片/音频/PDF 等）到 dist/blog -- */
+    log.step('复制 content/blog 附件到 dist/blog …');
+    copyBlogAssets();
+
     /* -- 5. 初始化 shiki 高亮器 -- */
     log.step('初始化 shiki 语法高亮 …');
     highlighter = await createHighlighter({
@@ -328,33 +432,31 @@ async function main() {
     const mdMain = createMarkdownRenderer({ breaks: false });
 
     for (const p of products) p.html = mdMain.render(p.body);
-    for (const p of posts) p.html = mdMain.render(p.body);
+    for (const p of posts) {
+      p.html = rewriteRelativeAssets(mdMain.render(p.body), path.dirname(p.relPath));
+    }
 
     /* -- 7. 排序 -- */
     products.sort((a, b) => (Number(a.data.order) || 999) - (Number(b.data.order) || 999));
     posts.sort((a, b) => toTime(b.data.date) - toTime(a.data.date));
 
-    /* -- 8. 渲染卡片片段 -- */
+    /* -- 8. 渲染卡片片段（首页「精选长文」仅收录 featured: true 的文档） -- */
     const tplProduct = loadTemplate('product-card.html');
     const tplBlog = loadTemplate('blog-card.html');
 
+    const featuredPosts = posts.filter((p) => p.data.featured === true);
     const productCards = products.map((p, i) => renderProductCard(tplProduct, p, i)).join('\n');
-    const blogCards = posts.map((p, i) => renderBlogCard(tplBlog, p, i)).join('\n');
+    const blogCards = featuredPosts.map((p, i) => renderBlogCard(tplBlog, p, i)).join('\n');
 
-    /* -- 9. 动态生成筛选 chips（产品状态 / 博客标签） -- */
-    const statuses = [...new Set(products.map((p) => String(p.data.status || 'Active').toLowerCase()))];
-    const statusChips = ['all', ...statuses]
-      .map((s) => `<button class="filter-chip${s === 'all' ? ' is-active' : ''}" data-filter="${escAttr(s)}">${s === 'all' ? '全部' : escHtml(s)}</button>`)
-      .join('');
-
-    const allTags = [...new Set(posts.flatMap((p) => p.data.tags || []))];
+    /* -- 9. 动态生成筛选 chips（首页精选长文标签） -- */
+    const allTags = [...new Set(featuredPosts.flatMap((p) => p.data.tags || []))];
     const tagChips = ['all', ...allTags]
       .map((t) => `<button class="filter-chip${t === 'all' ? ' is-active' : ''}" data-filter="${escAttr(t)}">${t === 'all' ? '全部' : `#${escHtml(t)}`}</button>`)
       .join('');
 
-    /* -- 10. 内容池：博客 + 产品的完整正文，嵌入 <template>（0 延迟秒开） -- */
+    /* -- 10. 内容池：首页精选长文 + 产品的完整正文，嵌入 <template>（0 延迟秒开） -- */
     const pool = [
-      ...posts.map((p) =>
+      ...featuredPosts.map((p) =>
         `<template id="article-${p.slug}" data-kind="blog">` +
         `<article class="article" data-title="${escAttr(p.data.title || '')}">${p.html}</article>` +
         `</template>`),
@@ -376,12 +478,12 @@ async function main() {
 
     const buildMeta =
       `Built in ${(performance.now() - started).toFixed(0)}ms · ` +
-      `${products.length} 产品 · ${posts.length} 篇长文 · ` +
+      `${products.length} 作品 · ${posts.length} 篇长文 · ` +
       new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
 
     /* 主页 Hero 实时统计（数字滚动动效由前端 JS 驱动） */
     const heroStats = [
-      `<span class="stat-item"><b class="stat-num" data-count="${products.length}">0</b><span>产品</span></span>`,
+      `<span class="stat-item"><b class="stat-num" data-count="${products.length}">0</b><span>作品</span></span>`,
       `<span class="stat-item"><b class="stat-num" data-count="${posts.length}">0</b><span>长文</span></span>`,
       `<span class="stat-item"><b class="stat-num" data-count="${posts.length + products.length}">0</b><span>文档</span></span>`,
     ].join('');
@@ -393,6 +495,7 @@ async function main() {
 
     const html = applyTokens(indexTpl, {
       PROFILE_NAME: escHtml(profile.name),
+      COPYRIGHT_NAME: escHtml(profile.copyright_name || profile.name),
       PROFILE_HANDLE: escHtml(profile.handle || ''),
       PROFILE_TAGLINE: escHtml(profile.tagline),
       PROFILE_AVATAR: escAttr(profile.avatar || '/assets/avatar/avatar.svg'),
@@ -405,7 +508,6 @@ async function main() {
       TYPEWRITER_PHRASES: escAttr(JSON.stringify(typewriterPhrases)),
       GITHUB_USERNAME: escAttr(profile.github_username || ''),
       PRODUCTS: productCards,
-      PRODUCT_FILTERS: statusChips,
       BLOG: blogCards,
       BLOG_FILTERS: tagChips,
       CONTENT_POOL: pool,
@@ -415,10 +517,10 @@ async function main() {
     /* -- 12. 写入主页输出 -- */
     fs.writeFileSync(path.join(DIR.dist, 'index.html'), html, 'utf8');
 
-    /* -- 13. 工作台页：全部文档归类列表（产品 / 长文 / 动态） -- */
+    /* -- 13. 工作台页：三栏阅读器（左文档树 / 中阅读区 / 右目录） -- */
     log.step('装配 templates/workspace.html …');
 
-    const KIND_LABEL = { product: '产品', blog: '长文' };
+    const KIND_LABEL = { product: '作品', blog: '长文' };
 
     const docItems = [
       ...products.map((p) => ({
@@ -433,6 +535,8 @@ async function main() {
       })),
       ...posts.map((p) => ({
         kind: 'blog',
+        cat: p.category,
+        catLabel: p.categoryLabel,
         slug: p.slug,
         title: String(p.data.title || 'Untitled'),
         desc: String(p.data.summary || ''),
@@ -444,50 +548,180 @@ async function main() {
     ];
     docItems.sort((a, b) => toTime(b.date) - toTime(a.date));
 
-    const docRows = docItems
-      .map((d) => {
-        const inner =
-          `<span class="doc-kind doc-kind-${d.kind}">${KIND_LABEL[d.kind]}</span>` +
-          `<div class="doc-main">` +
-          `<h3 class="doc-title">${escHtml(d.title)}</h3>` +
-          (d.desc ? `<p class="doc-desc">${escHtml(d.desc)}</p>` : '') +
-          `</div>` +
-          `<div class="doc-side">` +
-          (d.date ? `<time class="doc-date">${escHtml(d.date)}</time>` : '') +
-          (d.side ? `<span class="doc-meta">${escHtml(d.side)}</span>` : '') +
-          `</div>`;
-        return `<a class="doc-row" data-kind="${d.kind}" data-slug="${escAttr(d.slug)}" href="${escAttr(d.href)}" aria-label="查看：${escAttr(d.title)}">${inner}</a>`;
-      })
-      .join('\n');
+    /* 目录树：一级为分类目录（含虚拟组「长文」「产品」），其下按真实子目录逐级折叠。
+       节点：{ type:'dir', key, label, children } / { type:'doc', slug, title, date, read, kind } */
+    const WS_DIR_LABEL = { ...CATEGORY_LABEL, product: '作品' };
+    const treeRoot = { type: 'dir', key: '', label: '文档', children: [] };
+    const dirNodes = new Map();
+    const ensureDir = (key) => {
+      if (key === '') return treeRoot;
+      if (dirNodes.has(key)) return dirNodes.get(key);
+      const node = {
+        type: 'dir',
+        key,
+        label: key.includes('/') ? key.slice(key.lastIndexOf('/') + 1) : (WS_DIR_LABEL[key] || key),
+        children: [],
+      };
+      dirNodes.set(key, node);
+      ensureDir(key.includes('/') ? key.slice(0, key.lastIndexOf('/')) : '').children.push(node);
+      return node;
+    };
 
-    const docFilters = ['all', 'product', 'blog']
-      .map((k) => `<button class="filter-chip${k === 'all' ? ' is-active' : ''}" data-filter="${escAttr(k)}">${k === 'all' ? '全部' : KIND_LABEL[k]}</button>`)
-      .join('');
+    const preferredCats = ['knowledge', 'job', 'draft', 'podcast', 'relax', 'web', 'skills', 'about'];
+    for (const c of [...preferredCats, 'blog', 'product']) ensureDir(c);
+    for (const p of posts) {
+      if (!preferredCats.includes(p.category) && p.category !== 'blog') ensureDir(p.category);
+      const relDir = path.dirname(p.relPath).replace(/\\/g, '/');
+      ensureDir(relDir === '.' ? 'blog' : relDir).children.push({
+        type: 'doc',
+        slug: p.slug,
+        title: String(p.data.title || 'Untitled'),
+        date: String(p.data.date || ''),
+        read: String(p.data.read_time || ''),
+        kind: 'blog',
+      });
+    }
+    for (const p of products) {
+      ensureDir('product').children.push({
+        type: 'doc',
+        slug: p.slug,
+        title: String(p.data.title || 'Untitled'),
+        date: String(p.data.date || ''),
+        read: '',
+        kind: 'product',
+      });
+    }
 
-    const workspaceStats = [
-      `<span class="stat-chip">📚 文档 ${docItems.length}</span>`,
-      `<span class="stat-chip">🚀 产品 ${products.length}</span>`,
-      `<span class="stat-chip">✍️ 长文 ${posts.length}</span>`,
-    ].join('');
+    /* 组内排序：子目录在前（拼音序），文档随后（已按日期倒序插入）；根级按偏好序 */
+    const sortTree = (node) => {
+      const dirs = node.children.filter((c) => c.type === 'dir')
+        .sort((a, b) => a.label.localeCompare(b.label, 'zh'));
+      const docs = node.children.filter((c) => c.type === 'doc');
+      node.children = [...dirs, ...docs];
+      dirs.forEach(sortTree);
+    };
+    sortTree(treeRoot);
+    {
+      const rootDirs = treeRoot.children.filter((c) => c.type === 'dir');
+      treeRoot.children = [
+        ...[...preferredCats, 'blog', 'product'].flatMap((k) => rootDirs.filter((d) => d.key === k)),
+        ...rootDirs.filter((d) => ![...preferredCats, 'blog', 'product'].includes(d.key)),
+        ...treeRoot.children.filter((c) => c.type === 'doc'),
+      ];
+    }
+    /* Wiki 导览：为每个目录（分类 / 子目录 / 虚拟组）生成一个导览文档，
+       列出本目录的子目录与文档；树内置于各文件夹首位，面包屑点击即跳转到导览 */
+    const wikiRecords = [];
+    {
+      const usedWikiSlugs = new Set([...posts.map((p) => p.slug), ...products.map((p) => p.slug)]);
+      const wikiSlugOf = (key) => {
+        const base = slugify(`wiki-${key.replace(/\//g, '-')}`);
+        let slug = base;
+        let n = 2;
+        while (usedWikiSlugs.has(slug)) slug = `${base}-${n++}`;
+        usedWikiSlugs.add(slug);
+        return slug;
+      };
+      const countDocs = (n) => n.children.reduce((acc, c) => acc + (c.type === 'doc' ? 1 : countDocs(c)), 0);
 
-    /* 工作台搜索索引：构建期抽取纯文本，前端零请求匹配（含标题/分类/日期供结果面板展示） */
-    const KIND_LABEL_FULL = { product: '产品', blog: '长文' };
+      /* 第一遍：为每个目录节点分配导览 slug */
+      const assignSlugs = (node) => {
+        for (const child of node.children) {
+          if (child.type !== 'dir') continue;
+          if (child.key) child.wikiSlug = wikiSlugOf(child.key);
+          assignSlugs(child);
+        }
+      };
+      assignSlugs(treeRoot);
+
+      /* 第二遍：生成导览内容、插入树、登记文章记录 */
+      const buildWiki = (node) => {
+        for (const child of node.children) {
+          if (child.type !== 'dir') continue;
+          if (child.key) {
+            const childDirs = child.children.filter((c) => c.type === 'dir');
+            const ownDocs = child.children.filter((c) => c.type === 'doc' && !c.wiki);
+            const parts = [`「${child.label}」目录共收录 ${ownDocs.length} 篇文档${childDirs.length ? `、${childDirs.length} 个子目录` : ''}。`, ''];
+            if (childDirs.length) {
+              parts.push('## 子目录', '');
+              for (const d of childDirs) {
+                parts.push(`- [${d.label}](#/${encodeURI(d.wikiSlug)}) · ${countDocs(d)} 篇`);
+              }
+              parts.push('');
+            }
+            parts.push('## 本目录文档', '');
+            if (ownDocs.length) {
+              parts.push('| 文档 | 日期 | 阅读时长 |', '| --- | --- | --- |');
+              for (const d of ownDocs) {
+                parts.push(`| [${d.title}](#/${encodeURI(d.slug)}) | ${d.date || '—'} | ${d.read || '—'} |`);
+              }
+              parts.push('');
+            } else {
+              parts.push('_本目录暂无直接文档，内容都在子目录中。_', '');
+            }
+            const wikiMd = parts.join('\n');
+            const topKey = child.key.split('/')[0];
+            wikiRecords.push({
+              slug: child.wikiSlug,
+              kind: 'blog',
+              cat: topKey,
+              catLabel: WS_DIR_LABEL[topKey] || topKey,
+              title: `${child.label} · 导览`,
+              desc: `「${child.label}」目录的文档导览`,
+              date: '',
+              side: '1 min',
+              href: `/articles/${child.wikiSlug}.html`,
+              text: wikiMd,
+              html: mdMain.render(wikiMd),
+              data: {
+                title: `${child.label} · 导览`,
+                summary: `「${child.label}」目录的文档导览`,
+                date: '',
+                read_time: '1 min',
+                tags: [],
+              },
+              categoryLabel: WS_DIR_LABEL[topKey] || topKey,
+            });
+            child.children.unshift({
+              type: 'doc',
+              slug: child.wikiSlug,
+              title: `${child.label} · 导览`,
+              date: '',
+              read: '1 min',
+              kind: 'blog',
+              wiki: true,
+            });
+          }
+          buildWiki(child);
+        }
+      };
+      buildWiki(treeRoot);
+    }
+    /* 导览文档纳入搜索索引 */
+    docItems.push(...wikiRecords);
+    const workspaceTree = jsonForScriptTag(treeRoot);
+
+    /* 工作台搜索索引：构建期抽取纯文本，前端零请求匹配（含标题/分类/日期供结果面板展示）；
+       单篇正文截断到 20000 字符，控制 workspace.html 体积（完整正文在文章整页里） */
+    const SEARCH_TEXT_LIMIT = 20000;
+    const KIND_LABEL_FULL = { product: '作品', blog: '长文' };
     const searchIndex = jsonForScriptTag(
       docItems.map((d) => ({
         slug: d.slug,
         kind: KIND_LABEL_FULL[d.kind] || d.kind,
+        cat: d.cat || '',
+        catLabel: d.catLabel || '',
         title: d.title,
         desc: d.desc,
         date: d.date,
-        text: d.text,
+        text: d.text.length > SEARCH_TEXT_LIMIT ? d.text.slice(0, SEARCH_TEXT_LIMIT) : d.text,
       }))
     );
 
     const workspaceHtml = applyTokens(loadTemplate('workspace.html'), {
       PROFILE_NAME: escHtml(profile.name),
-      WORKSPACE_STATS: workspaceStats,
-      DOC_FILTERS: docFilters,
-      DOCS: docRows,
+      COPYRIGHT_NAME: escHtml(profile.copyright_name || profile.name),
+      WORKSPACE_TREE: workspaceTree,
       SEARCH_INDEX: searchIndex,
       BUILD_META: escHtml(buildMeta),
     });
@@ -503,6 +737,7 @@ async function main() {
       let extra = '';
 
       if (kind === 'blog') {
+        if (item.categoryLabel) metaChips.push(`<span class="doc-meta">${escHtml(item.categoryLabel)}</span>`);
         if (item.data.date) metaChips.push(`<span class="doc-meta">${escHtml(item.data.date)}</span>`);
         if (item.data.read_time) metaChips.push(`<span class="doc-meta">${escHtml(item.data.read_time)} 阅读</span>`);
         const tags = item.data.tags || [];
@@ -523,6 +758,7 @@ async function main() {
 
       return applyTokens(tplArticle, {
         PROFILE_NAME: escHtml(profile.name),
+      COPYRIGHT_NAME: escHtml(profile.copyright_name || profile.name),
         TITLE: escHtml(item.data.title || 'Untitled'),
         DESCRIPTION: escHtml(item.data.summary || item.data.tagline || ''),
         KIND: kind,
@@ -537,13 +773,16 @@ async function main() {
     for (const p of posts) {
       fs.writeFileSync(path.join(DIR.dist, 'articles', `${p.slug}.html`), renderArticlePage('blog', p), 'utf8');
     }
+    for (const w of wikiRecords) {
+      fs.writeFileSync(path.join(DIR.dist, 'articles', `${w.slug}.html`), renderArticlePage('blog', w), 'utf8');
+    }
     for (const p of products) {
       fs.writeFileSync(path.join(DIR.dist, 'articles', `${p.slug}.html`), renderArticlePage('product', p), 'utf8');
     }
 
     const elapsed = (performance.now() - started).toFixed(1);
-    log.ok(`构建完成：dist/index.html + dist/workspace.html + articles ${posts.length + products.length} 篇（${elapsed}ms）`);
-    log.ok(`  产品 ${products.length} · 博客 ${posts.length} · 输出 ${((html.length + workspaceHtml.length) / 1024).toFixed(1)} KB`);
+    log.ok(`构建完成：dist/index.html + dist/workspace.html + articles ${posts.length + products.length + wikiRecords.length} 篇（${elapsed}ms）`);
+    log.ok(`  作品 ${products.length} · 长文 ${posts.length} · 输出 ${((html.length + workspaceHtml.length) / 1024).toFixed(1)} KB`);
   } catch (err) {
     log.err(`构建失败：${err.message}`);
     if (err.stack) console.error(err.stack.split('\n').slice(0, 4).join('\n'));

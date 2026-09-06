@@ -340,27 +340,14 @@
   });
 
   /* ================================================================== */
-  /* 4. 动态筛选（产品状态 / 博客标签 / 工作台分类）                      */
+  /* 4. 动态筛选（产品状态 / 首页精选长文标签）                            */
   /* ================================================================== */
 
-  /* 工作台文档的分类筛选（搜索面板激活时列表明板二选一，见模块 4.5） */
-  const docFilter = {
-    category: 'all',
-    apply() {
-      const rows = $$('.doc-row');
-      let visible = 0;
-      rows.forEach((row) => {
-        const show = this.category === 'all' || row.dataset.kind === this.category;
-        row.classList.toggle('is-hidden', !show);
-        if (show) visible += 1;
-      });
-      $('#doc-empty')?.classList.toggle('is-hidden', visible > 0);
-    },
-  };
+  /* 工作台改为三栏阅读器（见模块 15），文档筛选由左侧文档树承担 */
 
   $$('.filter-bar').forEach((bar) => {
-    const target = bar.dataset.target; // 'products' | 'blog' | 'docs'
-    const cardSel = target === 'products' ? '.product-card' : target === 'docs' ? '.doc-row' : '.blog-card';
+    const target = bar.dataset.target; // 'products' | 'blog'
+    const cardSel = target === 'products' ? '.product-card' : '.blog-card';
 
     bar.addEventListener('click', (e) => {
       const chip = e.target.closest('.filter-chip');
@@ -368,12 +355,6 @@
 
       $$('.filter-chip', bar).forEach((c) => c.classList.toggle('is-active', c === chip));
       const filter = chip.dataset.filter;
-
-      if (target === 'docs') {
-        docFilter.category = filter;
-        docFilter.apply();
-        return;
-      }
 
       $$(cardSel).forEach((card) => {
         let match = filter === 'all';
@@ -400,14 +381,14 @@
     }
   })();
 
+  /* 阅读器桥：工作台三栏阅读器（模块 15）就绪后挂载 open(slug)，供搜索结果等调用 */
+  const wsReader = { open: null };
+
   const searchBox = $('#doc-search');
   if (searchBox) {
     const input = $('.doc-search-input', searchBox);
     const clearBtn = $('.doc-search-clear', searchBox);
     const searchPanel = $('#search-results');
-    const filterBar = $('.filter-bar[data-target="docs"]');
-    const docList = $('.doc-list');
-    const emptyTip = $('#doc-empty');
 
     const escapeHtml = (s) =>
       String(s).replace(/[&<>"']/g, (c) => ({
@@ -441,20 +422,13 @@
       return head + highlight(escapeHtml(text.slice(start, end)), terms) + tail;
     };
 
-    /** 退出搜索态：隐藏面板，恢复列表 / 筛选条 / 空态 */
+    /** 退出搜索态：隐藏结果面板 */
     const exitSearchMode = () => {
       if (searchPanel) searchPanel.hidden = true;
-      filterBar?.classList.remove('is-hidden');
-      docList?.classList.remove('is-hidden');
-      emptyTip?.classList.add('is-hidden');
-      docFilter.apply();
     };
 
-    /** 进入搜索态：隐藏列表，渲染结果面板 */
+    /** 进入搜索态：渲染结果面板（点击结果由工作台阅读器打开） */
     const enterSearchMode = (terms) => {
-      filterBar?.classList.add('is-hidden');
-      docList?.classList.add('is-hidden');
-      emptyTip?.classList.add('is-hidden');
       if (!searchPanel) return;
 
       const results = searchEntries.filter((entry) => {
@@ -464,9 +438,9 @@
 
       const items = results
         .map((entry, i) => {
-          const crumb = [entry.kind, entry.date].filter(Boolean).join(' · ');
+          const crumb = [entry.catLabel, entry.kind, entry.date].filter(Boolean).join(' · ');
           return (
-            `<a class="search-result${i === 0 ? ' is-active' : ''}" href="/articles/${encodeURIComponent(entry.slug)}.html">` +
+            `<a class="search-result${i === 0 ? ' is-active' : ''}" href="/articles/${encodeURIComponent(entry.slug)}.html" data-slug="${escapeHtml(entry.slug)}">` +
             `<p class="search-result-crumb">${escapeHtml(crumb)}</p>` +
             `<h3 class="search-result-title">${highlight(escapeHtml(entry.title), terms)}</h3>` +
             `<p class="search-result-excerpt">${makeExcerpt(entry.text, terms)}</p>` +
@@ -480,6 +454,15 @@
         (items || `<p class="search-empty">没有匹配的文档 —— 换个关键词试试。</p>`);
       searchPanel.hidden = false;
     };
+
+    /* 结果点击：工作台内阅读器打开（无阅读器的页面退回文章整页跳转） */
+    searchPanel.addEventListener('click', (e) => {
+      const hit = e.target.closest('.search-result');
+      if (!hit || !wsReader.open) return;
+      e.preventDefault();
+      searchPanel.hidden = true;
+      wsReader.open(hit.dataset.slug);
+    });
 
     const syncSearch = () => {
       const raw = input.value.trim();
@@ -555,7 +538,7 @@
   /* ================================================================== */
   /* 6. 滚动显现（进入视口渐入 + 同容器内逐个错峰）                       */
   /* ================================================================== */
-  const revealEls = $$('.product-card, .blog-card, .doc-row');
+  const revealEls = $$('.product-card, .blog-card');
   const pendingReveal = new Set(revealEls);
 
   /** IO 兜底：隐藏标签页/特殊环境下 IO 回调可能不触发，滚动时手动补检 */
@@ -796,12 +779,16 @@
       const strokeFor = () =>
         root.dataset.theme === 'dark' ? 'rgba(255, 255, 255, 0.09)' : 'rgba(15, 23, 42, 0.1)';
 
+      /* 网格仅亮色主题提供；暗色下清空画布（深空 + 星星即可） */
+      const gridEnabled = () => root.dataset.theme !== 'dark';
+
       const drawGrid = () => {
         rafPending = false;
         const w = gridCanvas.width / dpr;
         const h = gridCanvas.height / dpr;
         gtx.setTransform(dpr, 0, 0, dpr, 0, 0);
         gtx.clearRect(0, 0, w, h);
+        if (!gridEnabled()) return;
         gtx.strokeStyle = strokeFor();
         gtx.lineWidth = 1;
 
@@ -850,6 +837,7 @@
       };
 
       document.addEventListener('mousemove', (e) => {
+        if (!gridEnabled()) return;
         const rect = gridCanvas.getBoundingClientRect();
         mouseX = e.clientX - rect.left;
         mouseY = e.clientY - rect.top;
@@ -903,25 +891,6 @@
   decorateCode(document); // 文章整页 / 内容池中已渲染的代码块
 
   /* ================================================================== */
-  /* 12. 点击爱心漂浮（博客迁移：点击处生成随机主题色爱心，上浮消散）      */
-  /* ================================================================== */
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const HEART_SVG = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
-    const HEART_COLORS = ['#a78bfa', '#22d3ee', '#f472b6', '#fbbf24', '#4ade80'];
-
-    document.addEventListener('click', (e) => {
-      const heart = document.createElement('span');
-      heart.className = 'click-heart';
-      heart.style.left = `${e.clientX}px`;
-      heart.style.top = `${e.clientY}px`;
-      heart.style.color = HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)];
-      heart.innerHTML = HEART_SVG;
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1000);
-    });
-  }
-
-  /* ================================================================== */
   /* 13. 标签页切换彩蛋（博客迁移：离开页面"崩溃"，回来"恢复"）           */
   /* ================================================================== */
   const originTitle = document.title;
@@ -962,6 +931,275 @@
       /* 接口不可达：一言保持隐藏 */
     }
   });
+
+  /* ================================================================== */
+  /* 15. 工作台三栏阅读器（仿文档站）                                     */
+  /*     左：分类文档树（文件夹可折叠，状态持久化）                        */
+  /*     中：当前文档（抓取 /articles/<slug>.html 注入，hash 路由）        */
+  /*     右：本文目录 TOC（构建自正文标题，滚动跟随高亮）                  */
+  /* ================================================================== */
+  const wsShell = $('.ws-shell');
+  if (wsShell) {
+    const treeEl = $('#ws-tree');
+    const breadcrumbEl = $('#ws-breadcrumb');
+    const docEl = $('#ws-doc');
+    const emptyEl = $('#ws-empty');
+    const headEl = $('#ws-doc-head');
+    const bodyEl = $('#ws-doc-body');
+    const tocEl = $('#ws-toc');
+    const tocListEl = $('#ws-toc-list');
+    const pagerEl = $('#ws-pager');
+    const sidebarEl = $('#ws-sidebar');
+    const overlayEl = $('#ws-overlay');
+    const menuBtn = $('#ws-menu-btn');
+    const profileName = $('.nav-logo')?.textContent.trim() || document.title;
+
+    const escapeHtml = (s) =>
+      String(s).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      }[c]));
+    const enc = encodeURIComponent;
+
+    /* ---- 数据：树解析 + 文档索引（slug -> 节点与面包屑路径） + 展平顺序 ---- */
+    const treeData = (() => {
+      try {
+        const parsed = JSON.parse($('#ws-tree-data')?.textContent || 'null');
+        return parsed && Array.isArray(parsed.children) ? parsed : null;
+      } catch {
+        return null;
+      }
+    })();
+
+    const docIndex = new Map(); // slug -> { node, trail: [dir nodes] }
+    const flatOrder = [];       // 阅读顺序（树展平），供上一篇 / 下一篇
+    if (treeData) {
+      const walk = (node, trail) => {
+        for (const child of node.children) {
+          if (child.type === 'dir') walk(child, [...trail, child]);
+          else {
+            docIndex.set(child.slug, { node: child, trail });
+            flatOrder.push(child.slug);
+          }
+        }
+      };
+      walk(treeData, []);
+    }
+    const countDocs = (node) => node.children.reduce(
+      (n, c) => n + (c.type === 'doc' ? 1 : countDocs(c)), 0
+    );
+
+    /* ---- 折叠状态：默认全收起，当前文档的祖先强制展开；用户操作持久化 ---- */
+    const EXPANDED_KEY = 'ws-expanded-v1';
+    const expanded = (() => {
+      try {
+        return new Set(JSON.parse(localStorage.getItem(EXPANDED_KEY) || '[]'));
+      } catch {
+        return new Set();
+      }
+    })();
+    const saveExpanded = () => {
+      try { localStorage.setItem(EXPANDED_KEY, JSON.stringify([...expanded])); } catch { /* 隐私模式等 */ }
+    };
+
+    let currentSlug = null;
+    let activeTrail = []; // 当前文档的祖先 dir key，渲染时强制展开
+
+    const CHEVRON = '<svg class="ws-tree-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+
+    const renderTree = () => {
+      if (!treeEl || !treeData) return;
+      const build = (node) => node.children.map((child) => {
+        if (child.type === 'dir') {
+          const open = expanded.has(child.key) || activeTrail.includes(child.key);
+          return (
+            `<div class="ws-tree-dir${open ? ' is-open' : ''}">` +
+            `<button type="button" class="ws-tree-dir-btn" data-key="${escapeHtml(child.key)}" aria-expanded="${open}">` +
+            CHEVRON +
+            `<span class="ws-tree-dir-label">${escapeHtml(child.label)}</span>` +
+            `<span class="ws-tree-dir-count">${countDocs(child)}</span>` +
+            `</button>` +
+            `<div class="ws-tree-dir-children">${build(child)}</div>` +
+            `</div>`
+          );
+        }
+        return (
+          `<a class="ws-tree-link${child.wiki ? ' is-wiki' : ''}${child.slug === currentSlug ? ' is-active' : ''}"` +
+          ` data-slug="${escapeHtml(child.slug)}" href="#/${enc(child.slug)}"` +
+          `${child.slug === currentSlug ? ' aria-current="page"' : ''}>${escapeHtml(child.title)}</a>`
+        );
+      }).join('');
+      treeEl.innerHTML = build(treeData);
+    };
+
+    /* 文件夹折叠切换（事件委托，重渲染无需重绑） */
+    treeEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.ws-tree-dir-btn');
+      if (!btn) return;
+      const key = btn.dataset.key;
+      const dirEl = btn.closest('.ws-tree-dir');
+      const open = dirEl.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+      if (open) expanded.add(key);
+      else expanded.delete(key);
+      saveExpanded();
+    });
+    /* 移动端：点开文档后收起抽屉侧栏 */
+    treeEl.addEventListener('click', (e) => {
+      if (e.target.closest('.ws-tree-link')) closeSidebar();
+    });
+
+    /* ---- TOC：构建 + 平滑滚动 + 滚动跟随高亮 ---- */
+    let tocHeadings = [];
+
+    const buildToc = (scope) => {
+      tocHeadings = $$('h2, h3', scope).filter((h) => h.textContent.trim());
+      if (!tocHeadings.length) {
+        tocListEl.innerHTML = '<p class="ws-toc-empty">本文没有小节标题</p>';
+        return;
+      }
+      tocListEl.innerHTML = tocHeadings.map((h, i) => {
+        if (!h.id) h.id = `ws-h-${i}`;
+        return (
+          `<a class="ws-toc-link${h.tagName === 'H3' ? ' is-sub' : ''}" data-i="${i}" href="#${h.id}">` +
+          escapeHtml(h.textContent) +
+          `</a>`
+        );
+      }).join('');
+    };
+
+    tocListEl.addEventListener('click', (e) => {
+      const link = e.target.closest('.ws-toc-link');
+      if (!link) return;
+      e.preventDefault();
+      const target = tocHeadings[Number(link.dataset.i)];
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    let spyTicking = false;
+    const tocSpy = () => {
+      if (spyTicking || !tocHeadings.length) return;
+      spyTicking = true;
+      requestAnimationFrame(() => {
+        spyTicking = false;
+        const probe = window.scrollY + window.innerHeight * 0.28;
+        let active = 0;
+        tocHeadings.forEach((h, i) => {
+          if (h.getBoundingClientRect().top + window.scrollY <= probe) active = i;
+        });
+        $$('.ws-toc-link', tocListEl).forEach((a, i) => a.classList.toggle('is-active', i === active));
+      });
+    };
+    window.addEventListener('scroll', tocSpy, { passive: true });
+
+    /* ---- 文档抓取与注入 ---- */
+    const pageCache = new Map(); // slug -> { head, body }
+
+    const renderBreadcrumb = (meta) => {
+      /* 目录层级可点击：跳转到对应文件夹的 Wiki 导览文档 */
+      const crumbs = meta.trail.map((d) =>
+        d.wikiSlug
+          ? `<a class="ws-crumb" href="#/${enc(d.wikiSlug)}" title="查看「${escapeHtml(d.label)}」导览">${escapeHtml(d.label)}</a>`
+          : `<span class="ws-crumb">${escapeHtml(d.label)}</span>`
+      );
+      crumbs.push(`<span class="ws-crumb is-current">${escapeHtml(meta.node.title)}</span>`);
+      breadcrumbEl.innerHTML = crumbs.join('<span class="ws-crumb-sep">›</span>');
+    };
+
+    const renderPager = (slug) => {
+      const idx = flatOrder.indexOf(slug);
+      const prev = idx > 0 ? docIndex.get(flatOrder[idx - 1]) : null;
+      const next = idx >= 0 && idx < flatOrder.length - 1 ? docIndex.get(flatOrder[idx + 1]) : null;
+      const link = (cls, label, meta) =>
+        `<a class="ws-pager-link ${cls}" href="#/${enc(meta.node.slug)}"><small>${label}</small><span>${escapeHtml(meta.node.title)}</span></a>`;
+      pagerEl.innerHTML =
+        (prev ? link('is-prev', '上一篇', prev) : '<span></span>') +
+        (next ? link('is-next', '下一篇', next) : '<span></span>');
+    };
+
+    const openDoc = async (slug, { push = true } = {}) => {
+      const meta = docIndex.get(slug);
+      if (!meta) return false;
+      currentSlug = slug;
+      activeTrail = meta.trail.map((d) => d.key);
+      if (push) history.pushState(null, '', `#/${enc(slug)}`);
+      renderTree();
+      renderBreadcrumb(meta);
+
+      docEl.hidden = false;
+      emptyEl.hidden = true;
+      tocListEl.innerHTML = '';
+      bodyEl.innerHTML = '<p class="ws-loading">加载中…</p>';
+      window.scrollTo({ top: 0 });
+
+      try {
+        let page = pageCache.get(slug);
+        if (!page) {
+          const res = await fetch(`/articles/${enc(slug)}.html`);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const html = await res.text();
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+          const head = parsed.querySelector('.article-head');
+          const body = parsed.querySelector('.article');
+          page = {
+            head: head ? head.innerHTML : '',
+            body: body ? body.innerHTML : '<p class="ws-error">空文档</p>',
+          };
+          pageCache.set(slug, page);
+        }
+        if (currentSlug !== slug) return true; // 期间用户已切换到其他文档
+
+        headEl.innerHTML = page.head;
+        bodyEl.innerHTML = page.body;
+        /* 阅读视图里隐藏与文档题名重复的正文首行 H1（源文件与文章整页保持原样） */
+        const firstH1 = bodyEl.querySelector(':scope > h1:first-child');
+        if (firstH1 && firstH1.textContent.replace(/\s+/g, '') === meta.node.title.replace(/\s+/g, '')) {
+          firstH1.remove();
+        }
+        document.title = `${meta.node.title} · ${profileName}`;
+        buildToc(bodyEl);
+        renderPager(slug);
+        decorateCode(bodyEl);
+        tocSpy();
+        closeSidebar();
+        return true;
+      } catch (err) {
+        if (currentSlug === slug) {
+          bodyEl.innerHTML =
+            `<p class="ws-error">加载失败（${escapeHtml(err.message)}）—— ` +
+            `<a href="/articles/${enc(slug)}.html">尝试打开原始页面</a></p>`;
+        }
+        return false;
+      }
+    };
+    wsReader.open = (slug) => openDoc(slug);
+
+    /* hash 路由：#/slug；返回键可回溯阅读历史 */
+    const slugFromHash = () => {
+      const m = decodeURIComponent(location.hash).match(/^#\/(.+)$/);
+      return m ? m[1] : null;
+    };
+    window.addEventListener('hashchange', () => {
+      const slug = slugFromHash();
+      if (slug && slug !== currentSlug) openDoc(slug, { push: false });
+    });
+
+    /* ---- 移动端侧栏抽屉 ---- */
+    function closeSidebar() {
+      sidebarEl.classList.remove('is-open');
+      overlayEl.hidden = true;
+    }
+    menuBtn.addEventListener('click', () => {
+      sidebarEl.classList.add('is-open');
+      overlayEl.hidden = false;
+    });
+    overlayEl.addEventListener('click', closeSidebar);
+    $('#ws-sidebar-close')?.addEventListener('click', closeSidebar);
+
+    /* ---- 启动：渲染树，默认打开 hash 指定文档或阅读顺序第一篇 ---- */
+    renderTree();
+    const initial = slugFromHash() || flatOrder[0];
+    if (initial && docIndex.has(initial)) openDoc(initial);
+  }
 
   /* ================================================================== */
   /* 启动                                                               */

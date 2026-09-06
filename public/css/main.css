@@ -27,6 +27,12 @@ body::before {
   pointer-events: none;
 }
 
+/* 暗色主题（及未显式设置主题且系统偏好为暗色时）：网格让位给流体极光 */
+:root[data-theme='dark'] body::before,
+:root:not([data-theme]) body::before {
+  content: none;
+}
+
 /* 暗色主题：全页流体极光（三团色斑缓慢游移，营造深空流体感） */
 :root[data-theme='dark'] body::after {
   content: '';

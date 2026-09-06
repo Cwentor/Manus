@@ -1,9 +1,12 @@
 ---
-title: "浅析现代前端与内容分离架构"
-date: "2026-05-12"
-summary: "探讨为什么我们要把 Markdown 当成纯数据库，而不是排版画板。"
-tags: ["Architecture", "Engineering"]
-read_time: "6 min"
+title: 浅析现代前端与内容分离架构
+date: '2026-05-12'
+summary: 探讨为什么我们要把 Markdown 当成纯数据库，而不是排版画板。
+tags:
+  - Architecture
+  - Engineering
+read_time: 6 min
+featured: true
 ---
 
 ## 一个反直觉的结论

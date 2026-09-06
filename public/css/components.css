@@ -856,8 +856,8 @@
  * ------------------------------------------------------------------------ */
 .grid-products {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
-  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+  gap: var(--space-4);
 }
 
 .product-card {
@@ -1866,6 +1866,14 @@ body.drawer-open .drawer {
   border-top: 1px solid var(--border);
 }
 
+.footer-copyright {
+  text-align: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
 .footer-text {
   text-align: center;
   font-size: var(--text-xs);
@@ -1887,29 +1895,3 @@ body.drawer-open .drawer {
   margin-left: 0.5em;
 }
 
-/* --------------------------------------------------------------------------
- * 点击爱心漂浮（博客迁移：app.js 在点击处生成，1s 上浮消散）
- * ------------------------------------------------------------------------ */
-.click-heart {
-  position: fixed;
-  z-index: 130;
-  pointer-events: none;
-  animation: heart-float 1s ease-out forwards;
-}
-
-@keyframes heart-float {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -160%) scale(0.4);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .click-heart {
-    display: none;
-  }
-}

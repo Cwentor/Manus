@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="photo-get-mcp cover">
+  <defs>
+    <linearGradient id="pgm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b0764"/>
+      <stop offset="55%" stop-color="#a21caf"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#pgm)"/>
+  <circle cx="660" cy="110" r="180" fill="#f472b6" opacity="0.18"/>
+  <rect x="140" y="120" width="250" height="180" rx="16" fill="#0b0f1a" stroke="#ffffff" stroke-opacity="0.14"/>
+  <circle cx="205" cy="175" r="18" fill="#f472b6"/>
+  <path d="M160 270l60-64 46 44 34-28 70 48z" fill="#f472b6" opacity="0.75"/>
+  <rect x="430" y="150" width="230" height="150" rx="16" fill="#0b0f1a" stroke="#ffffff" stroke-opacity="0.14"/>
+  <circle cx="480" cy="195" r="15" fill="#c084fc"/>
+  <path d="M450 270l52-56 40 38 30-24 64 42z" fill="#c084fc" opacity="0.75"/>
+  <path d="M395 205h30m0 0l-10-10m10 10l-10 10" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <text x="400" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700" fill="#ffffff" opacity="0.92">photo-get-mcp</text>
+</svg>

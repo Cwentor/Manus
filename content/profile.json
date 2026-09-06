@@ -1,13 +1,14 @@
 {
-  "name": "林晚舟",
-  "handle": "@wanzhou",
+  "name": "陈文涛",
+  "handle": "@Cwentor",
+  "copyright_name": "Cwentor",
   "tagline": "把想法变成产品，把产品打磨成艺术品。",
   "typewriter": [
     "把想法变成产品，把产品打磨成艺术品。",
     "人生如逆旅，我亦是行人。",
     "Keep building, keep shipping."
   ],
-  "github_username": "Cat-Drink",
+  "github_username": "Cwentor",
   "avatar": "/assets/avatar/avatar.svg",
   "status": {
     "emoji": "🟢",
@@ -16,9 +17,9 @@
   "location": "广州",
   "available_for": "Remote · 2026 Q3",
   "socials": [
-    { "label": "GitHub", "url": "https://github.com/wanzhou-dev", "icon": "github" },
-    { "label": "X / Twitter", "url": "https://x.com/wanzhou_dev", "icon": "twitter" },
-    { "label": "Email", "url": "mailto:hi@wanzhou.dev", "icon": "mail" },
+    { "label": "GitHub", "url": "https://github.com/Cwentor", "icon": "github" },
+    { "label": "X / Twitter", "url": "https://x.com/cwenta00330", "icon": "twitter" },
+    { "label": "Email", "url": "mailto:2738035238@qq.com", "icon": "mail" },
     { "label": "Blog RSS", "url": "/feed.xml", "icon": "rss" }
   ]
 }

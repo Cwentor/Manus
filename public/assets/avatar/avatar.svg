@@ -1,12 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="avatar">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="陈文涛的头像">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#a78bfa"/>
       <stop offset="100%" stop-color="#22d3ee"/>
     </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.25" r="0.9">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   <rect width="200" height="200" rx="48" fill="url(#bg)"/>
-  <circle cx="100" cy="78" r="30" fill="#ffffff" opacity="0.92"/>
-  <path d="M38 172c4-34 26-50 62-50s58 16 62 50" fill="#ffffff" opacity="0.92"/>
-  <circle cx="100" cy="78" r="13" fill="#7c3aed"/>
+  <rect width="200" height="200" rx="48" fill="url(#glow)"/>
+  <circle cx="100" cy="100" r="74" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="2"/>
+  <circle cx="100" cy="100" r="64" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1"/>
+  <text x="100" y="104" text-anchor="middle" dominant-baseline="central"
+        font-family="'LXGW WenKai', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"
+        font-size="76" font-weight="700" fill="#ffffff">陈</text>
+  <text x="100" y="162" text-anchor="middle"
+        font-family="'Inter', 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif"
+        font-size="15" letter-spacing="3" fill="#ffffff" fill-opacity="0.85">CWENTOR</text>
 </svg>

@@ -1,9 +1,12 @@
 ---
-title: "零依赖重构：把构建脚本从 120ms 压到 18ms"
-date: "2026-05-28"
-summary: "一次对构建管线的降本增效实验：去掉重复 IO、引入缓存、并发渲染。"
-tags: ["Tooling", "Node.js"]
-read_time: "8 min"
+title: 零依赖重构：把构建脚本从 120ms 压到 18ms
+date: '2026-05-28'
+summary: 一次对构建管线的降本增效实验：去掉重复 IO、引入缓存、并发渲染。
+tags:
+  - Tooling
+  - Node.js
+read_time: 8 min
+featured: true
 ---
 
 ## 背景

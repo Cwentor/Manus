@@ -1,0 +1,2828 @@
+{
+  "about/404.md": {
+    "data": {
+      "title": "404 - 页面未找到",
+      "date": "2026-03-13",
+      "summary": "你访问的页面可能已经被移动、删除，或者网址输入有误。",
+      "tags": [
+        "关于",
+        "about"
+      ],
+      "read_time": "1 min",
+      "slug": "404",
+      "category": "about"
+    },
+    "bodyHash": "e426afcc224d486524323c57b52deea579cf574625a7182800f37ce24ff203d8"
+  },
+  "about/about.md": {
+    "data": {
+      "title": "关于",
+      "date": "2026-01-22",
+      "summary": "一个小小博客站，记录自己的学习过程。",
+      "tags": [
+        "关于",
+        "about"
+      ],
+      "read_time": "2 min",
+      "slug": "about",
+      "category": "about"
+    },
+    "bodyHash": "217e1a5058ce7f5b4c40468395504a83c9a9ad077a2275bb6fbd6de6ded4542a"
+  },
+  "about/个人/1-面试经验.md": {
+    "data": {
+      "title": "1-面试经验",
+      "summary": "1、开发更看重候选人是否经过系统性的专业训练",
+      "tags": [
+        "关于",
+        "个人",
+        "about"
+      ],
+      "read_time": "3 min",
+      "slug": "1-面试经验",
+      "category": "about"
+    },
+    "bodyHash": "3c4a8c044ccce0e7c6757ac56e0856d446621457f4742dfeefd2fd2d85055d96"
+  },
+  "about/个人/2-个人养成.md": {
+    "data": {
+      "title": "2-个人养成",
+      "summary": "- 脑腐：刷完手机一两个小时之后，整个人瘫掉的感觉",
+      "tags": [
+        "关于",
+        "个人",
+        "about"
+      ],
+      "read_time": "16 min",
+      "slug": "2-个人养成",
+      "category": "about"
+    },
+    "bodyHash": "31296e5d638fa391720b16d360d8572197ee28ff81baafaab4c797d27d4a1cbd"
+  },
+  "about/个人/3-如何快速社会化.md": {
+    "data": {
+      "title": "3-如何快速社会化",
+      "summary": "社会化程度低，才是现在大学生最该解决的问题，这也是出了社会之后能跟别人拉开差距的最根本原因。学校有学校的规则，社会有社会的规则，这两套规则互相不兼容。如果你脱…",
+      "tags": [
+        "关于",
+        "个人",
+        "about"
+      ],
+      "read_time": "4 min",
+      "slug": "3-如何快速社会化",
+      "category": "about"
+    },
+    "bodyHash": "b9238eb944a294c314286f52c66cd90ac17a41f6ebf1ea0bff19b0e4e4f1bc4e"
+  },
+  "about/个人/4-简历优化.md": {
+    "data": {
+      "title": "4-简历优化",
+      "summary": "1、简历的项目一定要和岗位高度匹配，不同赛道岗位单独定制一份简历",
+      "tags": [
+        "关于",
+        "个人",
+        "about"
+      ],
+      "read_time": "5 min",
+      "slug": "4-简历优化",
+      "category": "about"
+    },
+    "bodyHash": "e729c53e66307c1fb84ae910cbd9766eea064448540055be832b3ccc4bf90394"
+  },
+  "about/个人/5-社交礼仪细节.md": {
+    "data": {
+      "title": "容易被忽略的社交礼仪细节：16个不礼貌小行为",
+      "summary": "日常社交中，有些细节很小，不容易被留意，但却影响别人对你的印象。以下是一些需要注意的地方：",
+      "tags": [
+        "关于",
+        "个人",
+        "about"
+      ],
+      "read_time": "2 min",
+      "slug": "5-社交礼仪细节",
+      "category": "about"
+    },
+    "bodyHash": "c617975b213553c8e82146b0a55aae6a679f7bfe4f90420279beb43b86d534d6"
+  },
+  "about/个人/6-如何入门学习.md": {
+    "data": {
+      "title": "如何用 3 小时入门任意编程语言",
+      "summary": "今天这期视频，我想分享一个统一的思路，让你用 3 个小时的时间入门任意的编程语言。我认为，只要你有小学三年级的水平——英语、数学和逻辑，你就可以上手任何编程语…",
+      "tags": [
+        "关于",
+        "个人",
+        "about"
+      ],
+      "read_time": "7 min",
+      "slug": "6-如何入门学习",
+      "category": "about"
+    },
+    "bodyHash": "bb1ab93c8392584f5308f950c6c65e4dae7479ffa9e2e8637b357b649051d517"
+  },
+  "about/个人简历.md": {
+    "data": {
+      "title": "个人简历",
+      "summary": "<center<font color= 757575 size=6 请使用PC端查看，谢谢</font</center",
+      "tags": [
+        "关于",
+        "about"
+      ],
+      "read_time": "1 min",
+      "slug": "个人简历",
+      "category": "about"
+    },
+    "bodyHash": "2235629796fdce5743f0a602ecc67f7d0407fcaf29d9dad2d187bdabdf153c98"
+  },
+  "about/大学期间要完成的事情.md": {
+    "data": {
+      "title": "大学期间要完成的事情",
+      "date": "2026-03-13",
+      "summary": "[x] 走上讲台进行一次认真准备的pre",
+      "tags": [
+        "关于",
+        "about"
+      ],
+      "read_time": "7 min",
+      "slug": "大学期间要完成的事情",
+      "category": "about"
+    },
+    "bodyHash": "d5ac255056624fe1dae1d877253e05116ba8b5ea9144901d2a029e5be6b9d0ca"
+  },
+  "about/如何培养自己-播客版.md": {
+    "data": {
+      "title": "当我站在人生的十字路口：一位年轻人关于自我培养的思考",
+      "summary": "今天想和大家聊聊一个听起来很大，但其实每个人都在面对的话题——如何培养自己。",
+      "tags": [
+        "关于",
+        "about"
+      ],
+      "read_time": "9 min",
+      "slug": "如何培养自己-播客版",
+      "category": "about"
+    },
+    "bodyHash": "153e7c231f5d3ca1ab560a3eea76a508d54f0e375ebeba33b574cab538a7cc57"
+  },
+  "build-pipeline-tuning.md": {
+    "data": {
+      "title": "零依赖重构：把构建脚本从 120ms 压到 18ms",
+      "date": "2026-05-28",
+      "summary": "一次对构建管线的降本增效实验：去掉重复 IO、引入缓存、并发渲染。",
+      "tags": [
+        "Tooling",
+        "Node.js"
+      ],
+      "read_time": "8 min",
+      "featured": true
+    },
+    "bodyHash": "752f30fb7ef8a3a07d8d6af6d4e708a82769e4f1f980fcca4ad54251f7d74c39"
+  },
+  "content-separation.md": {
+    "data": {
+      "title": "浅析现代前端与内容分离架构",
+      "date": "2026-05-12",
+      "summary": "探讨为什么我们要把 Markdown 当成纯数据库，而不是排版画板。",
+      "tags": [
+        "Architecture",
+        "Engineering"
+      ],
+      "read_time": "6 min",
+      "featured": true
+    },
+    "bodyHash": "9dafe0a191628ff3e0d3362353a324926cfe382940b6fee633a6a024744cb85a"
+  },
+  "draft/3/从架构视角梳理SpringBoot.md": {
+    "data": {
+      "title": "从架构视角梳理SpringBoot：它到底封装了什么？",
+      "summary": "SpringBoot你天天在用，但你有没有停下来想过：SpringBoot在Spring的基础上，到底封装了什么？",
+      "tags": [
+        "随笔",
+        "draft"
+      ],
+      "read_time": "6 min",
+      "slug": "从架构视角梳理springboot",
+      "category": "draft"
+    },
+    "bodyHash": "5b084b2ff8f018b27a522609f8bc968d53ce3b548cb1f574689e9ce354d5b6c5"
+  },
+  "draft/3/零基础入门AI编程100讲150期：什么是CI_CD.md": {
+    "data": {
+      "title": "什么是 CI/CD？为什么现在发布代码越来越快？",
+      "summary": "简单说，CI/CD 是一套让代码从写完到上线尽可能自动化、标准化的工程流程。",
+      "tags": [
+        "随笔",
+        "draft"
+      ],
+      "read_time": "5 min",
+      "slug": "零基础入门ai编程100讲150期什么是ci-cd",
+      "category": "draft"
+    },
+    "bodyHash": "0d43b48d90afb92edbedff25766e72057178a69d4e4bce23f49dc7e74f9fa8be"
+  },
+  "draft/vibe/10套Claude_Codex顶级AI Skill完整总结.md": {
+    "data": {
+      "title": "10套Claude/Codex顶级AI Skill完整总结",
+      "summary": "作者整理了 10 套适配 Codex、覆盖编程 / 设计 / 营销全办公场景的优质 AI 技能工具，主张按需选用、精简配置，分四大类整理如下：",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "10套claude-codex顶级ai-skill完整总结",
+      "category": "draft"
+    },
+    "bodyHash": "3f82552d64558a3c470e5e9359295fe71b343d9da9a8462b868364d51676fd86"
+  },
+  "draft/vibe/5分钟快速弄懂RAG核心要点.md": {
+    "data": {
+      "title": "5分钟快速弄懂RAG核心要点",
+      "summary": "RAG 是 检索增强生成（Retrieval-Augmented Generation） 的缩写，是一种扩展大模型能力的技术方案。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "3 min",
+      "slug": "5分钟快速弄懂rag核心要点",
+      "category": "draft"
+    },
+    "bodyHash": "06f1b234d1d9e9502783125d669d89492d67b4ad18e500c5998ebabc5245b0be"
+  },
+  "draft/vibe/AI Agent项目实战踩坑总结（3个项目经验复盘）.md": {
+    "data": {
+      "title": "AI Agent项目实战踩坑总结（3个项目经验复盘）",
+      "summary": "做 Agent 的第一步不是编写代码，而是完整设计任务思考流程。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "4 min",
+      "slug": "ai-agent项目实战踩坑总结3个项目经验复盘",
+      "category": "draft"
+    },
+    "bodyHash": "b147efb5d87f3cc75c4346f4d313606712d5f2daf043265e4c200a6942f7ac90"
+  },
+  "draft/vibe/AI浏览器技能探究：六条技术路线.md": {
+    "data": {
+      "title": "AI 浏览器技能探究：六条技术路线",
+      "summary": "浏览器自动化工具有 50+ 个，底层只有 6 条技术路线。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "3 min",
+      "slug": "ai浏览器技能探究六条技术路线",
+      "category": "draft"
+    },
+    "bodyHash": "b77e1442da6c33cb1c973c1f953c070ab88fd3d5fc4561efaa3b448041f87aef"
+  },
+  "draft/vibe/AI的改变.md": {
+    "data": {
+      "title": "AI的改变",
+      "summary": "AI 并没有真正解放人类，反而因为它只「完成」了表层工作，把所有隐性、复杂的后续工作全部压到人类身上，最终让人变得更累；许多人误以为 AI 能帮我们做完所有事…",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "ai的改变",
+      "category": "draft"
+    },
+    "bodyHash": "558527955049c82177100f79c0b699d6f5e130db5e4ed0f30a687b6c9ce93d20"
+  },
+  "draft/vibe/AI自学复盘：搞清楚需求比学工具更重要.md": {
+    "data": {
+      "title": "AI 自学复盘：搞清楚需求比学工具更重要",
+      "summary": "刚开始学 AI 的时候，我跟很多人一样：看到什么教程都觉得有用，疯狂点收藏，装了一大堆工具，结果不出两周全部吃灰。后来才明白：我压根没想清楚到底为什么要学这玩…",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "4 min",
+      "slug": "ai自学复盘搞清楚需求比学工具更重要",
+      "category": "draft"
+    },
+    "bodyHash": "8148763309b60063f984429b36b082a6b1619ea5e5c1630aaa0eef0e46a127b6"
+  },
+  "draft/vibe/Agent工程师的核心能力详解.md": {
+    "data": {
+      "title": "Agent 工程师的核心能力详解",
+      "summary": "开篇：焦虑背后的本质问题",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "9 min",
+      "slug": "agent工程师的核心能力详解",
+      "category": "draft"
+    },
+    "bodyHash": "bda6dc1b9a504df10cf5b01c8c847fc1325e9a5a973f40d4985910139de29c3f"
+  },
+  "draft/vibe/Codex _ Claude_前端进阶_Agent_Skills_完整文档.md": {
+    "data": {
+      "title": "Codex / Claude 前端进阶 Agent Skills 完整文档",
+      "summary": "整套共 10 项专业技能，覆盖需求→Figma 设计→前端开发→UI 审查→自动化测试→CI/PR 工程协作全流程，完整打通产品、设计、开发工程闭环，让 AI…",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "10 min",
+      "slug": "codex-claude-前端进阶-agent-skills-完整文档",
+      "category": "draft"
+    },
+    "bodyHash": "a989ed2112d6c65f32395c96cae24faffe039d0c321e03ef33234f694f25f7c4"
+  },
+  "draft/vibe/Loop Engineering循环工程总结.md": {
+    "data": {
+      "title": "Loop Engineering（循环工程）- 总结",
+      "summary": "Loop Engineering（循环工程） 是2026年6月诞生的AI工程化第四代范式，核心转变是：",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "6 min",
+      "slug": "loop-engineering循环工程总结",
+      "category": "draft"
+    },
+    "bodyHash": "d8947a1dfa5096cce15e042580bf0b615cc9f8a90b91b8fad7e761756bfba410"
+  },
+  "draft/vibe/ReAct从理论到工程总结.md": {
+    "data": {
+      "title": "ReAct：从论文到Claude Code工程实现",
+      "summary": "ReAct = Reasoning + Action，推理 + 行动，是一套强迫大语言模型交替推理与行动的机制。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "3 min",
+      "slug": "react从理论到工程总结",
+      "category": "draft"
+    },
+    "bodyHash": "409e74f1f5e1279cf4792b40465c14f53cb1277c6ddf9bb27bcf49fccc4d6452"
+  },
+  "draft/vibe/Token本质到底是什么彻底讲透总结.md": {
+    "data": {
+      "title": "Token 的本质到底是什么？彻底讲透",
+      "summary": "面试官问「模型是怎么看懂你说话的」，如果你只会说「因为它被训练过」，面试基本就凉了。满大街都会调 API，但真正拉开差距的就是底层逻辑。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "5 min",
+      "slug": "token本质到底是什么彻底讲透总结",
+      "category": "draft"
+    },
+    "bodyHash": "4288e88bfb13eb5a8824eb69bc881ea1823d5dea0806dc127a29020da59b8a86"
+  },
+  "draft/vibe/TypeScript不如Python_Agent工具设计哲学.md": {
+    "data": {
+      "title": "TypeScript 不如 Python？Agent 工具设计哲学",
+      "summary": "假如你是老板，面前有两个员工：",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "1 min",
+      "slug": "typescript不如python-agent工具设计哲学",
+      "category": "draft"
+    },
+    "bodyHash": "ef8a7cf30cc884728037930863d1bbff3f3e42e048c2566801640479003b88fe"
+  },
+  "draft/vibe/Vibe Coding 避坑完整规则文档.md": {
+    "data": {
+      "title": "Vibe Coding 避坑完整规则文档",
+      "summary": "Vibe coding 真的很爽。你只要说一句 “帮我做一个博客系统”，AI 就开始刷刷刷地写文件、搭路由、建数据库。十分钟后，一个能跑的产品雏形就出来了。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "3 min",
+      "slug": "vibe-coding-避坑完整规则文档",
+      "category": "draft"
+    },
+    "bodyHash": "3a3bb7731b5bc0786390034de624af8177721b24223443d81af888fb75dcbf01"
+  },
+  "draft/vibe/VibeCoding反复Bug的解决经验.md": {
+    "data": {
+      "title": "Vibe Coding 反复 Bug 的解决经验",
+      "summary": "- 同一个问题反复修改，改 A 坏 B，问题复现",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "vibecoding反复bug的解决经验",
+      "category": "draft"
+    },
+    "bodyHash": "83223cb095c99d0660687bc5af860ab44409ab24d6b843879479a1df5bdcca8d"
+  },
+  "draft/vibe/Vibe_Coding能写进产品经理简历总结.md": {
+    "data": {
+      "title": "Vibe Coding能写进产品经理简历吗？- 总结",
+      "summary": "能跑不等于能写进简历。Vibe Coding（AI编程）本身是工具，不是履历。页面能打开 ≠ 你做过产品功能 ≠ 你解决了真实问题。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "3 min",
+      "slug": "vibe-coding能写进产品经理简历总结",
+      "category": "draft"
+    },
+    "bodyHash": "4d6347f01596349bcedfff050f867a9808e8e34b9c3479dab57ee9045170772a"
+  },
+  "draft/vibe/bro_confirm技能完整内容总结.md": {
+    "data": {
+      "title": "bro\\-confirm 技能完整内容总结",
+      "summary": "1. 技能名称：bro\\-confirm（大哥请确认）",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "3 min",
+      "slug": "bro-confirm技能完整内容总结",
+      "category": "draft"
+    },
+    "bodyHash": "8be537c782d044ad6cb9dd53adf39d6cfb95b0ad519607f2fb97ebfed691679b"
+  },
+  "draft/vibe/一个Hook配置，让AI从听话变成自驱.md": {
+    "data": {
+      "title": "一个Hook配置，让AI从听话变成自驱",
+      "summary": "Hook 直译就是\"钩子\"，它把一个事件和一个确定性的脚本绑定在一起。当特定事件发生时，自动执行对应的脚本。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "一个hook配置让ai从听话变成自驱",
+      "category": "draft"
+    },
+    "bodyHash": "95ecb6232bfa8dd0fdc0c46d9d7783c762d2c574c22883f96b495bb062c9bd36"
+  },
+  "draft/vibe/个人项目改造：让RAG_Agent项目在面试中更有含金量.md": {
+    "data": {
+      "title": "个人项目改造：让 RAG/Agent 项目在面试中更有含金量",
+      "summary": "问题：个人项目写得太单薄，怎么升级？",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "3 min",
+      "slug": "个人项目改造让rag-agent项目在面试中更有含金量",
+      "category": "draft"
+    },
+    "bodyHash": "e5598d91c385a6db953d3a807c31ce0888feafaabfb07f835571c20613fbfe15"
+  },
+  "draft/vibe/云API怎么进行定价的.md": {
+    "data": {
+      "title": "API怎么定价的",
+      "summary": "云厂商大模型API定价并非拍脑袋决定，而是从底层物理能耗出发，完整串联硬件工程、运维成本、商业化策略的全链路逻辑推导出来的。本文从能耗原理出发，逐层拆解完整定…",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "6 min",
+      "slug": "云api怎么进行定价的",
+      "category": "draft"
+    },
+    "bodyHash": "f076b998c19e609b8ced5173b29ee4a3eff48bbbfb6bb3b4adf14738e0e18c8a"
+  },
+  "draft/vibe/从需求到上线全自动化：MCP如何让AI调用工具总结.md": {
+    "data": {
+      "title": "从需求到上线全自动化：MCP如何让AI调用工具 - 总结",
+      "summary": "MCP (Model Context Protocol) 是专门为智能体提供远程工具调用的标准化协议，也可以理解为远程插件能力。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "从需求到上线全自动化mcp如何让ai调用工具总结",
+      "category": "draft"
+    },
+    "bodyHash": "51d9edffb5161a3a70f940b022212a70752db5e70fd10fc866bc5a9a193763a4"
+  },
+  "draft/vibe/企业Agent落地三大实战坑总结.md": {
+    "data": {
+      "title": "企业Agent落地三大实战坑总结",
+      "summary": "上个月帮一个 300 人左右的公司做 Agent 落地，一开始我以为最难的是模型和工具。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "企业agent落地三大实战坑总结",
+      "category": "draft"
+    },
+    "bodyHash": "5ab3d51dcb3b3e8cb955ce6639bc4824eecbec6793d1ed7d3cb889e69783954b"
+  },
+  "draft/vibe/关于系统.md": {
+    "data": {
+      "title": "关于系统",
+      "summary": "大多数人的想法不是死在脑子里，而是死在执行上面。",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "关于系统",
+      "category": "draft"
+    },
+    "bodyHash": "de84f2eddaf12dea364e0d127d2fec33d14f416a7e4d184ec6d950d053d4fb11"
+  },
+  "draft/vibe/到底哪种记忆系统最适合Agent.md": {
+    "data": {
+      "title": "到底哪种记忆系统最适合 Agent？",
+      "summary": "批判：目前九成方案是\"技术自嗨\"",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "到底哪种记忆系统最适合agent",
+      "category": "draft"
+    },
+    "bodyHash": "db3add99b6c77d8e21f8ef0441f42b90e70d3c8a2c6036695334da60e2f53096"
+  },
+  "draft/vibe/实战干货：为什么AI写代码前一定要让它先写文档.md": {
+    "data": {
+      "title": "实战干货：为什么 AI 写代码前一定要让它先写文档",
+      "summary": "核心概念：SDD（Spec-Driven Development，规格驱动开发）",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "实战干货为什么ai写代码前一定要让它先写文档",
+      "category": "draft"
+    },
+    "bodyHash": "96a8e8780bcb32fc525b40b22eb7fbf7a0ef8f974eb0adb247371cb2804b34a2"
+  },
+  "draft/vibe/干货：LangGraph与CrewAI等Agent框架对比.md": {
+    "data": {
+      "title": "【干货】LangGraph / CrewAI 等 Agent 框架对比",
+      "summary": "------------------",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "干货langgraph与crewai等agent框架对比",
+      "category": "draft"
+    },
+    "bodyHash": "e59c228285d81b8f92d9ca57c1a5fdc984023d49dfb95a558ea367b1cb829fbd"
+  },
+  "draft/vibe/相同尺寸大模型，显存为啥差一倍？一张图看懂浮点精度.md": {
+    "data": {
+      "title": "相同尺寸大模型，显存为啥差一倍？一张图看懂浮点精度",
+      "summary": "你有没有疑问过：明明都是27B参数量的大模型，为什么有的部署要吃掉五十多G的显存，有的却只要30G显存就能跑？整整快一倍的显存差距到底是怎么来的？",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "6 min",
+      "slug": "相同尺寸大模型显存为啥差一倍一张图看懂浮点精度",
+      "category": "draft"
+    },
+    "bodyHash": "d089486fcc780c611bfbe2f056c34da36767e312dc4f007a3148db9579b06a13"
+  },
+  "draft/vibe/这次再错过AI，真的就晚了，之后淘汰你的不是AI，而是会用AI的人.md": {
+    "data": {
+      "title": "这次再错过AI，真的就晚了，之后淘汰你的不是AI，而是会用AI的人",
+      "summary": "过去 20 年普通人最大的机会是什么？",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "10 min",
+      "slug": "这次再错过ai真的就晚了之后淘汰你的不是ai而是会用ai的人",
+      "category": "draft"
+    },
+    "bodyHash": "ee9a8abd5391adadd06cedbf19634350c0114d445fc779c06ef91434c6d3eeb6"
+  },
+  "draft/vibe/通过状态机和约束，让AI不再瞎跑.md": {
+    "data": {
+      "title": "通过状态机和约束，让AI不再瞎跑",
+      "summary": "相信大家在使用AI编程工具的时候都有过这种体验：",
+      "tags": [
+        "随笔",
+        "vibe",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "通过状态机和约束让ai不再瞎跑",
+      "category": "draft"
+    },
+    "bodyHash": "f5ed2b3b3c6211fdb3e14fef8d07db549808da3bb2d2d9ae570ee316c0556fca"
+  },
+  "draft/其他面试笔试/大文件上传系统设计总结.md": {
+    "data": {
+      "title": "大文件上传系统设计 - 总结",
+      "summary": "这是一道大厂高频面试题，考察的是资源分配能力、网络一致性保证和容错思维。",
+      "tags": [
+        "随笔",
+        "其他面试笔试",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "大文件上传系统设计总结",
+      "category": "draft"
+    },
+    "bodyHash": "476f6b9dc2e35d1dcba4c867c345ac562d6f390a9f0f9e888ccad82c99bfe63c"
+  },
+  "draft/其他面试笔试/程序员面试经验合集.md": {
+    "data": {
+      "title": "程序员面试经验合集",
+      "summary": "2. 腾讯后端开发暑期实习二面",
+      "tags": [
+        "随笔",
+        "其他面试笔试",
+        "draft"
+      ],
+      "read_time": "41 min",
+      "slug": "程序员面试经验合集",
+      "category": "draft"
+    },
+    "bodyHash": "4a2acd70c42c7183d8b9aa7e6972efde256717f2a134080024cb164fa79a4f64"
+  },
+  "draft/其他面试笔试/线上排障：日志打爆磁盘，别直接用rm.md": {
+    "data": {
+      "title": "线上排障：日志打爆磁盘，别直接用rm",
+      "summary": "线上服务器触发磁盘报警，日志目录使用率达到100%。很多人的第一反应是：",
+      "tags": [
+        "随笔",
+        "其他面试笔试",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "线上排障日志打爆磁盘别直接用rm",
+      "category": "draft"
+    },
+    "bodyHash": "0066b8ba5df154342355761aaeb3c750bd6752dbd5a0834a0d26a068d0d4eba6"
+  },
+  "draft/其他面试笔试/网络通信的基础-socket总结.md": {
+    "data": {
+      "title": "网络通信的基础：Socket - 总结",
+      "summary": "Socket（套接字） 是网络编程最基础的接口，是网络通信的核心抽象。你现在刷抖音、打游戏、发微信，背后都是Socket在工作。",
+      "tags": [
+        "随笔",
+        "其他面试笔试",
+        "draft"
+      ],
+      "read_time": "3 min",
+      "slug": "网络通信的基础-socket总结",
+      "category": "draft"
+    },
+    "bodyHash": "1753f46bfa5b16ee3dab1ddf96e506623b0f629067f3e57caa4b5c3b572a24a8"
+  },
+  "draft/其他面试笔试/面试官问HashMap底层原理你会先背.md": {
+    "data": {
+      "title": "面试官问 HashMap 底层原理，你会先背？",
+      "summary": "用生活场景理解 HashMap",
+      "tags": [
+        "随笔",
+        "其他面试笔试",
+        "draft"
+      ],
+      "read_time": "1 min",
+      "slug": "面试官问hashmap底层原理你会先背",
+      "category": "draft"
+    },
+    "bodyHash": "406b57ef0cafbfbd25c3db6e5891e82464aa5905dbeeff779ec5115359115778"
+  },
+  "draft/完整/2026-02-28-杂项.md": {
+    "data": {
+      "title": "杂项",
+      "date": "2026-02-28",
+      "summary": ".js 文件是 JavaScript 文件的扩展名，主要用于存储和执行 JavaScript 代码。",
+      "tags": [
+        "随笔",
+        "完整",
+        "杂项",
+        "draft"
+      ],
+      "read_time": "6 min",
+      "slug": "2026-02-28-杂项",
+      "category": "draft"
+    },
+    "bodyHash": "f3d41d5eedbcba2f088c791fdbc4257ea7ca7b6a91f623b468a990c272dd668a"
+  },
+  "draft/完整/2026-06-18-Hive优化.md": {
+    "data": {
+      "title": "Hive优化（整理版）",
+      "date": "2026-06-18",
+      "summary": "1.1 hive的特征：",
+      "tags": [
+        "随笔",
+        "完整",
+        "Hive",
+        "优化"
+      ],
+      "read_time": "21 min",
+      "slug": "2026-06-18-hive优化",
+      "category": "draft"
+    },
+    "bodyHash": "39359268a49750150ae152a81b6a9770e06b1b7e4d19ebe8de1bb30fab0f1e5e"
+  },
+  "draft/完整/2026-06-20-如何让AI进行工程化架构处理.md": {
+    "data": {
+      "title": "如何让AI进行工程化架构处理",
+      "date": "2026-06-20",
+      "summary": "AI代码的架构与工程化陷阱。",
+      "tags": [
+        "随笔",
+        "完整",
+        "draft"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-06-20-如何让ai进行工程化架构处理",
+      "category": "draft"
+    },
+    "bodyHash": "a5cce4f86066befa1aaf4fa12939c4dc03c39a09bde4b8c02a70d1665afe357c"
+  },
+  "draft/完整/Apache DolphinScheduler K8s 客户端连接池实现方案.md": {
+    "data": {
+      "title": "Apache DolphinScheduler K8s 客户端连接池实现方案",
+      "summary": "这个项目是我给 Apache DolphinScheduler 贡献的 K8s 客户端连接池特性，对应社区 PR \\17510。",
+      "tags": [
+        "随笔",
+        "完整",
+        "draft"
+      ],
+      "read_time": "10 min",
+      "slug": "apache-dolphinscheduler-k8s-客户端连接池实现方案",
+      "category": "draft"
+    },
+    "bodyHash": "3b571856d84efe456f815b5094b5e373f8a9cf533b6e04af883c8c393af7cf53"
+  },
+  "draft/完整/Flink消费Kafka指标延迟控制5s内调优手段.md": {
+    "data": {
+      "title": "Flink消费Kafka指标延迟控制5s内调优手段",
+      "summary": "整体分为Kafka Source 读取调优、Flink 运行时核心调优、算子 \\& 业务逻辑优化、Checkpoint / 状态调优、资源并行度匹配、网络与 …",
+      "tags": [
+        "随笔",
+        "完整",
+        "draft"
+      ],
+      "read_time": "10 min",
+      "slug": "flink消费kafka指标延迟控制5s内调优手段",
+      "category": "draft"
+    },
+    "bodyHash": "f963778cbf3bb886b2f8ddd497886b90461320094b986fb624546a3dc810b9f2"
+  },
+  "draft/完整/Hive离线数仓DWD_DWS_ADS分层职责+落地业务指标案例.md": {
+    "data": {
+      "title": "Hive离线数仓DWD/DWS/ADS分层职责\\+落地业务指标案例",
+      "summary": "1\\. DWD 层：明细事实层（数据清洗、标准化、粒度对齐）",
+      "tags": [
+        "随笔",
+        "完整",
+        "draft"
+      ],
+      "read_time": "7 min",
+      "slug": "hive离线数仓dwd-dws-ads分层职责落地业务指标案例",
+      "category": "draft"
+    },
+    "bodyHash": "e866eab4a0caa6e62d420fcf72de951f110806830d3dbd20a7766d121f96a9b1"
+  },
+  "draft/完整/MinerU_markdown_尚硅谷大数据技术之Doris_2069854439495008256.md": {
+    "data": {
+      "title": "1 Doris简介",
+      "summary": "尚硅谷大数据技术之Doris",
+      "tags": [
+        "随笔",
+        "完整",
+        "draft"
+      ],
+      "read_time": "116 min",
+      "slug": "mineru-markdown-尚硅谷大数据技术之doris-2069854439495008256",
+      "category": "draft"
+    },
+    "bodyHash": "2861b4014689389f36ea8646a1ec46039acf2bf5c0983db9bc2971ff79400f7e"
+  },
+  "draft/完整/一、选型依据：为什么是 LinkedBlockingQueue？.md": {
+    "data": {
+      "title": "一、选型依据：为什么是 LinkedBlockingQueue？",
+      "summary": "1你写 K8s 连接池时，池内空闲客户端采用什么并发容器存储？为什么选择它而非其他容器？",
+      "tags": [
+        "随笔",
+        "完整",
+        "draft"
+      ],
+      "read_time": "10 min",
+      "slug": "一选型依据为什么是-linkedblockingqueue",
+      "category": "draft"
+    },
+    "bodyHash": "6912d23a2deb69e8a83d9b413fe3f4e76264689e176d6bf9f76c67c2a6f798ca"
+  },
+  "draft/完整/面试内容分析：DolphinScheduler K8S连接池项目深度解析.md": {
+    "data": {
+      "title": "面试内容分析：DolphinScheduler K8S连接池项目深度解析",
+      "summary": "面试官你好，我是广东工业大学的陈文涛。在校期间有四项项目经历：",
+      "tags": [
+        "随笔",
+        "完整",
+        "draft"
+      ],
+      "read_time": "11 min",
+      "slug": "面试内容分析dolphinscheduler-k8s连接池项目深度解析",
+      "category": "draft"
+    },
+    "bodyHash": "ed70e26c65e0eb115fb10b574283f8ffa9e2e382cf34eea52aeaf1ab99b892e9"
+  },
+  "job/2026-06-18-求职综合指南.md": {
+    "data": {
+      "title": "求职综合指南",
+      "date": "2026-06-18",
+      "summary": "- 一、心态调整与行业认知",
+      "tags": [
+        "求职",
+        "job"
+      ],
+      "read_time": "50 min",
+      "slug": "2026-06-18-求职综合指南",
+      "category": "job"
+    },
+    "bodyHash": "6ff62308873b395d1939b18346a2058c1425ddb7615a383eece9bad85c39badd"
+  },
+  "job/agent面试/2026-06-20-AI面试全景知识体系.md": {
+    "data": {
+      "title": "AI 面试全景知识体系",
+      "date": "2026-06-20",
+      "summary": "本文档整合自《Agent 面试全景梳理》与《AI 面试知识体系整合手册》两份材料，按照\"基础理论 → 核心技术 → 面试实战 → 项目落地 → 趋势展望\"的逻…",
+      "tags": [
+        "求职",
+        "agent面试",
+        "job"
+      ],
+      "read_time": "50 min",
+      "slug": "2026-06-20-ai面试全景知识体系",
+      "category": "job"
+    },
+    "bodyHash": "c2eceef9e10a47a8b065da8d261f13d909ee329ecef5464b5aa1029643a831e2"
+  },
+  "job/agent面试/2026-06-20-Agent从开发到工作.md": {
+    "data": {
+      "title": "Agent从开发到工作：普通人零基础转AI全指南",
+      "date": "2026-06-20",
+      "summary": "作为一名普通转行程序员，踩过很多 AI 学习的坑，终于摸索出一套普通人可复制的 Agent 成长路线。没有名校学历、没有算法基础，纯靠循序渐进落地实操，吃透当…",
+      "tags": [
+        "求职",
+        "agent面试",
+        "job"
+      ],
+      "read_time": "20 min",
+      "slug": "2026-06-20-agent从开发到工作",
+      "category": "job"
+    },
+    "bodyHash": "8da6da05eda1dc064d86ff48d1c32c10472237c3fea95490c8cb14bb79738062"
+  },
+  "job/agent面试/2026-06-20-大模型Agent面试高频题.md": {
+    "data": {
+      "title": "八股（Redis 核心）",
+      "date": "2026-06-20",
+      "summary": "这是落地项目一定会遇到的痛点，推荐三套方案组合解决：",
+      "tags": [
+        "求职",
+        "agent面试",
+        "job"
+      ],
+      "read_time": "86 min",
+      "slug": "2026-06-20-大模型agent面试高频题",
+      "category": "job"
+    },
+    "bodyHash": "617f8a058caaa704d1be6fd5cc77dbce76c26815898818d55663f38dcb34f30e"
+  },
+  "job/agent面试/2026-06-20-请大神来锐评AI应用和Agent开发相关.md": {
+    "data": {
+      "title": "请大神来锐评 AI 应用和 Agent 开发相关",
+      "date": "2026-06-20",
+      "summary": "1. NLP 基础：Transformer 架构",
+      "tags": [
+        "求职",
+        "agent面试",
+        "job"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-06-20-请大神来锐评ai应用和agent开发相关",
+      "category": "job"
+    },
+    "bodyHash": "0b7b093e0123a5ecd11e174ecaba268826e78d04d1744d0b7ba97181ed107f5b"
+  },
+  "job/coding/hot100/2026-03-21-双指针.md": {
+    "data": {
+      "title": "Leetcode Hot100 双指针",
+      "date": "2026-03-21",
+      "summary": "看了官方的伪代码后，基于自身理解修改正例得到的代码。",
+      "tags": [
+        "求职",
+        "hot100",
+        "Leetcode",
+        "算法"
+      ],
+      "read_time": "6 min",
+      "slug": "2026-03-21-双指针",
+      "category": "job"
+    },
+    "bodyHash": "4f6031b9ecf53e732d3d7c59b607d65651454a84535907687ddb9312ee2e26ff"
+  },
+  "job/coding/hot100/2026-03-23-哈希.md": {
+    "data": {
+      "title": "Leetcode Hot100 哈希",
+      "date": "2026-03-23",
+      "tags": [
+        "求职",
+        "hot100",
+        "Leetcode",
+        "算法"
+      ],
+      "read_time": "10 min",
+      "slug": "2026-03-23-哈希",
+      "category": "job"
+    },
+    "bodyHash": "ddc5734ba8d5a124264ec42fd9cddc62a9e90691d002c9055f8272ed2c9f037e"
+  },
+  "job/coding/hot100/2026-03-27-滑动窗口.md": {
+    "data": {
+      "title": "Leetcode Hot100 滑动窗口",
+      "date": "2026-03-27",
+      "summary": "我的原始思路是考虑截取子串然后排序比较，但是时间复杂度较高，需要优化一下",
+      "tags": [
+        "求职",
+        "hot100",
+        "Leetcode",
+        "算法"
+      ],
+      "read_time": "6 min",
+      "slug": "2026-03-27-滑动窗口",
+      "category": "job"
+    },
+    "bodyHash": "d408316ef5fb03b2dd2950839bc9bcd0142550210d4bdccd3f90d87a52139802"
+  },
+  "job/coding/hot100/2026-03-29-二分查找.md": {
+    "data": {
+      "title": "Leetcode Hot100 二分查找",
+      "date": "2026-03-29",
+      "summary": "数组/矩阵的前提是递增或者递减",
+      "tags": [
+        "求职",
+        "hot100",
+        "Leetcode",
+        "算法"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-03-29-二分查找",
+      "category": "job"
+    },
+    "bodyHash": "9f2a744b54dea8913003653493669e7c66279adc47275683d65c009bfdcef142"
+  },
+  "job/coding/hot100/2026-03-29-子串.md": {
+    "data": {
+      "title": "Leetcode Hot100 子串",
+      "date": "2026-03-29",
+      "summary": "部分解题思路借鉴了leetcode官方解集",
+      "tags": [
+        "求职",
+        "hot100",
+        "Leetcode",
+        "算法"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-03-29-子串",
+      "category": "job"
+    },
+    "bodyHash": "0492f11b738d896fd5a0e6afad25a91ed150a063545516224d328c43dd1bb940"
+  },
+  "job/coding/hot100/2026-03-29-栈.md": {
+    "data": {
+      "title": "Leetcode Hot100 子串",
+      "date": "2026-03-29",
+      "tags": [
+        "求职",
+        "hot100",
+        "Leetcode",
+        "算法"
+      ],
+      "read_time": "1 min",
+      "slug": "2026-03-29-栈",
+      "category": "job"
+    },
+    "bodyHash": "abee125f9e8be8d75b7f0ce675e2b2153cac87b35ca2732261c297967ed50aed"
+  },
+  "job/coding/index.md": {
+    "data": {
+      "title": "Coding",
+      "summary": "刷题",
+      "tags": [
+        "求职",
+        "coding",
+        "job"
+      ],
+      "read_time": "1 min",
+      "slug": "job-coding-index",
+      "category": "job"
+    },
+    "bodyHash": "e24a0c35f9f48f5ac0c85403a47460163a95c743e3188a98c08c66715d3f7020"
+  },
+  "job/coding/刷题笔记.md": {
+    "data": {
+      "title": "刷题笔记",
+      "summary": "刷题笔记，包含数组、字符串、链表、树、图等数据结构",
+      "tags": [
+        "求职",
+        "coding",
+        "job"
+      ],
+      "read_time": "48 min",
+      "slug": "刷题笔记",
+      "category": "job"
+    },
+    "bodyHash": "4234aca36c9fa7247adf74391cc362c2b6a8da3aec4f1fcc913c8d12deb076e8"
+  },
+  "job/coding/手撕题.md": {
+    "data": {
+      "title": "手撕题整理",
+      "summary": "面试手撕整理",
+      "tags": [
+        "求职",
+        "coding",
+        "job"
+      ],
+      "read_time": "24 min",
+      "slug": "手撕题",
+      "category": "job"
+    },
+    "bodyHash": "d3756477b1983b0c9b4a1646f80c0abf9fe94747b82196701f624dc6ff5808eb"
+  },
+  "job/coding/算法拓展/KMP算法.md": {
+    "data": {
+      "title": "KMP 算法",
+      "summary": "KMP 是三位大牛：D.E.Knuth、J.H.Morris 和 V.R.Pratt 同时发现的。其中第一位就是《计算机程序设计艺术》的作者！",
+      "tags": [
+        "求职",
+        "算法拓展",
+        "job"
+      ],
+      "read_time": "7 min",
+      "slug": "kmp算法",
+      "category": "job"
+    },
+    "bodyHash": "6967d58b7e3a324ab89cfff1ba27859b778fa12f2eac84df84982760a6d9f8e7"
+  },
+  "job/coding/算法拓展/分治算法.md": {
+    "data": {
+      "title": "算法专题 之 分治算法",
+      "summary": "2021-12-09 14:46:17",
+      "tags": [
+        "求职",
+        "算法拓展",
+        "job"
+      ],
+      "read_time": "13 min",
+      "slug": "分治算法",
+      "category": "job"
+    },
+    "bodyHash": "ea61e6bd740a621b5fdab40f0e00f8538254d0e93de4eae6e2ffbe064cc92583"
+  },
+  "job/coding/算法拓展/回溯算法.md": {
+    "data": {
+      "title": "数据结构和算法-五大常用算法:回溯算法 - 秦羽的思考 - 博客园",
+      "summary": "原文链接：https://www.cnblogs.com/xuwc/p/13923246.html",
+      "tags": [
+        "求职",
+        "算法拓展",
+        "job"
+      ],
+      "read_time": "45 min",
+      "slug": "回溯算法",
+      "category": "job"
+    },
+    "bodyHash": "cf82d90701fd4cfbe3ca35f4e42bf9d1cab57b64a1841b5e5b56236471fde75e"
+  },
+  "job/coding/算法拓展/枚举算法.md": {
+    "data": {
+      "title": "枚举算法",
+      "summary": "枚举算法也称为穷举算法，核心思想是：在解决问题时，将事件发生的每一种可能全部列举出来，然后逐一判断，最终得出结论。",
+      "tags": [
+        "求职",
+        "算法拓展",
+        "job"
+      ],
+      "read_time": "4 min",
+      "slug": "枚举算法",
+      "category": "job"
+    },
+    "bodyHash": "e4566b01f15dca136bf8b173132cc96be8f8adf07349b6ed70cd921af910dcc6"
+  },
+  "job/coding/算法拓展/查找算法.md": {
+    "data": {
+      "title": "常见的七种查找算法",
+      "summary": "数据结构是数据存储的方式，算法是数据计算的方式。算法和数据结构息息相关，本文涉及部分数据结构的专业名词。",
+      "tags": [
+        "求职",
+        "算法拓展",
+        "job"
+      ],
+      "read_time": "32 min",
+      "slug": "查找算法",
+      "category": "job"
+    },
+    "bodyHash": "94c7f06e106a12d144af4217a8a0d4a0886f77114c4437163ccac782f182aeaf"
+  },
+  "job/coding/算法拓展/贪心算法.md": {
+    "data": {
+      "title": "贪心算法详解",
+      "summary": "原文链接：https://mp.weixin.qq.com/s?biz=MzU1NjEwMTY0Mw==&mid=2247584917&idx=1&sn=11…",
+      "tags": [
+        "求职",
+        "算法拓展",
+        "job"
+      ],
+      "read_time": "11 min",
+      "slug": "贪心算法",
+      "category": "job"
+    },
+    "bodyHash": "8442a3d1270ec63ef6826c0045efac6ebc041625aec4a507648d74b00c3e2660"
+  },
+  "job/facebook/2026-03-01-Agent.md": {
+    "data": {
+      "title": "Agent",
+      "date": "2026-03-01",
+      "summary": "你设计的 Agent 核心 ReAct 循环完整流程是什么？每一步你在代码里做了哪些容错处理？",
+      "tags": [
+        "求职",
+        "facebook",
+        "Agent",
+        "job"
+      ],
+      "read_time": "8 min",
+      "slug": "2026-03-01-agent",
+      "category": "job"
+    },
+    "bodyHash": "26e9eb2dc207784a5cc1d18c7f22ca83234aa146d70858500d39ca0e0bd42fbd"
+  },
+  "job/facebook/2026-03-01-ClickHouse.md": {
+    "data": {
+      "title": "ClickHouse",
+      "date": "2026-03-01",
+      "summary": "ck讲一下特点（clickhouse的优点）",
+      "tags": [
+        "求职",
+        "facebook",
+        "ClickHouse",
+        "job"
+      ],
+      "read_time": "18 min",
+      "slug": "2026-03-01-clickhouse",
+      "category": "job"
+    },
+    "bodyHash": "707f2f724ba39e9c36faded379d18ad58ce381e9e7b4d789cdeee160ef1f2df9"
+  },
+  "job/facebook/2026-03-01-Flink.md": {
+    "data": {
+      "title": "Flink",
+      "date": "2026-03-01",
+      "summary": "Flink是一个分布式的计算框架，主要用于对有界和无界数据流进行有状态计算。",
+      "tags": [
+        "求职",
+        "facebook",
+        "Flink",
+        "job"
+      ],
+      "read_time": "52 min",
+      "slug": "2026-03-01-flink",
+      "category": "job"
+    },
+    "bodyHash": "6727786ab31286c5acc84c72ebd73e99f257767edbe7fda380afe2cbb1824c50"
+  },
+  "job/facebook/2026-03-01-Flume.md": {
+    "data": {
+      "title": "Flume",
+      "date": "2026-03-01",
+      "summary": "简述 flume 基础架构",
+      "tags": [
+        "求职",
+        "facebook",
+        "Flume",
+        "job"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-03-01-flume",
+      "category": "job"
+    },
+    "bodyHash": "b8100a867fe177faa72d9b110d2136a3ad30285cc9ac885a02b616beecbdde75"
+  },
+  "job/facebook/2026-03-01-HBase.md": {
+    "data": {
+      "title": "HBase",
+      "date": "2026-03-01",
+      "summary": "Hbase是一个建立在Hadoop上的分布式列式存储数据库，它用于存储非结构化和半结构化的大规模数据，并提供了实时的数据访问能力",
+      "tags": [
+        "求职",
+        "facebook",
+        "HBase",
+        "job"
+      ],
+      "read_time": "16 min",
+      "slug": "2026-03-01-hbase",
+      "category": "job"
+    },
+    "bodyHash": "116eb2fc7d8b7e918308ef78a4659bbc416a01908b921e3c63b9ddb242066731"
+  },
+  "job/facebook/2026-03-01-Hadoop.md": {
+    "data": {
+      "title": "Hadoop",
+      "date": "2026-03-01",
+      "summary": "Hadoop是Apache的开源的分布式系统基础架构，主要解决海量数据存储与计算的问题，主要包括HDFS分布式文件存储系统、MapReduce分布式计算框架和…",
+      "tags": [
+        "求职",
+        "facebook",
+        "Hadoop",
+        "job"
+      ],
+      "read_time": "29 min",
+      "slug": "2026-03-01-hadoop",
+      "category": "job"
+    },
+    "bodyHash": "f33c75d079063e5a76c665f23838d135bbcb8c4d76f619eef228f252e0b8d97c"
+  },
+  "job/facebook/2026-03-01-Hive.md": {
+    "data": {
+      "title": "Hive",
+      "date": "2026-03-01",
+      "summary": "我理解的，hive 就是一款构建数据仓库的工具，它可以将结构化的数据映射为一张表，并且可以通过 SQL语句进行查询分析。本质上是将SQL转换为MapReduc…",
+      "tags": [
+        "求职",
+        "facebook",
+        "Hive",
+        "job"
+      ],
+      "read_time": "24 min",
+      "slug": "2026-03-01-hive",
+      "category": "job"
+    },
+    "bodyHash": "08184846bd87d13994a949f839a817bcd6fbd719b931e12b4e6a364e8fa49256"
+  },
+  "job/facebook/2026-03-01-Java.md": {
+    "data": {
+      "title": "Java数据结构",
+      "date": "2026-03-01",
+      "summary": "1. volatile关键字的作用",
+      "tags": [
+        "求职",
+        "facebook",
+        "Java数据结构",
+        "job"
+      ],
+      "read_time": "33 min",
+      "slug": "2026-03-01-java",
+      "category": "job"
+    },
+    "bodyHash": "77d9ce46c648f9fe1a68deb5de02e6aae78acdcf833b7f0c4ca90e77a75e4d7d"
+  },
+  "job/facebook/2026-03-01-Kafka.md": {
+    "data": {
+      "title": "Kafka : 消息队列",
+      "date": "2026-03-01",
+      "summary": "kafka的底层配置相关",
+      "tags": [
+        "求职",
+        "facebook",
+        "Kafka",
+        "消息队列"
+      ],
+      "read_time": "33 min",
+      "slug": "2026-03-01-kafka",
+      "category": "job"
+    },
+    "bodyHash": "9efc424ccbcd22628064bd14b623b87d93526acaadc2c2b783fb31c1f4e82011"
+  },
+  "job/facebook/2026-03-01-Linux.md": {
+    "data": {
+      "title": "Linux/shell",
+      "date": "2026-03-01",
+      "summary": "按修改时间排序查看当前目录文件",
+      "tags": [
+        "求职",
+        "facebook",
+        "Linux",
+        "job"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-03-01-linux",
+      "category": "job"
+    },
+    "bodyHash": "d50fa560c6f99fd8c573308736ad48a3ab039d2d1361a0917ce77f498c1ca6c0"
+  },
+  "job/facebook/2026-03-01-MaxWell.md": {
+    "data": {
+      "title": "Maxwell",
+      "date": "2026-03-01",
+      "summary": "Maxwell的底层实现原理",
+      "tags": [
+        "求职",
+        "facebook",
+        "Maxwell",
+        "job"
+      ],
+      "read_time": "1 min",
+      "slug": "2026-03-01-maxwell",
+      "category": "job"
+    },
+    "bodyHash": "48209f851cd6794319a93b5f5c968192276265243fb5c2e54c6a64fadab26104"
+  },
+  "job/facebook/2026-03-01-MySQL.md": {
+    "data": {
+      "title": "MySQL",
+      "date": "2026-03-01",
+      "summary": "数据库三范式包括：原子性、消除部分依赖（唯一性）、消除传递依赖（独立性）",
+      "tags": [
+        "求职",
+        "facebook",
+        "MySQL",
+        "job"
+      ],
+      "read_time": "13 min",
+      "slug": "2026-03-01-mysql",
+      "category": "job"
+    },
+    "bodyHash": "b3e1cfb0708cd8fe268e61c9d40e18ea9e879bc366a8e0b77ab341d5c33c2305"
+  },
+  "job/facebook/2026-03-01-Redis.md": {
+    "data": {
+      "title": "Redis",
+      "date": "2026-03-01",
+      "summary": "2. Redis为什么快",
+      "tags": [
+        "求职",
+        "facebook",
+        "Redis",
+        "job"
+      ],
+      "read_time": "6 min",
+      "slug": "2026-03-01-redis",
+      "category": "job"
+    },
+    "bodyHash": "b103d873b72e1fe01115ebd1ff595e9140e9d7c90c990688d651865a3abae9b8"
+  },
+  "job/facebook/2026-03-01-Spark.md": {
+    "data": {
+      "title": "Spark",
+      "date": "2026-03-01",
+      "summary": "RDD（Resilient Distributed Dataset，弹性分布式数据集）是Spark的核心数据结构。",
+      "tags": [
+        "求职",
+        "facebook",
+        "Spark",
+        "job"
+      ],
+      "read_time": "14 min",
+      "slug": "2026-03-01-spark",
+      "category": "job"
+    },
+    "bodyHash": "e06bf1d4a649944f2777c88fed7ff26269147355c8a03ac157849fe64f0466a4"
+  },
+  "job/facebook/2026-03-01-Zookeeper.md": {
+    "data": {
+      "title": "Zookeeper",
+      "date": "2026-03-01",
+      "summary": "简单介绍一下zookeeper",
+      "tags": [
+        "求职",
+        "facebook",
+        "Zookeeper",
+        "job"
+      ],
+      "read_time": "13 min",
+      "slug": "2026-03-01-zookeeper",
+      "category": "job"
+    },
+    "bodyHash": "8251debead84d76ee3c8763691955b8a316d6acd844de31948288ce7ae32647d"
+  },
+  "job/facebook/2026-03-01-其他项目相关.md": {
+    "data": {
+      "title": "其他项目相关",
+      "date": "2026-03-01",
+      "summary": "写一个prom sql语句查询CPU和内存信息",
+      "tags": [
+        "求职",
+        "facebook",
+        "其他项目相关",
+        "job"
+      ],
+      "read_time": "18 min",
+      "slug": "2026-03-01-其他项目相关",
+      "category": "job"
+    },
+    "bodyHash": "7b2ede07e1fc06e7f0573117eb52fc55e7be019a67f72e9270a752f09a401de5"
+  },
+  "job/facebook/2026-03-01-实时数仓项目.md": {
+    "data": {
+      "title": "数据仓库",
+      "date": "2026-03-01",
+      "summary": "springboot 程序实时生成，模拟真实的流数据，用配置文件来控制随机范围",
+      "tags": [
+        "求职",
+        "facebook",
+        "数据仓库",
+        "实时数仓"
+      ],
+      "read_time": "12 min",
+      "slug": "2026-03-01-实时数仓项目",
+      "category": "job"
+    },
+    "bodyHash": "6090d8a2e96480bf1bae276eb678f7dbd23185a21d4ffc174f72241d0ffb5989"
+  },
+  "job/facebook/2026-03-01-数据仓库.md": {
+    "data": {
+      "title": "数据仓库",
+      "date": "2026-03-01",
+      "summary": "数据流向：ODS（原始数据）→ DWD（清洗明细）→ DIM（维度关联）→ DWS（公共汇总）→ ADS（应用指标）",
+      "tags": [
+        "求职",
+        "facebook",
+        "数据仓库",
+        "job"
+      ],
+      "read_time": "19 min",
+      "slug": "2026-03-01-数据仓库",
+      "category": "job"
+    },
+    "bodyHash": "4c936a773de8337cd0c6461cf08f93d399f493d95db77a6fc7eb6db6437e7a43"
+  },
+  "job/facebook/2026-03-01-离线数仓项目.md": {
+    "data": {
+      "title": "离线数仓项目",
+      "date": "2026-03-01",
+      "summary": "- ODS：操作数据层，原始数据接入",
+      "tags": [
+        "求职",
+        "facebook",
+        "数据仓库",
+        "离线数仓"
+      ],
+      "read_time": "12 min",
+      "slug": "2026-03-01-离线数仓项目",
+      "category": "job"
+    },
+    "bodyHash": "2932b65c876a1cc64cbfb38dc31d48510856cc84bda4d157c423db479b2624a3"
+  },
+  "job/facebook/2026-03-01-线程与多线程fg异步与同步.md": {
+    "data": {
+      "title": "线程与多线程/异步与同步",
+      "date": "2026-03-01",
+      "summary": "1. 资源分配 vs 执行单元",
+      "tags": [
+        "求职",
+        "facebook",
+        "线程",
+        "多线程"
+      ],
+      "read_time": "22 min",
+      "slug": "2026-03-01-线程与多线程fg异步与同步",
+      "category": "job"
+    },
+    "bodyHash": "d703a393c5d3296058bbac2ef4c462a5a1ff9b508020706543912996aa0afb93"
+  },
+  "job/facebook/2026-03-01-计算机网络.md": {
+    "data": {
+      "title": "计算机网络",
+      "date": "2026-03-01",
+      "summary": "计算机网络相关知识",
+      "tags": [
+        "求职",
+        "facebook",
+        "cookie",
+        "面经"
+      ],
+      "read_time": "27 min",
+      "slug": "2026-03-01-计算机网络",
+      "category": "job"
+    },
+    "bodyHash": "59c4d48c571e8b1737fa739b5eb69f7f771e32a4eb5e5257d54c4c9189502678"
+  },
+  "job/index.md": {
+    "data": {
+      "title": "找工作",
+      "summary": "找工作的准备工作",
+      "tags": [
+        "求职",
+        "job"
+      ],
+      "read_time": "1 min",
+      "slug": "job-index",
+      "category": "job"
+    },
+    "bodyHash": "e24a0c35f9f48f5ac0c85403a47460163a95c743e3188a98c08c66715d3f7020"
+  },
+  "knowledge/2026-06-17-如何正确进行技术学习.md": {
+    "data": {
+      "title": "如何正确进行技术学习",
+      "date": "2026-02-17",
+      "summary": "看教程、看视频、看书、看别人的代码都属于输入。输入有价值，但本身无法实打实提升实操能力。",
+      "tags": [
+        "知识库",
+        "技术学习核心方法论",
+        "学习",
+        "knowledge"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-06-17-如何正确进行技术学习",
+      "category": "knowledge"
+    },
+    "bodyHash": "6fe52dfbc47324b5c9b6480419fb58486691a3358dace68b76177ff5cb594c36"
+  },
+  "knowledge/agent/20026-06-18-Agent的Skill过多？怎么提高命中.md": {
+    "data": {
+      "title": "Agent 的 Skill 过多？怎么提高命中率",
+      "date": "0026-06-18",
+      "summary": "我们团队在构建企业级 Agent 平台的过程中踩过一个典型的坑：从最初的十几个 Skill 快速迭代到上百个 Skill 后，原本准确率不错的 Skill 路…",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "3 min",
+      "slug": "20026-06-18-agent的skill过多怎么提高命中",
+      "category": "knowledge"
+    },
+    "bodyHash": "026d70a07c90a48428b6ef417064d11e07a583c4f03875820e365115b460523f"
+  },
+  "knowledge/agent/2026-06-03-说一下Harness.md": {
+    "data": {
+      "title": "说一下 Harness",
+      "date": "2026-06-03",
+      "summary": "Harness 的英文原意是「马具 / 缰绳」——用来驾驭烈马、使其听从指令并稳定出力的一套索具。",
+      "tags": [
+        "知识库",
+        "agent",
+        "Agent",
+        "Harness"
+      ],
+      "read_time": "14 min",
+      "slug": "2026-06-03-说一下harness",
+      "category": "knowledge"
+    },
+    "bodyHash": "18ffd7dde94a075a1245fa0dba31fa24586f6cb0e8128ced91d8d542d0845cef"
+  },
+  "knowledge/agent/2026-06-17-3分钟了解Loop_Engineer.md": {
+    "data": {
+      "title": "三分钟了解 Loop Engineering",
+      "date": "2026-06-17",
+      "summary": "这周 AI 圈炸锅了——就因为六个字：「别再写 prompt 了」。这条推来自「小龙虾之父 Peter St. Petersburg」，七百万人围观，评论直接…",
+      "tags": [
+        "知识库",
+        "agent",
+        "Agent",
+        "Loop Engineering"
+      ],
+      "read_time": "5 min",
+      "slug": "2026-06-17-3分钟了解loop-engineer",
+      "category": "knowledge"
+    },
+    "bodyHash": "de39451cec8615bf2d3af652c81fd3fdb8ad9e7bd614fddbfd4cf776fb3cf474"
+  },
+  "knowledge/agent/2026-06-17-AI 核心概念.md": {
+    "data": {
+      "title": "AI 核心概念",
+      "date": "2026-06-17",
+      "summary": "随着 AI 领域的发展，大量概念（Command、Prompt、RAG、Agent、MCP、Skills、Workflow）被不断堆砌，容易让人迷失。以下从底…",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-06-17-ai-核心概念",
+      "category": "knowledge"
+    },
+    "bodyHash": "4fe51a30314e3523e4ec236dc235a49a4a5c26d8a4b09ed8529825161564307e"
+  },
+  "knowledge/agent/2026-06-17-Agent_Loop工程.md": {
+    "data": {
+      "title": "Agent Loop工程",
+      "date": "2026-06-17",
+      "summary": "<div class=\"highlight-box highlight-warning\"",
+      "tags": [
+        "知识库",
+        "agent",
+        "Agent",
+        "Loop Engineering"
+      ],
+      "read_time": "12 min",
+      "slug": "2026-06-17-agent-loop工程",
+      "category": "knowledge"
+    },
+    "bodyHash": "774c99e9ca4163e78df4acee673daa3311a87ea01b00e399555b3565662ab5f8"
+  },
+  "knowledge/agent/2026-06-17-Skills的过去、现在和未来.md": {
+    "data": {
+      "title": "Skills的过去、现在和未来",
+      "date": "2026-06-17",
+      "summary": "渐进式披露机制：将提示词分为三层——",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "4 min",
+      "slug": "2026-06-17-skills的过去现在和未来",
+      "category": "knowledge"
+    },
+    "bodyHash": "83e44754ad24a439b0075e237bae19e3596dc6c772ba3f5395be4b1477d6016f"
+  },
+  "knowledge/agent/2026-06-17-Vibe_Coding的能力培养.md": {
+    "data": {
+      "title": "Vibe Coding 的能力培养",
+      "date": "2026-06-17",
+      "summary": "Vibe Coding 五层能力模型",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "6 min",
+      "slug": "2026-06-17-vibe-coding的能力培养",
+      "category": "knowledge"
+    },
+    "bodyHash": "509bd06518fe884acbe307bf9d2d3327826b46e15f88ad50f6387340a043372c"
+  },
+  "knowledge/agent/2026-06-17-什么是Vibe_Coding.md": {
+    "data": {
+      "title": "什么是 Vibe_Coding",
+      "date": "2026-06-17",
+      "summary": "不得不说，Vibe Coding 这个概念最近越来越火，但我发现很多人对它的理解其实挺模糊的。今天就好好聊聊这个事，从核心理念到具体怎么落地，再到底层的 AI…",
+      "tags": [
+        "知识库",
+        "agent",
+        "Agent",
+        "Vibe_Coding"
+      ],
+      "read_time": "11 min",
+      "slug": "2026-06-17-什么是vibe-coding",
+      "category": "knowledge"
+    },
+    "bodyHash": "a3bac7701115c9a0a6395073c26327b17d9389ed68c0346eb3ea3244f284852f"
+  },
+  "knowledge/agent/2026-06-17-前沿部署工程师FDE.md": {
+    "data": {
+      "title": "FDE（Forward Deployed Engineer / 前沿部署工程师）",
+      "date": "2026-06-17",
+      "summary": "FDE = Forward Deployed Engineer（前沿部署工程师/前线部署工程师）",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "6 min",
+      "slug": "2026-06-17-前沿部署工程师fde",
+      "category": "knowledge"
+    },
+    "bodyHash": "86650a9adc439ce66bd9b1a86153e45a64aa54ebb6fb8ccca44bc4b6c6378199"
+  },
+  "knowledge/agent/2026-06-17-如何用Vibe_Coding落地项目.md": {
+    "data": {
+      "title": "如何用Vibe_Coding落地项目",
+      "date": "2026-06-17",
+      "summary": "如果你让 AI 上来就直接写代码，那这个项目大概率已经开始跑偏了。刚开始用 AI 做项目的人，最缺的往往不是代码能力，而是不知道该让 AI 按什么技术路线、什…",
+      "tags": [
+        "知识库",
+        "agent",
+        "Agent",
+        "Vibe_Coding"
+      ],
+      "read_time": "14 min",
+      "slug": "2026-06-17-如何用vibe-coding落地项目",
+      "category": "knowledge"
+    },
+    "bodyHash": "31be93fac688a0173c657402b96098df58663e82751a4cabe57daeca8f12027e"
+  },
+  "knowledge/agent/2026-06-17-怎么更好地应用AI编程.md": {
+    "data": {
+      "title": "怎么更好地应用AI编程",
+      "date": "2026-06-17",
+      "summary": "AI 编程高效协作 10 条实战准则",
+      "tags": [
+        "知识库",
+        "agent",
+        "Agent",
+        "AI Programming"
+      ],
+      "read_time": "11 min",
+      "slug": "2026-06-17-怎么更好地应用ai编程",
+      "category": "knowledge"
+    },
+    "bodyHash": "9bb3b8fe96059f5665557bd0e9ae1a47dba39c89f10afe779a0cfbadecbe0bb1"
+  },
+  "knowledge/agent/2026-06-17-职业发展与行业趋势篇.md": {
+    "data": {
+      "title": "三分钟了解 Loop Engineering",
+      "date": "2026-06-17",
+      "summary": "转行 AI 应用开发的现实思考",
+      "tags": [
+        "知识库",
+        "agent",
+        "Agent",
+        "Loop Engineering"
+      ],
+      "read_time": "13 min",
+      "slug": "2026-06-17-职业发展与行业趋势篇",
+      "category": "knowledge"
+    },
+    "bodyHash": "24984da86b23bb66281f10682a04fac1b7ff6afd39b9bde29093c6d6d1cb726c"
+  },
+  "knowledge/agent/2026-06-18-Agent工程能力的培养.md": {
+    "data": {
+      "title": "零基础一天（9小时）学完Agent！",
+      "date": "2026-06-18",
+      "summary": "学会 Agent 只需要 1 天 \\ 9 小时！",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "16 min",
+      "slug": "2026-06-18-agent工程能力的培养",
+      "category": "knowledge"
+    },
+    "bodyHash": "06b6de1917b19af0172dc4ca5b0f5baf3b845d53e9983913643899e88517d1a4"
+  },
+  "knowledge/agent/2026-06-18-Trae实用技巧.md": {
+    "data": {
+      "title": "Trae 实用技巧汇总",
+      "date": "2026-06-18",
+      "summary": "第一部分：隐藏指令人格类功能",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "9 min",
+      "slug": "2026-06-18-trae实用技巧",
+      "category": "knowledge"
+    },
+    "bodyHash": "c1fc27a5d85622f931ad2555504ae793c8bcfbeb4c794db575287fcd87a3a989"
+  },
+  "knowledge/agent/2026-06-18-从Agent驱动到Harness.md": {
+    "data": {
+      "title": "从Agent驱动到Harness",
+      "date": "2026-06-18",
+      "summary": "使用主 Agent 驱动和协调多个子 Agent，形成自动化工作流：",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "7 min",
+      "slug": "2026-06-18-从agent驱动到harness",
+      "category": "knowledge"
+    },
+    "bodyHash": "2866dc67601af3a752a28333ae2cf8f15002a497816e915ba4f5e883f954a00b"
+  },
+  "knowledge/agent/2026-06-18-构建生产级Agent_Memory的系统.md": {
+    "data": {
+      "title": "构建生产级 Agent Memory 的系统",
+      "date": "2026-06-18",
+      "summary": "面试官问你 Agent 的记忆机制应该怎么设计，如果你脱口而出说\"我会用向量数据库存历史对话，用户每次提问就用检索去库里捞相关内容，然后拼到 prompt 给…",
+      "tags": [
+        "知识库",
+        "agent",
+        "knowledge"
+      ],
+      "read_time": "11 min",
+      "slug": "2026-06-18-构建生产级agent-memory的系统",
+      "category": "knowledge"
+    },
+    "bodyHash": "4a89d13b2d89efb95c682042965f5ffc4e83074efa4aa05f2d95bee938616272"
+  },
+  "knowledge/classic/2026-02-10-Dos_Comand.md": {
+    "data": {
+      "title": "Dos Comand",
+      "date": "2026-02-10",
+      "summary": "1. 在应用里面搜索命令提示符打开",
+      "tags": [
+        "知识库",
+        "classic",
+        "Dos",
+        "命令"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-02-10-dos-comand",
+      "category": "knowledge"
+    },
+    "bodyHash": "a7ab1f36f213174ed6e09adbfcfa5edcc94b560928830a897a173e648ec34e72"
+  },
+  "knowledge/classic/2026-02-10-解决Linux系统下中文乱码的问题.md": {
+    "data": {
+      "title": "Linux系统下中文乱码的问题",
+      "date": "2026-02-11",
+      "summary": "如果服务器可以联网，直接在线安装：",
+      "tags": [
+        "知识库",
+        "classic",
+        "字体",
+        "乱码"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-02-10-解决linux系统下中文乱码的问题",
+      "category": "knowledge"
+    },
+    "bodyHash": "539243307dfe5a8baa73b20267b21426434968552b0d56f627f9f8bb556254e9"
+  },
+  "knowledge/classic/2026-02-11-Bug笔记.md": {
+    "data": {
+      "title": "问题记录",
+      "date": "2026-02-11",
+      "summary": "heartbeat 设置为 10 的作用",
+      "tags": [
+        "知识库",
+        "classic",
+        "notes",
+        "knowledge"
+      ],
+      "read_time": "15 min",
+      "slug": "2026-02-11-bug笔记",
+      "category": "knowledge"
+    },
+    "bodyHash": "c52e3ef3791aca28ff19ab09b0857cd93a0822095a81c332785d508f795b2d1a"
+  },
+  "knowledge/classic/2026-02-15-iframe没有id和name时如何定位.md": {
+    "data": {
+      "title": "iframe没有id和name时如何定位",
+      "date": "2026-02-15",
+      "summary": "iframe 标签也叫浮动框架标签（Inline Frame），是一种特殊的框架标签：",
+      "tags": [
+        "知识库",
+        "classic",
+        "iframe",
+        "爬虫"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-02-15-iframe没有id和name时如何定位",
+      "category": "knowledge"
+    },
+    "bodyHash": "9fbfaef5c585d847b28806ef185c5703f0b214539da430a97f777d2604be9dbb"
+  },
+  "knowledge/classic/2026-02-17-如何解决git冲突_refusing_to_merge_unrelated_histories.md": {
+    "data": {
+      "title": "如何解决 Git 冲突：refusing to merge unrelated histories",
+      "date": "2026-02-17",
+      "summary": "当使用 git merge 命令合并分支时，如果 Git 检测到两个分支之间存在不相关的提交历史记录，即两个分支没有共同的祖先提交，Git 会拒绝合并并抛出以…",
+      "tags": [
+        "知识库",
+        "classic",
+        "git",
+        "冲突"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-02-17-如何解决git冲突-refusing-to-merge-unrelated-histories",
+      "category": "knowledge"
+    },
+    "bodyHash": "2281a61e2147e5f5a7569279dfb83a6e375ef03d2bda4e7102ca91a48df264dc"
+  },
+  "knowledge/classic/2026-02-18-电脑突然关机重启_教你追溯原因.md": {
+    "data": {
+      "title": "电脑突然关机重启？教你追溯原因",
+      "date": "2026-02-18",
+      "summary": "Windows 系统会自动记录每次开关机和重启事件，通过「事件查看器」可以精准定位原因。",
+      "tags": [
+        "知识库",
+        "classic",
+        "Windows11",
+        "关机重启"
+      ],
+      "read_time": "4 min",
+      "slug": "2026-02-18-电脑突然关机重启-教你追溯原因",
+      "category": "knowledge"
+    },
+    "bodyHash": "103681f6085c1d45ca7285af12e9f5cffbf4ba1725ca0971505daf1e1163a45d"
+  },
+  "knowledge/classic/2026-02-20-Promethus_HTTP_API_如何调用_PromQL.md": {
+    "data": {
+      "title": "Promethus HTTP API 如何调用 PromQL",
+      "date": "2026-02-20",
+      "summary": "Prometheus API 使用了 JSON 格式的响应内容。当 API 调用成功后将会返回查询结果。",
+      "tags": [
+        "知识库",
+        "classic",
+        "Prometheus",
+        "API"
+      ],
+      "read_time": "5 min",
+      "slug": "2026-02-20-promethus-http-api-如何调用-promql",
+      "category": "knowledge"
+    },
+    "bodyHash": "6e7450b46141046c23a6274f44b79d91594b717dcb5e5586c32a0ce6613b6522"
+  },
+  "knowledge/classic/2026-03-01-Docker_Bug_Process.md": {
+    "data": {
+      "title": "Docker Bug Process Error - Failed to download metadata for repo 'appstream'",
+      "date": "2026-03-01",
+      "summary": "在 Docker 中使用 CentOS 镜像打包安装 vim 时出现以下错误：",
+      "tags": [
+        "知识库",
+        "classic",
+        "Docker",
+        "knowledge"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-03-01-docker-bug-process",
+      "category": "knowledge"
+    },
+    "bodyHash": "598bdbe9510ff4a9ef85499b381c462131685581401533dd3868002061890cb5"
+  },
+  "knowledge/classic/2026-03-20-Git Debug.md": {
+    "data": {
+      "title": "Git Debug",
+      "date": "2026-03-20",
+      "summary": "由于工程架构的变动，现在A仓库被废弃了，创建了一个与A 仓库内容完全一样的仓库B，但是有一个同事还不知道这件事，不小心往A仓库提交了好多代码，问现在如何",
+      "tags": [
+        "知识库",
+        "classic",
+        "git",
+        "Debug"
+      ],
+      "read_time": "17 min",
+      "slug": "2026-03-20-git-debug",
+      "category": "knowledge"
+    },
+    "bodyHash": "e935c74d63038ad6cde4bd8c22b4c29987c91555c311f87e382142721f187434"
+  },
+  "knowledge/classic/2026-06-01-VMware三种网络模式说明.md": {
+    "data": {
+      "title": "VMware三种网络模式（桥接、NAT模式、仅主机）模式说明",
+      "date": "2026-06-01",
+      "summary": "VMware 提供了三种主要的网络连接模式：桥接模式（Bridged Mode）、NAT模式（Network Address Translation Mode…",
+      "tags": [
+        "知识库",
+        "classic",
+        "VMware",
+        "网络"
+      ],
+      "read_time": "7 min",
+      "slug": "2026-06-01-vmware三种网络模式说明",
+      "category": "knowledge"
+    },
+    "bodyHash": "3fe139c3332d5db20eee76eeb77651685d7a8fd0bb649571751bafe1d2240a06"
+  },
+  "knowledge/classic/2026-06-02-TCP流量控制和拥塞控制是一回事吗？.md": {
+    "data": {
+      "title": "TCP流量控制和拥塞控制是一回事吗？",
+      "date": "2026-06-02",
+      "summary": "面试官问你：TCP为什么既有流量控制又有拥塞控制？很多人第一反应是：不都是控制发送速度吗？其实这两个机制完全不是一回事。流量控制解决的是接收方\"吃不消\"的问题…",
+      "tags": [
+        "知识库",
+        "classic",
+        "TCP",
+        "流量控制"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-06-02-tcp流量控制和拥塞控制是一回事吗",
+      "category": "knowledge"
+    },
+    "bodyHash": "081e01389061299e65229890ea7a81a5e216ab61e2e483325f27a8444a5c2c86"
+  },
+  "knowledge/classic/2026-06-03-Docker为什么比虚拟机快.md": {
+    "data": {
+      "title": "Docker 为什么比虚拟机快？",
+      "date": "2026-06-03",
+      "summary": "对比维度 虚拟机（VM） Docker 容器",
+      "tags": [
+        "知识库",
+        "classic",
+        "Docker",
+        "容器化"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-06-03-docker为什么比虚拟机快",
+      "category": "knowledge"
+    },
+    "bodyHash": "99791e5a553dab274081edd3261d81aea6e115bbc5a39f197681f87368fede56"
+  },
+  "knowledge/classic/2026-06-03-SOLID设计原则.md": {
+    "data": {
+      "title": "SOLID设计原则",
+      "date": "2026-02-17",
+      "summary": "1、什么是SOLID设计原则",
+      "tags": [
+        "知识库",
+        "classic",
+        "SOLID",
+        "设计原则"
+      ],
+      "read_time": "17 min",
+      "slug": "2026-06-03-solid设计原则",
+      "category": "knowledge"
+    },
+    "bodyHash": "c8b42ced8dbe5f72d5441eaa25281935f1c5c0cb39075eaf37261f732b28c3e9"
+  },
+  "knowledge/classic/2026-06-03-从localhost到公共网站.md": {
+    "data": {
+      "title": "从 localhost 到公共网站",
+      "date": "2026-06-03",
+      "summary": "- 上线门槛不在技术，在线下手续：代码可能只占 20%-30%，备案、执照、支付才是真正的挑战",
+      "tags": [
+        "知识库",
+        "classic",
+        "localhost",
+        "网站"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-06-03-从localhost到公共网站",
+      "category": "knowledge"
+    },
+    "bodyHash": "18614cd832723dea31967a75904383471536a1f5d9caa3b7fd5f6ac170850e16"
+  },
+  "knowledge/classic/2026-06-03-元素定位频繁抖动不稳定怎么解决.md": {
+    "data": {
+      "title": "元素定位频繁抖动不稳定怎么解决？",
+      "date": "2026-06-03",
+      "summary": "这道题正是普通自动化测试和资深自动化测试的核心分水岭。考察的从来不是会不会写定位语法，而是实战中排查问题、优化脚本稳定性的综合能力。",
+      "tags": [
+        "知识库",
+        "classic",
+        "MySQL",
+        "元素定位"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-06-03-元素定位频繁抖动不稳定怎么解决",
+      "category": "knowledge"
+    },
+    "bodyHash": "8857f4f7ab79447329dfd310e075e77a1b7f4f67194d4d105a78354fcc3e849e"
+  },
+  "knowledge/classic/2026-06-03-没并发为什么用Redis.md": {
+    "data": {
+      "title": "没并发为什么用 Redis？",
+      "date": "2026-06-03",
+      "summary": "面试官突然问了一句：为什么你项目要用 Redis，你们也没什么并发？",
+      "tags": [
+        "知识库",
+        "classic",
+        "Redis",
+        "knowledge"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-06-03-没并发为什么用redis",
+      "category": "knowledge"
+    },
+    "bodyHash": "76d13bc09ebbdfd56fbdfffaed124f706fcf649cc4de24a28675e1b62ebaa3fd"
+  },
+  "knowledge/classic/2026-06-17-Git_Guide.md": {
+    "data": {
+      "title": "Git指南",
+      "date": "2026-06-17",
+      "summary": "- 1.1 什么是版本控制",
+      "tags": [
+        "知识库",
+        "classic",
+        "Git",
+        "指南"
+      ],
+      "read_time": "18 min",
+      "slug": "2026-06-17-git-guide",
+      "category": "knowledge"
+    },
+    "bodyHash": "9f1652b60a18cd9177d25c0e8cb651fcec02b00a9a7d0cca749d60a42dff3f8c"
+  },
+  "knowledge/classic/2026-06-18-R语言.md": {
+    "data": {
+      "title": "环境配置",
+      "date": "2026-06-18",
+      "summary": "The Comprehensive R Archive Network",
+      "tags": [
+        "知识库",
+        "classic",
+        "knowledge"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-06-18-r语言",
+      "category": "knowledge"
+    },
+    "bodyHash": "4b6367697135907e8a809495b3f99584200a2a9f094c31abe12e27b4a101edde"
+  },
+  "knowledge/classic/bigdata/2026-02-19-大数据系统在低水平主机的性能优化方案.md": {
+    "data": {
+      "title": "大数据系统在低水平主机的性能优化方案",
+      "date": "2026-02-19",
+      "summary": "临时释放缓存（每次启动服务前执行）",
+      "tags": [
+        "知识库",
+        "bigdata",
+        "虚拟机",
+        "性能优化"
+      ],
+      "read_time": "5 min",
+      "slug": "2026-02-19-大数据系统在低水平主机的性能优化方案",
+      "category": "knowledge"
+    },
+    "bodyHash": "7406cf13d2e69950e5ef56515ea4739fd6fe909a26698eb0a9ba23902f41b769"
+  },
+  "knowledge/classic/bigdata/2026-05-27-dolphinscheduler部署.md": {
+    "data": {
+      "title": "DolphinScheduler 部署指南",
+      "date": "2026-05-27",
+      "summary": "官方文档参考：DolphinScheduler 伪集群部署",
+      "tags": [
+        "知识库",
+        "bigdata",
+        "dolphinscheduler",
+        "部署"
+      ],
+      "read_time": "12 min",
+      "slug": "2026-05-27-dolphinscheduler部署",
+      "category": "knowledge"
+    },
+    "bodyHash": "6d127ad77fd5c6b9035ec8fc8ad6bb3a1b51be986dd60041a463fb04b1037481"
+  },
+  "knowledge/classic/bigdata/2026-06-03-Hadoop的Map端及Reduce端的Join和数据压缩.md": {
+    "data": {
+      "title": "Hadoop Map端及Reduce端的Join实现与数据压缩",
+      "date": "2026-06-03",
+      "summary": "适用于关联表中有小表的情形：",
+      "tags": [
+        "知识库",
+        "bigdata",
+        "Hadoop",
+        "Join"
+      ],
+      "read_time": "19 min",
+      "slug": "2026-06-03-hadoop的map端及reduce端的join和数据压缩",
+      "category": "knowledge"
+    },
+    "bodyHash": "c8da5eeea99dba8834a1a8ed784dd1386fda6c84d434c79dcbc97f4800bab3ad"
+  },
+  "knowledge/classic/bigdata/2026-06-03-Hbase在百亿数据场景为什么查询速度依然非常快.md": {
+    "data": {
+      "title": "HBase在百亿数据场景下，为什么查询速度依然非常快？",
+      "date": "2026-02-17",
+      "summary": "HBase适合存储PB级别的海量数据（百亿千亿量级记录），如果根据记录主键Rowkey来查询，能在几十到百毫秒内返回数据。",
+      "tags": [
+        "知识库",
+        "bigdata",
+        "HBase",
+        "查询"
+      ],
+      "read_time": "4 min",
+      "slug": "2026-06-03-hbase在百亿数据场景为什么查询速度依然非常快",
+      "category": "knowledge"
+    },
+    "bodyHash": "c2107de9bd47893d8b3aea2a0ffe178dbc864e1f9da9ad4721d01fb4e95b71b5"
+  },
+  "knowledge/classic/bigdata/2026-06-17-HDFS权限模型.md": {
+    "data": {
+      "title": "HDFS权限模型",
+      "date": "2026-06-17",
+      "summary": "理解HDFS权限模型的一个关键点。HDFS里显示的组，其实是一个存储在NameNode内存中的逻辑字符串，它并不要求这个组在Linux系统中真实存在。",
+      "tags": [
+        "知识库",
+        "bigdata",
+        "knowledge"
+      ],
+      "read_time": "4 min",
+      "slug": "2026-06-17-hdfs权限模型",
+      "category": "knowledge"
+    },
+    "bodyHash": "f6565c3c8f7833f902b9a850358e27f4e140e532c789a5ca16d372063b594091"
+  },
+  "knowledge/classic/bigdata/2026-06-18-Hive大表join大表如何调优.md": {
+    "data": {
+      "title": "Hive大表join大表如何调优",
+      "date": "2026-06-18",
+      "summary": "在Hive中，优化器会根据统计信息决定是将大表放在前面（Join的左边）还是小表放在前面。通常，优化器会选择数据量较小的表作为驱动表（小表作为左边），因为这样…",
+      "tags": [
+        "知识库",
+        "bigdata",
+        "knowledge"
+      ],
+      "read_time": "7 min",
+      "slug": "2026-06-18-hive大表join大表如何调优",
+      "category": "knowledge"
+    },
+    "bodyHash": "9ac82cf436d93dc534c725f9e8012de15a1ff19ceb4383ca429e95f1ee2a47a4"
+  },
+  "knowledge/classic/bigdata/2026-06-18-日志埋点与中台.md": {
+    "data": {
+      "title": "日志埋点 与 前台/中台/后台",
+      "date": "2026-06-18",
+      "summary": "日志埋点是一种在业务系统的程序中植入收集事件数据的SDK（工具代码）以进行各种事件收集的技术，这些数据是数据仓库的主要来源。",
+      "tags": [
+        "知识库",
+        "bigdata",
+        "knowledge"
+      ],
+      "read_time": "11 min",
+      "slug": "2026-06-18-日志埋点与中台",
+      "category": "knowledge"
+    },
+    "bodyHash": "e800c90b06ab72653ed4604d8790acbcc73f30aab8321611099cfa2e944eee59"
+  },
+  "knowledge/classic/mysql/2026-06-03-MySQL8.0安装配置_Linux.md": {
+    "data": {
+      "title": "MySQL8.0安装配置(Linux)",
+      "date": "2026-02-17",
+      "summary": "4. 创建data文件夹",
+      "tags": [
+        "知识库",
+        "mysql",
+        "MySQL",
+        "安装配置"
+      ],
+      "read_time": "3 min",
+      "slug": "2026-06-03-mysql80安装配置-linux",
+      "category": "knowledge"
+    },
+    "bodyHash": "52e2875bda4a8c5e14d684dae622563928c25b80dc4ee484e70b7e080b09e093"
+  },
+  "knowledge/classic/mysql/2026-06-03-MySQL如何减少回表.md": {
+    "data": {
+      "title": "MySQL如何减少回表",
+      "date": "2026-02-17",
+      "summary": "面试官如果问你 MySQL 如何减少回表，你千万不要只说一句\"加索引\"，这个回答太浅了。",
+      "tags": [
+        "知识库",
+        "mysql",
+        "MySQL",
+        "回表"
+      ],
+      "read_time": "11 min",
+      "slug": "2026-06-03-mysql如何减少回表",
+      "category": "knowledge"
+    },
+    "bodyHash": "823ec212b5c6be62473a5a2d4860790f12ce3bf5c007a7b48d5eaa2cfd873b4a"
+  },
+  "knowledge/classic/mysql/2026-06-03-MySQL锁机制.md": {
+    "data": {
+      "title": "MySQL锁机制",
+      "date": "2026-02-17",
+      "summary": "锁是计算机协调多个进程或线程并发访问某一资源的机制。在数据库中，除传统的计算资源（CPU、RAM、I/O）的争用以外，数据也是一种供许多用户共享的资源。如何保…",
+      "tags": [
+        "知识库",
+        "mysql",
+        "MySQL",
+        "锁机制"
+      ],
+      "read_time": "10 min",
+      "slug": "2026-06-03-mysql锁机制",
+      "category": "knowledge"
+    },
+    "bodyHash": "2f058f1493d6a30698aabb7cdfb3927967e7ca26e703cfac88e22b19ef6c7a0b"
+  },
+  "knowledge/classic/mysql/2026-06-03-一个表中可以有多个自增列吗.md": {
+    "data": {
+      "title": "一个表中可以有多个自增列吗？",
+      "date": "2026-06-03",
+      "summary": "自增列可使用 autoincrement 来实现，当一个列被标识为 autoincrement 之后：",
+      "tags": [
+        "知识库",
+        "mysql",
+        "MySQL",
+        "自增列"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-06-03-一个表中可以有多个自增列吗",
+      "category": "knowledge"
+    },
+    "bodyHash": "1c1925b7e7e1851ee0299739ea72c61633213a98e7c68caa47556240ceaff7a0"
+  },
+  "knowledge/classic/mysql/2026-06-03-排查SQL慢查询性能瓶颈.md": {
+    "data": {
+      "title": "排查SQL慢查询性能瓶颈",
+      "date": "2026-06-03",
+      "summary": "面试官问你 SQL 跑得慢要怎么排查？",
+      "tags": [
+        "知识库",
+        "mysql",
+        "MySQL",
+        "查询性能瓶颈"
+      ],
+      "read_time": "4 min",
+      "slug": "2026-06-03-排查sql慢查询性能瓶颈",
+      "category": "knowledge"
+    },
+    "bodyHash": "64720df4e52026c8a86a1eba2f503547b8ef2184e54da432bef3fbd6ec83c946"
+  },
+  "knowledge/classic/mysql/2026-06-03-聚簇索引等于主键索引吗.md": {
+    "data": {
+      "title": "聚簇索引=主键索引吗？",
+      "date": "2026-06-03",
+      "summary": "在 InnoDB 引擎中，每张表都会有一个特殊的索引 —— 聚簇索引（Clustered Index），也称为聚集索引，它是用来存储行数据的。",
+      "tags": [
+        "知识库",
+        "mysql",
+        "MySQL",
+        "聚簇索引"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-06-03-聚簇索引等于主键索引吗",
+      "category": "knowledge"
+    },
+    "bodyHash": "dde5d697b9260949ee3e818dd5e0502255ea818d2056f3777381265c94d440e1"
+  },
+  "knowledge/classic/mysql/2026-06-18-MySQL是否真的每张表最好不超过2000万数据.md": {
+    "data": {
+      "title": "MySQL每张表最好不超过2000万数据，是真的吗？",
+      "date": "2026-06-18",
+      "summary": "作为后端开发工程师，是不是经常听到过：",
+      "tags": [
+        "知识库",
+        "mysql",
+        "knowledge"
+      ],
+      "read_time": "6 min",
+      "slug": "2026-06-18-mysql是否真的每张表最好不超过2000万数据",
+      "category": "knowledge"
+    },
+    "bodyHash": "46af6883e33234b4b1b4b8299100e7c4cf8f74ca46f0d11d2bbfdab86ffb5b82"
+  },
+  "knowledge/index.md": {
+    "data": {
+      "title": "wiki",
+      "summary": "wiki合集",
+      "tags": [
+        "知识库",
+        "knowledge"
+      ],
+      "read_time": "1 min",
+      "slug": "knowledge-index",
+      "category": "knowledge"
+    },
+    "bodyHash": "e24a0c35f9f48f5ac0c85403a47460163a95c743e3188a98c08c66715d3f7020"
+  },
+  "podcast/2026-06-18-毕业生补贴完全指南.md": {
+    "data": {
+      "title": "毕业生补贴完全指南",
+      "date": "2026-06-18",
+      "summary": "没有学校会主动告诉你，毕业以后其实有很多补贴可以领。很多补贴不会主动打到你的账户里，需要自己查、自己申请、自己领，毕业生一定别错过。",
+      "tags": [
+        "播客",
+        "podcast"
+      ],
+      "read_time": "4 min",
+      "slug": "2026-06-18-毕业生补贴完全指南",
+      "category": "podcast"
+    },
+    "bodyHash": "0ffd7591c8d9cf9638127ad74890e6f84a3d2d6269069ef1a9734ee6968cf870"
+  },
+  "podcast/2026-06-18-脑力工作者的三种累.md": {
+    "data": {
+      "title": "为什么你越睡越累？脑力工作者的三种\"累\"",
+      "date": "2026-06-18",
+      "summary": "脑力工作者最好的休息方式不是睡觉。体力工作者累了，躺下来睡觉就是最好的休息方式，但是脑力工作者累了，你就不能只会睡觉了，不然你有可能会越睡越累。",
+      "tags": [
+        "播客",
+        "podcast"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-06-18-脑力工作者的三种累",
+      "category": "podcast"
+    },
+    "bodyHash": "4fd470ebd3bc439257b6f6fc154413b5cb6e7147f72bec38dc8edde0157e2a9a"
+  },
+  "podcast/self_improve/00_开篇.md": {
+    "data": {
+      "title": "自我提升与个人成长完整指南（整合版）",
+      "summary": "这不是一本手册，是我对自己的整理。如果你也在同样的关口，希望能给你一点参照。",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "1 min",
+      "slug": "00-开篇",
+      "category": "podcast"
+    },
+    "bodyHash": "a6fb518ac32a1241e436d8fb494f1412b4b55d0e3336561ce758b716a6856fd6"
+  },
+  "podcast/self_improve/01_认知觉醒.md": {
+    "data": {
+      "title": "第一篇章：认知觉醒",
+      "summary": "第1章 迷茫不是你的错，但它需要被认真对待",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "11 min",
+      "slug": "01-认知觉醒",
+      "category": "podcast"
+    },
+    "bodyHash": "fa05333542b77859a4fe2fbaac88ee0c361e0e21ce5bd4d32e439be8816357b2"
+  },
+  "podcast/self_improve/02_目标与方向.md": {
+    "data": {
+      "title": "第二篇章：目标与方向",
+      "summary": "第6章 目标在前，工具在后",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "4 min",
+      "slug": "02-目标与方向",
+      "category": "podcast"
+    },
+    "bodyHash": "5c6515f806a057f511bad3322fdacc62e1c1e3483ae050f97b85d93ff543581a"
+  },
+  "podcast/self_improve/03_学习方法论.md": {
+    "data": {
+      "title": "第三篇章：学习方法论",
+      "summary": "第9章 西蒙学习法：6个月成为专家的核心策略",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "10 min",
+      "slug": "03-学习方法论",
+      "category": "podcast"
+    },
+    "bodyHash": "4a9e4660b6c87cf3b6bfbde8cb6a756f4c2825f6376651f2db58096553f3aa23"
+  },
+  "podcast/self_improve/04_注意力与时间管理.md": {
+    "data": {
+      "title": "第四篇章：注意力与时间管理",
+      "summary": "第13章 注意力防漏系统（7步法）",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "6 min",
+      "slug": "04-注意力与时间管理",
+      "category": "podcast"
+    },
+    "bodyHash": "f7424d6e5e40f342879d9e2a65ca4967637de224f0ebc7d52b3bc0ee7243fed7"
+  },
+  "podcast/self_improve/05_行动与习惯.md": {
+    "data": {
+      "title": "第五篇章：行动与习惯",
+      "summary": "第18章 你现在就能做的几件事",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "7 min",
+      "slug": "05-行动与习惯",
+      "category": "podcast"
+    },
+    "bodyHash": "6f2d56170bb0755ae41ffc829a6be2ec26a9755d7f921f2ac038f3e24e5c542c"
+  },
+  "podcast/self_improve/06_系统升级.md": {
+    "data": {
+      "title": "第六篇章：系统升级",
+      "summary": "第22章 把成长变成系统：每日六小时闭环",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "6 min",
+      "slug": "06-系统升级",
+      "category": "podcast"
+    },
+    "bodyHash": "0a939d2a1767d28dc432503c2e50374287ab0a2e5e40668c36ea654f3102f9f5"
+  },
+  "podcast/self_improve/07_生活哲学.md": {
+    "data": {
+      "title": "第七篇章：生活哲学",
+      "summary": "第26章 独立思考与自我管理",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "5 min",
+      "slug": "07-生活哲学",
+      "category": "podcast"
+    },
+    "bodyHash": "db974328fbecc3f65856d52a8bc734a7c36a10449f5ee18e790f1e252fdb9e08"
+  },
+  "podcast/self_improve/99_结语.md": {
+    "data": {
+      "title": "结语",
+      "summary": "你觉得迷茫，不代表你软弱，不代表你没用，不代表你比那些\"看起来很有方向感\"的同学差。有时候那些看起来很有方向感的人，只是把那个方向感包装得比较好。或者，他们的…",
+      "tags": [
+        "播客",
+        "self_improve",
+        "podcast"
+      ],
+      "read_time": "1 min",
+      "slug": "99-结语",
+      "category": "podcast"
+    },
+    "bodyHash": "71d5d00c9b8b7b603f566cd1fb63f076eb049259352f44ecf5e7a810b9e74323"
+  },
+  "podcast/轻音少女-相遇天使/相遇天使_推文.md": {
+    "data": {
+      "title": "相遇天使_推文",
+      "summary": "推荐内涵：青春与友情的永恒旋律 ------轻音少女献给青春的离别诗",
+      "tags": [
+        "播客",
+        "轻音少女-相遇天使",
+        "podcast"
+      ],
+      "read_time": "5 min",
+      "slug": "相遇天使-推文",
+      "category": "podcast"
+    },
+    "bodyHash": "8d3a6980c13e9e593f85a1ddabc1f9e3423c52ebf6e8f6633dba9406d15170aa"
+  },
+  "podcast/轻音少女-相遇天使/相遇天使_歌词.md": {
+    "data": {
+      "title": "相遇天使_歌词",
+      "summary": "<div class=\"music-player-wrapper\"",
+      "tags": [
+        "播客",
+        "轻音少女-相遇天使",
+        "podcast"
+      ],
+      "read_time": "14 min",
+      "slug": "相遇天使-歌词",
+      "category": "podcast"
+    },
+    "bodyHash": "03d7573396cebdb33892fae526760d8ceff1dad3ef65039df907f53040e0250b"
+  },
+  "relax/2026-02-15-电脑键盘的快捷键用法.md": {
+    "data": {
+      "title": "电脑键盘的快捷键用法",
+      "date": "2026-02-15",
+      "summary": "- 锁定/解锁电脑win键： FN + win",
+      "tags": [
+        "闲聊",
+        "快捷键",
+        "Windows11",
+        "relax"
+      ],
+      "read_time": "1 min",
+      "slug": "2026-02-15-电脑键盘的快捷键用法",
+      "category": "relax"
+    },
+    "bodyHash": "68df57fe1f559ce7558d12d7783ef0f072a23a58bd6f1b15ee9ddb174c6f51b8"
+  },
+  "relax/2026-05-03-古诗.md": {
+    "data": {
+      "title": "古诗",
+      "date": "2026-02-15",
+      "summary": "https://cat-drink.github.io/poem/",
+      "tags": [
+        "闲聊",
+        "古诗",
+        "relax"
+      ],
+      "read_time": "1 min",
+      "slug": "2026-05-03-古诗",
+      "category": "relax"
+    },
+    "bodyHash": "445684fbebe7eb8af03ff4634a3764f2d60df20adebb077f60ddf76974e9c795"
+  },
+  "relax/2026-06-02-如何准备日本二次元旅行.md": {
+    "data": {
+      "title": "如何准备日本二次元旅行",
+      "date": "2026-02-15",
+      "summary": "- 护照办理：通过 \"移民局 12367\" APP 预约，携带身份证和 120 元前往办理。户籍本地办理需 10-15 天，异地需 20 天以上。",
+      "tags": [
+        "闲聊",
+        "日本二次元",
+        "旅行攻略",
+        "relax"
+      ],
+      "read_time": "8 min",
+      "slug": "2026-06-02-如何准备日本二次元旅行",
+      "category": "relax"
+    },
+    "bodyHash": "9f7fc911ba071bdc8cc2e66e9a40b82a4292dd1f6436f1c8a9fcfa9c33626446"
+  },
+  "relax/2026-06-02-拍照引导话术.md": {
+    "data": {
+      "title": "拍照引导话术",
+      "date": "2026-02-07",
+      "summary": "（尽可能调动小姐姐的肢体，让她不呆板）",
+      "tags": [
+        "闲聊",
+        "relax"
+      ],
+      "read_time": "1 min",
+      "slug": "2026-06-02-拍照引导话术",
+      "category": "relax"
+    },
+    "bodyHash": "53c6b44275cdfe92ea3ce27a2cdbe67a04f72ff4506004d3077ee3ae3b3cad76"
+  },
+  "relax/2026-06-03-为了健康怎么吃.md": {
+    "data": {
+      "title": "为了健康怎么吃",
+      "date": "2026-02-15",
+      "summary": "1. 维B含量高的蔬果：香蕉、菠菜、西兰花、生菜、葡萄、杨桃",
+      "tags": [
+        "闲聊",
+        "饮食",
+        "健康",
+        "饮食建议"
+      ],
+      "read_time": "1 min",
+      "slug": "2026-06-03-为了健康怎么吃",
+      "category": "relax"
+    },
+    "bodyHash": "6e0678cbf60b36f368aacd24660b2afaa28c8f9892c4a776e9df93e8d0bc38d3"
+  },
+  "relax/2026-06-03-广州美食.md": {
+    "data": {
+      "title": "广州美食推荐",
+      "date": "2026-02-07",
+      "summary": "No.1广州最好吃的早茶：陶居居",
+      "tags": [
+        "闲聊",
+        "relax"
+      ],
+      "read_time": "1 min",
+      "slug": "2026-06-03-广州美食",
+      "category": "relax"
+    },
+    "bodyHash": "7041720c884169f4938ca083cdd950346c336e46fcf0bf354675fa8c4b004d52"
+  },
+  "relax/2026-06-17-所想即所得.md": {
+    "data": {
+      "title": "所想即所得",
+      "date": "2026-02-07",
+      "summary": "请各位即将毕业的朋友们正视自己的焦虑 因为这个时代想要做到稳定真的是很不容易的事 在你毕业前会因为考试 论文和毕业焦虑 在你毕业之后会因为工作焦虑 请你相信我…",
+      "tags": [
+        "闲聊",
+        "relax"
+      ],
+      "read_time": "4 min",
+      "slug": "2026-06-17-所想即所得",
+      "category": "relax"
+    },
+    "bodyHash": "d92e2e6dfed5e5d882a9dedd936529f4f03e3c2eab791ed3c59eecc9d25a9c34"
+  },
+  "relax/index.md": {
+    "data": {
+      "title": "闲聊",
+      "summary": "轻松有趣的内容集合",
+      "tags": [
+        "闲聊",
+        "relax"
+      ],
+      "read_time": "1 min",
+      "slug": "relax-index",
+      "category": "relax"
+    },
+    "bodyHash": "e24a0c35f9f48f5ac0c85403a47460163a95c743e3188a98c08c66715d3f7020"
+  },
+  "skills/SKILL.md": {
+    "data": {
+      "title": "Skill：markitdown-converter",
+      "summary": "基于微软 markitdown 将多种文件格式（PDF/Word/Excel/PPT/HTML/EPUB/音频/图片等）自动转换为结构清晰的 Markdown 文档。当用户需要将文档转换为 Markdown、批量转换文件、或整理文档为文本格式时触发。",
+      "tags": [
+        "技能",
+        "skills"
+      ],
+      "read_time": "15 min",
+      "slug": "skills-skill",
+      "category": "skills"
+    },
+    "bodyHash": "4059ab11beba32dfea41d07ffe8c1521331951e33dd196bba604a2925d1e79f3"
+  },
+  "skills/markitdown-skill/SKILL.md": {
+    "data": {
+      "title": "Skill：markitdown-converter",
+      "summary": "基于微软 markitdown 将多种文件格式（PDF/Word/Excel/PPT/HTML/EPUB/音频/图片等）自动转换为结构清晰的 Markdown 文档。当用户需要将文档转换为 Markdown、批量转换文件、或整理文档为文本格式时触发。",
+      "tags": [
+        "技能",
+        "markitdown-skill",
+        "skills"
+      ],
+      "read_time": "15 min",
+      "slug": "skills-markitdown-skill-skill",
+      "category": "skills"
+    },
+    "bodyHash": "4059ab11beba32dfea41d07ffe8c1521331951e33dd196bba604a2925d1e79f3"
+  },
+  "skills/pretext-frontend-design/SKILL.md": {
+    "data": {
+      "title": "Skill：pretext-frontend-design",
+      "summary": "使用 @chenglou/pretext 进行高性能文本测量与布局的前端设计 skill。适用于需要精确文本排版、避免 DOM reflow、实现虚拟化/缩紧包裹/手动逐行布局等场景。当你需要做 Canvas/SVG 文本渲染、文本高度预计算、富文本内联流排版时触发此 skill。",
+      "tags": [
+        "技能",
+        "pretext-frontend-design",
+        "skills"
+      ],
+      "read_time": "11 min",
+      "slug": "skills-pretext-frontend-design-skill",
+      "category": "skills"
+    },
+    "bodyHash": "9c2786ca709aab46998e28ceed6edc8f5b44978e6c37f3390c74694aaf39251e"
+  },
+  "web/2026-02-07-Web_Share.md": {
+    "data": {
+      "title": "学习资源分享",
+      "date": "2026-02-07",
+      "summary": "<div class=\"web-scroll\" markdown=\"0\"",
+      "tags": [
+        "资源分享",
+        "web"
+      ],
+      "read_time": "44 min",
+      "slug": "2026-02-07-web-share",
+      "category": "web"
+    },
+    "bodyHash": "7fa254b207efd7814e6a761a0c08789aefd5f39a3610e5c37c36911e95c23573"
+  },
+  "web/2026-02-09-GitHub_Project_Share.md": {
+    "data": {
+      "title": "GitHub项目分享",
+      "date": "2026-02-09",
+      "summary": "像老乡鸡那样做饭: 集成老乡鸡大部分菜品做法，适合日常做饭参考",
+      "tags": [
+        "资源分享",
+        "web"
+      ],
+      "read_time": "11 min",
+      "slug": "2026-02-09-github-project-share",
+      "category": "web"
+    },
+    "bodyHash": "4b8e293d51b0ed3ed22e0a22521d29450baf204e1eb248afe587e599c3a5a289"
+  },
+  "web/2026-06-18-AI_Web_Share.md": {
+    "data": {
+      "title": "AI工具分享",
+      "date": "2026-02-07",
+      "summary": "<div class=\"web-scroll\" markdown=\"0\"",
+      "tags": [
+        "资源分享",
+        "web"
+      ],
+      "read_time": "17 min",
+      "slug": "2026-06-18-ai-web-share",
+      "category": "web"
+    },
+    "bodyHash": "c1a85dbe0eb4efe4fcdf724452849a458e0b9a1d228657521b4193595922f542"
+  },
+  "web/2026-06-18-Fun_Web_Share.md": {
+    "data": {
+      "title": "趣味网站",
+      "date": "2026-02-07",
+      "summary": "<div class=\"web-scroll\" markdown=\"0\"",
+      "tags": [
+        "资源分享",
+        "web"
+      ],
+      "read_time": "12 min",
+      "slug": "2026-06-18-fun-web-share",
+      "category": "web"
+    },
+    "bodyHash": "0b00685680514a74f4a10e4956f4e17b188a8aff56788b5bb2e5973cfc468820"
+  },
+  "web/2026-06-20-Util_Web_Share.md": {
+    "data": {
+      "title": "工具网站",
+      "date": "2026-06-20",
+      "summary": "<div class=\"web-scroll\" markdown=\"0\"",
+      "tags": [
+        "资源分享",
+        "web"
+      ],
+      "read_time": "2 min",
+      "slug": "2026-06-20-util-web-share",
+      "category": "web"
+    },
+    "bodyHash": "4a49b77627371596e2a5c4ac20001f84387cc70f9f6ae16a31639240d7b678b9"
+  },
+  "web/index.md": {
+    "data": {
+      "title": "资源分享",
+      "summary": "分享一些好玩、有用的资源",
+      "tags": [
+        "资源分享",
+        "web"
+      ],
+      "read_time": "1 min",
+      "slug": "web-index",
+      "category": "web"
+    },
+    "bodyHash": "e24a0c35f9f48f5ac0c85403a47460163a95c743e3188a98c08c66715d3f7020"
+  }
+}

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="VideoGetTool cover">
+  <defs>
+    <linearGradient id="vgt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="vgt-acc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#vgt)"/>
+  <circle cx="660" cy="90" r="180" fill="#a78bfa" opacity="0.18"/>
+  <circle cx="120" cy="380" r="220" fill="#22d3ee" opacity="0.12"/>
+  <rect x="120" y="110" width="220" height="150" rx="16" fill="#0b0f1a" stroke="#ffffff" stroke-opacity="0.14"/>
+  <path d="M215 155l44 26-44 26z" fill="url(#vgt-acc)"/>
+  <rect x="150" y="290" width="360" height="12" rx="6" fill="url(#vgt-acc)" opacity="0.85"/>
+  <rect x="150" y="316" width="280" height="8" rx="4" fill="#ffffff" opacity="0.28"/>
+  <rect x="530" y="130" width="160" height="200" rx="16" fill="#0b0f1a" stroke="#ffffff" stroke-opacity="0.14"/>
+  <path d="M610 160v90m0 0l-26-26m26 26l26-26" stroke="#22d3ee" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+  <rect x="570" y="286" width="80" height="10" rx="5" fill="#ffffff" opacity="0.3"/>
+  <text x="400" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700" fill="#ffffff" opacity="0.92">VideoGetTool</text>
+</svg>

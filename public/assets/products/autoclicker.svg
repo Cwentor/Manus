@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="AutoClicker cover">
+  <defs>
+    <linearGradient id="acl" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#431407"/>
+      <stop offset="55%" stop-color="#c2410c"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#acl)"/>
+  <circle cx="680" cy="360" r="190" fill="#fbbf24" opacity="0.16"/>
+  <circle cx="330" cy="215" r="90" fill="none" stroke="#fbbf24" stroke-opacity="0.7" stroke-width="3"/>
+  <circle cx="330" cy="215" r="56" fill="none" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="3"/>
+  <circle cx="330" cy="215" r="26" fill="#fbbf24" opacity="0.9"/>
+  <path d="M310 195l58 44-30 4 14 32-16 8-14-32-22 22z" fill="#fff7ed" stroke="#431407" stroke-width="2"/>
+  <rect x="500" y="120" width="190" height="190" rx="16" fill="#0b0f1a" stroke="#ffffff" stroke-opacity="0.14"/>
+  <text x="595" y="185" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#fbbf24">x1024</text>
+  <path d="M540 215h110M540 245h82M540 275h96" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <text x="400" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700" fill="#ffffff" opacity="0.92">AutoClicker</text>
+</svg>

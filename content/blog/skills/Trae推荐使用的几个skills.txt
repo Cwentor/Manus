@@ -1,0 +1,27 @@
+npx skills add https://github.com/anthropics/skills --skill 									
+
+
+doc-coauthoring
+docx
+pdf
+pptx
+xlsx
+
+
+webapp-testing
+canvas-design
+skill-creator
+theme-factory
+
+
+-----
+-a trae-cn
+-y
+
+
+
+https://github.com/xstongxue/best-skills/tree/main/skills
+
+code-review-skill
+
+
