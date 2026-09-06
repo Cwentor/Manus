@@ -97,13 +97,12 @@ read_time: "5 min"
 
 本项目已配置 GitHub Actions，推送到 `master` 分支即可自动构建并部署到 GitHub Pages。
 
-**首次部署步骤：**
+**首次部署步骤（关键！）：**
 
-1. **开启 Pages 服务**
-   - 进入 GitHub 仓库页面 → **Settings** → **Pages**
-   - **Source** 选择 `GitHub Actions`
+1. **进入 Settings → Pages → Build and deployment**
+   - **Source** 选择 **`GitHub Actions`**（⚠️ 必须选这个，不要选 "Deploy from a branch"）
 
-2. **推送代码**
+2. **推送代码触发部署**
    ```bash
    git add .
    git commit -m "feat: enable GitHub Pages deploy"
@@ -112,14 +111,19 @@ read_time: "5 min"
 
 3. **查看 CI 状态**
    - 进入 **Actions** 标签页，确认 `Deploy to GitHub Pages` workflow 成功运行
-   - 部署完成后站点地址为：`https://<username>.github.io/<repo>/`
+   - 部署完成后站点地址为：`https://Cwentor.github.io/Manus/`
+
+> **⚠️ 如果报错 `Liquid syntax error`：**
+> 说明 GitHub Pages 仍在走默认的 Jekyll 构建（`jekyll-build-pages@v1`）。
+> 请务必在 **Settings → Pages → Source** 中选择 **`GitHub Actions`**，而非 "Deploy from a branch"。
+> 本仓库已添加 `.nojekyll` 和 `_config.yml` 作为额外防护，但**根本解决方式是切换 Source**。
 
 **工作流文件：** `.github/workflows/deploy.yml`
 
 **手动触发部署：**
 - 在 **Actions** 页面找到 `Deploy to GitHub Pages`，点击 **Run workflow** → **Run workflow** 按钮
 
-### 手动部署
+### 手动部署（不推荐）
 
 若需手动部署到 GitHub Pages：
 
@@ -130,7 +134,7 @@ git commit -m "deploy: update dist"
 git push origin master
 ```
 
-然后在 GitHub 仓库的 **Settings → Pages** 中将 **Source** 改为 `Deploy from a branch`，分支选择 `main`，目录选择 `/ (root)`。
+然后在 GitHub 仓库的 **Settings → Pages** 中将 **Source** 改为 `Deploy from a branch`，分支选择 `master`，目录选择 `/ (root)`。
 
 ## License
 
