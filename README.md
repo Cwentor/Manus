@@ -93,6 +93,45 @@ read_time: "5 min"
 
 `dist/` 是纯静态目录，任意静态托管皆可：GitHub Pages、Vercel、Netlify、Cloudflare Pages、Nginx。构建命令 `npm run build`，产物目录 `dist`。
 
+### GitHub Pages 自动化部署（推荐）
+
+本项目已配置 GitHub Actions，推送到 `main` 分支即可自动构建并部署到 GitHub Pages。
+
+**首次部署步骤：**
+
+1. **开启 Pages 服务**
+   - 进入 GitHub 仓库页面 → **Settings** → **Pages**
+   - **Source** 选择 `GitHub Actions`
+
+2. **推送代码**
+   ```bash
+   git add .
+   git commit -m "feat: enable GitHub Pages deploy"
+   git push origin main
+   ```
+
+3. **查看 CI 状态**
+   - 进入 **Actions** 标签页，确认 `Deploy to GitHub Pages` workflow 成功运行
+   - 部署完成后站点地址为：`https://<username>.github.io/<repo>/`
+
+**工作流文件：** `.github/workflows/deploy.yml`
+
+**手动触发部署：**
+- 在 **Actions** 页面找到 `Deploy to GitHub Pages`，点击 **Run workflow** → **Run workflow** 按钮
+
+### 手动部署
+
+若需手动部署到 GitHub Pages：
+
+```bash
+npm run build                  # 构建到 dist/
+git add dist/
+git commit -m "deploy: update dist"
+git push origin main
+```
+
+然后在 GitHub 仓库的 **Settings → Pages** 中将 **Source** 改为 `Deploy from a branch`，分支选择 `main`，目录选择 `/ (root)`。
+
 ## License
 
 MIT
