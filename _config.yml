@@ -1,0 +1,5 @@
+# Jekyll / GitHub Pages 配置
+# 本仓库由 build.js 完全接管静态生成，不需要 Jekyll 介入
+# 保留此文件仅用于关闭 Jekyll 默认行为
+title: Manus Showcase
+description: 个人主页展厅 — 内容与 UI 彻底分离架构
