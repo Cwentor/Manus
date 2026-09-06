@@ -1,0 +1,172 @@
+/* ==========================================================================
+   main.css — 布局层：页面骨架 / 响应式栅格 / 滚动显现动效
+   ========================================================================== */
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--text);
+  background: var(--bg);
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+  overflow-x: hidden;
+}
+
+/* 背景氛围：极淡的网格纹理（纯 CSS，无图片请求） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.35;
+  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+
+/* 暗色主题：全页流体极光（三团色斑缓慢游移，营造深空流体感） */
+:root[data-theme='dark'] body::after {
+  content: '';
+  position: fixed;
+  inset: -25%;
+  z-index: -4;
+  background:
+    radial-gradient(38% 42% at 22% 28%, rgb(124 58 237 / 0.17), transparent 70%),
+    radial-gradient(34% 38% at 80% 66%, rgb(34 211 238 / 0.13), transparent 70%),
+    radial-gradient(28% 30% at 58% 88%, rgb(167 139 250 / 0.11), transparent 70%);
+  animation: fluid-drift 32s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes fluid-drift {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(3.5%, -2.5%) scale(1.06) rotate(2.5deg);
+  }
+  100% {
+    transform: translate(-3%, 3%) scale(1.02) rotate(-2deg);
+  }
+}
+
+/* 星空画布（app.js 渲染；仅暗色主题显示） */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+:root[data-theme='light'] .starfield {
+  display: none;
+}
+
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+/* 筛选后隐藏卡片 */
+.is-hidden {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 滚动显现（IntersectionObserver 驱动 .is-visible）
+ * ------------------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+ * 产品卡片 3D 悬浮入场（与 tilt 共用，避免与 transform 冲突则仅用于非 tilt 卡）
+ * ------------------------------------------------------------------------ */
+
+/* --------------------------------------------------------------------------
+ * 响应式
+ * ------------------------------------------------------------------------ */
+
+/* 平板 */
+@media (max-width: 860px) {
+  .blog-card {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-2);
+  }
+
+  .blog-date {
+    grid-row: auto;
+  }
+
+  .blog-summary,
+  .blog-meta {
+    grid-column: 1;
+  }
+}
+
+/* 手机 */
+@media (max-width: 560px) {
+  .nav-link {
+    display: none; /* 导航收敛为 Logo + 主题切换 */
+  }
+
+  .hero-tagline {
+    font-size: var(--text-base);
+  }
+
+  .grid-products {
+    grid-template-columns: 1fr;
+  }
+
+  .product-actions {
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    margin-left: 0;
+  }
+
+  .doc-row {
+    grid-template-columns: auto 1fr;
+    padding: var(--space-4);
+  }
+
+  .doc-side {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-3);
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * 无障碍：减弱动效
+ * ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

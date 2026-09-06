@@ -1,0 +1,28 @@
+{
+  "name": "manus-showcase",
+  "version": "1.0.0",
+  "description": "内容与 UI 彻底分离的静态个人主页展厅（Markdown 驱动，零打包工具，含工作台与文章页）",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js && node scripts/serve.js",
+    "serve": "node scripts/serve.js"
+  },
+  "keywords": [
+    "markdown",
+    "static-site",
+    "showcase",
+    "portfolio",
+    "zero-bundler"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^14.1.0",
+    "shiki": "^3.2.0"
+  }
+}

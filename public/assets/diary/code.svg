@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" role="img" aria-label="代码">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="400" fill="url(#bg)"/>
+  <circle cx="56" cy="52" r="7" fill="#ff5f57"/><circle cx="84" cy="52" r="7" fill="#febc2e"/><circle cx="112" cy="52" r="7" fill="#28c840"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M70 130l-28 26 28 26" stroke="#a78bfa" stroke-width="8"/>
+    <path d="M118 130l28 26-28 26" stroke="#22d3ee" stroke-width="8"/>
+    <path d="M150 112l-40 88" stroke="#fbbf24" stroke-width="8"/>
+  </g>
+  <g fill="#ffffff" opacity="0.92">
+    <rect x="170" y="130" width="180" height="10" rx="5" fill="#a78bfa" fill-opacity="0.9"/>
+    <rect x="170" y="160" width="140" height="10" rx="5" fill="#ffffff" opacity="0.35"/>
+    <rect x="170" y="190" width="160" height="10" rx="5" fill="#ffffff" opacity="0.28"/>
+  </g>
+  <rect x="60" y="260" width="360" height="2" fill="#ffffff" opacity="0.1"/>
+  <rect x="60" y="275" width="20" height="8" rx="4" fill="#28c840"/>
+  <text x="96" y="284" font-family="Consolas, monospace" font-size="16" fill="#34d399">✔ build passed in 18.2ms</text>
+</svg>

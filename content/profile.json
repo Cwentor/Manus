@@ -1,0 +1,18 @@
+{
+  "name": "林晚舟",
+  "handle": "@wanzhou",
+  "tagline": "把想法变成产品，把产品打磨成艺术品。",
+  "avatar": "/assets/avatar/avatar.svg",
+  "status": {
+    "emoji": "🟢",
+    "text": "Building cool things"
+  },
+  "location": "广州",
+  "available_for": "Remote · 2026 Q3",
+  "socials": [
+    { "label": "GitHub", "url": "https://github.com/wanzhou-dev", "icon": "github" },
+    { "label": "X / Twitter", "url": "https://x.com/wanzhou_dev", "icon": "twitter" },
+    { "label": "Email", "url": "mailto:hi@wanzhou.dev", "icon": "mail" },
+    { "label": "Blog RSS", "url": "/feed.xml", "icon": "rss" }
+  ]
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="个人主页展厅 — 内容与 UI 彻底分离架构">
+  <title>{{PROFILE_NAME}} · Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- 入场开屏（首次进入播放，会话内后续跳转自动跳过） -->
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splash-core">
+      <p class="splash-name">{{PROFILE_NAME}}</p>
+      <p class="splash-sub">{{PROFILE_HANDLE}} · SHOWCASE</p>
+      <div class="splash-bar" role="presentation"><span></span></div>
+    </div>
+  </div>
+
+  <!-- 暗色主题动态星空（app.js 渲染，亮色主题自动隐藏） -->
+  <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
+
+  <!-- ================================================================== -->
+  <!-- 导航栏                                                              -->
+  <!-- ================================================================== -->
+  <nav class="navbar" aria-label="主导航">
+    <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">{{PROFILE_NAME}}</a>
+      <div class="nav-links">
+        <a class="nav-link" href="workspace.html">工作台</a>
+        <a class="nav-link" href="#products">产品</a>
+        <a class="nav-link" href="#blog">长文</a>
+        <button class="theme-toggle" aria-label="切换主题" type="button">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.73 12.73 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================================================================== -->
+  <!-- Hero 区域 —— 个人信息（内容由 build.js 注入）                       -->
+  <!-- ================================================================== -->
+  <section id="hero" class="hero">
+    <div class="hero-inner container">
+      <div class="hero-avatar-flip" tabindex="0" aria-label="头像（悬停或聚焦翻转查看背面）">
+        <div class="hero-avatar-inner">
+          <img class="hero-avatar-face hero-avatar-front" src="{{PROFILE_AVATAR}}" alt="{{PROFILE_NAME}}" width="96" height="96" loading="eager">
+          <div class="hero-avatar-face hero-avatar-back" aria-hidden="true">
+            <span class="hero-avatar-emoji">👋</span>
+            <span class="hero-avatar-handle">{{PROFILE_HANDLE}}</span>
+          </div>
+        </div>
+      </div>
+      <h1 class="hero-name">{{PROFILE_NAME}} <span class="hero-handle">{{PROFILE_HANDLE}}</span></h1>
+      <p class="hero-tagline" id="hero-typewriter">{{PROFILE_TAGLINE}}</p>
+      <div class="hero-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-text">{{PROFILE_STATUS_EMOJI}} {{PROFILE_STATUS}}</span>
+        <span class="hero-meta">{{PROFILE_LOCATION}} · {{PROFILE_AVAILABLE}}</span>
+      </div>
+      <div class="hero-socials">{{PROFILE_SOCIALS}}</div>
+      <div class="hero-stats">{{HERO_STATS}}</div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- 产品展区 —— Bento Grid 卡片                                        -->
+  <!-- ================================================================== -->
+  <section id="products" class="section">
+    <div class="container">
+      <h2 class="section-title">产品展区 <span class="section-subtitle">What I've Built</span></h2>
+      <div class="filter-bar" data-target="products">
+        {{PRODUCT_FILTERS}}
+      </div>
+      <div class="grid-products">
+        {{PRODUCTS}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- 精选长文 —— 博客卡片列表                                           -->
+  <!-- ================================================================== -->
+  <section id="blog" class="section">
+    <div class="container">
+      <h2 class="section-title">精选长文 <span class="section-subtitle">Long Reads</span></h2>
+      <div class="filter-bar" data-target="blog">
+        {{BLOG_FILTERS}}
+      </div>
+      <div class="list-blog">
+        {{BLOG}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- 页脚                                                                -->
+  <!-- ================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">{{BUILD_META}}</p>
+    </div>
+  </footer>
+
+  <!-- ================================================================== -->
+  <!-- 文章抽屉（右侧滑入 + 全屏阅读层）                                   -->
+  <!-- ================================================================== -->
+  <div id="drawer-overlay" class="drawer-overlay" aria-hidden="true"></div>
+  <aside id="drawer" class="drawer" aria-hidden="true" role="dialog" aria-label="文章阅读">
+    <header class="drawer-header">
+      <h2 id="drawer-title" class="drawer-title"></h2>
+      <button class="drawer-close" aria-label="关闭阅读" type="button">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </header>
+    <div id="drawer-body" class="drawer-body"></div>
+  </aside>
+
+  <!-- ================================================================== -->
+  <!-- 内容池（博客 + 产品完整正文，<template> 标签实现 0 延迟秒开）          -->
+  <!-- ================================================================== -->
+  <div id="content-pool" hidden>
+    {{CONTENT_POOL}}
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
