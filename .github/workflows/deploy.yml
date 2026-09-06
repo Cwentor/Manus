@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 permissions:
@@ -10,6 +10,7 @@ permissions:
   pages: write
   id-token: write
 
+# 静默忽略 Jekyll，完全由 build.js 自己控制输出
 concurrency:
   group: "pages"
   cancel-in-progress: false

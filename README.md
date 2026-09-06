@@ -95,7 +95,7 @@ read_time: "5 min"
 
 ### GitHub Pages 自动化部署（推荐）
 
-本项目已配置 GitHub Actions，推送到 `main` 分支即可自动构建并部署到 GitHub Pages。
+本项目已配置 GitHub Actions，推送到 `master` 分支即可自动构建并部署到 GitHub Pages。
 
 **首次部署步骤：**
 
@@ -107,7 +107,7 @@ read_time: "5 min"
    ```bash
    git add .
    git commit -m "feat: enable GitHub Pages deploy"
-   git push origin main
+   git push origin master
    ```
 
 3. **查看 CI 状态**
@@ -127,7 +127,7 @@ read_time: "5 min"
 npm run build                  # 构建到 dist/
 git add dist/
 git commit -m "deploy: update dist"
-git push origin main
+git push origin master
 ```
 
 然后在 GitHub 仓库的 **Settings → Pages** 中将 **Source** 改为 `Deploy from a branch`，分支选择 `main`，目录选择 `/ (root)`。
