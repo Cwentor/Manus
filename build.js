@@ -75,6 +75,17 @@ function escAttr(str) {
   return escHtml(str).replace(/\n/g, '&#10;');
 }
 
+/**
+ * 站内根绝对路径（/xxx）转站点根相对路径（xxx），外链原样保留。
+ * GitHub Pages 项目站点部署在子路径（如 /Manus/）下，页面内以 / 开头的
+ * 引用会落到域名根导致 404；index.html / workspace.html 位于站点根，
+ * 去掉前导斜杠的相对写法在两个位置都能正确解析。
+ */
+function rootRel(url) {
+  const s = String(url ?? '');
+  return s.startsWith('/') && !s.startsWith('//') ? s.slice(1) : s;
+}
+
 /** 模板 token 替换：{{KEY}} -> value（split/join 避免正则替换陷阱） */
 function applyTokens(template, tokens) {
   let out = template;
@@ -346,7 +357,7 @@ function renderProductCard(tpl, product, index) {
     SLUG: product.slug,
     TITLE: escHtml(product.data.title || 'Untitled'),
     TAGLINE: escHtml(product.data.tagline || ''),
-    COVER: escAttr(product.data.cover || '/assets/products/placeholder.svg'),
+    COVER: escAttr(rootRel(product.data.cover || 'assets/products/placeholder.svg')),
     STATUS: escHtml(product.data.status || 'Active'),
     STATUS_CLASS: status.replace(/[^a-z0-9-]/g, ''),
     TECH: techChips,
@@ -472,7 +483,7 @@ async function main() {
     const socialsHtml = profile.socials
       .map((s) => {
         const icon = ICONS[s.icon] || ICONS.link;
-        return `<a class="social-pill" href="${escAttr(s.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escAttr(s.label)}">${icon}<span>${escHtml(s.label)}</span></a>`;
+        return `<a class="social-pill" href="${escAttr(rootRel(s.url))}" target="_blank" rel="noopener noreferrer" aria-label="${escAttr(s.label)}">${icon}<span>${escHtml(s.label)}</span></a>`;
       })
       .join('');
 
@@ -498,7 +509,7 @@ async function main() {
       COPYRIGHT_NAME: escHtml(profile.copyright_name || profile.name),
       PROFILE_HANDLE: escHtml(profile.handle || ''),
       PROFILE_TAGLINE: escHtml(profile.tagline),
-      PROFILE_AVATAR: escAttr(profile.avatar || '/assets/avatar/avatar.svg'),
+      PROFILE_AVATAR: escAttr(rootRel(profile.avatar || 'assets/avatar/avatar.svg')),
       PROFILE_STATUS: escHtml(profile.status?.text || 'Building cool things'),
       PROFILE_STATUS_EMOJI: escHtml(profile.status?.emoji || '🟢'),
       PROFILE_LOCATION: escHtml(profile.location || ''),

@@ -27,6 +27,34 @@
   const root = document.documentElement;
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
+  /* ------------------------------------------------------------------ */
+  /* 站点根前缀：GitHub Pages 项目站点部署在子路径（如 /Manus/）下，      */
+  /* 以 / 开头的根绝对请求会落到域名根导致 404。从当前页面 URL 动态推导： */
+  /* 去掉末尾文件名、并上溯 /articles/ 子目录后，余下即站点根目录。       */
+  /* 用户站点（username.github.io）或自定义域部署时自动退化为 /。          */
+  /* ------------------------------------------------------------------ */
+  const SITE_ROOT = (() => {
+    const segs = location.pathname.split('/').filter(Boolean);
+    const last = segs[segs.length - 1] || '';
+    let dirs = /\.\w+$/.test(last) ? segs.slice(0, -1) : segs; // 末尾是文件则去掉
+    if (dirs[dirs.length - 1] === 'articles') dirs = dirs.slice(0, -1); // 文章整页再上溯一级
+    return (dirs.length ? '/' + dirs.join('/') : '') + '/';
+  })();
+
+  /**
+   * 正文重写：构建期正文里的站内资源以根绝对路径书写（/blog/、/assets/），
+   * 在子路径部署下需补上站点根前缀。正文同时被内容池、工作台、文章整页复用，
+   * 相对路径无法两全，故统一运行时处理。
+   */
+  function fixSiteRoots(scope) {
+    $$('[src^="/blog/"], [src^="/assets/"], [href^="/blog/"], [href^="/assets/"]', scope).forEach((el) => {
+      for (const attr of ['src', 'href']) {
+        const val = el.getAttribute(attr);
+        if (val && val.startsWith('/')) el.setAttribute(attr, SITE_ROOT + val.slice(1));
+      }
+    });
+  }
+
   /* ================================================================== */
   /* 0. 入场开屏（纯 CSS 时间轴播放；会话内仅首次，重复访问跳过）         */
   /* ================================================================== */
@@ -205,6 +233,7 @@
     drawerTitle.textContent = article.dataset.title || '';
     drawerBody.replaceChildren(article);
     drawerBody.scrollTop = 0;
+    fixSiteRoots(drawerBody); // 内容池正文的站内资源补站点根前缀
     decorateCode(drawerBody); // 抽屉正文里的代码块补复制按钮
 
     body.classList.add('drawer-open', 'scroll-locked');
@@ -440,7 +469,7 @@
         .map((entry, i) => {
           const crumb = [entry.catLabel, entry.kind, entry.date].filter(Boolean).join(' · ');
           return (
-            `<a class="search-result${i === 0 ? ' is-active' : ''}" href="/articles/${encodeURIComponent(entry.slug)}.html" data-slug="${escapeHtml(entry.slug)}">` +
+            `<a class="search-result${i === 0 ? ' is-active' : ''}" href="${SITE_ROOT}articles/${encodeURIComponent(entry.slug)}.html" data-slug="${escapeHtml(entry.slug)}">` +
             `<p class="search-result-crumb">${escapeHtml(crumb)}</p>` +
             `<h3 class="search-result-title">${highlight(escapeHtml(entry.title), terms)}</h3>` +
             `<p class="search-result-excerpt">${makeExcerpt(entry.text, terms)}</p>` +
@@ -890,6 +919,9 @@
 
   decorateCode(document); // 文章整页 / 内容池中已渲染的代码块
 
+  /* 文章整页（/articles/ 子目录）：正文里的站内绝对资源引用补站点根前缀 */
+  if (document.querySelector('.article-page')) fixSiteRoots(document);
+
   /* ================================================================== */
   /* 13. 标签页切换彩蛋（博客迁移：离开页面"崩溃"，回来"恢复"）           */
   /* ================================================================== */
@@ -1134,7 +1166,7 @@
       try {
         let page = pageCache.get(slug);
         if (!page) {
-          const res = await fetch(`/articles/${enc(slug)}.html`);
+          const res = await fetch(`${SITE_ROOT}articles/${enc(slug)}.html`);
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const html = await res.text();
           const parsed = new DOMParser().parseFromString(html, 'text/html');
@@ -1150,6 +1182,7 @@
 
         headEl.innerHTML = page.head;
         bodyEl.innerHTML = page.body;
+        fixSiteRoots(bodyEl); // 正文（/blog/、/assets/ 资源）补站点根前缀
         /* 阅读视图里隐藏与文档题名重复的正文首行 H1（源文件与文章整页保持原样） */
         const firstH1 = bodyEl.querySelector(':scope > h1:first-child');
         if (firstH1 && firstH1.textContent.replace(/\s+/g, '') === meta.node.title.replace(/\s+/g, '')) {
@@ -1166,7 +1199,7 @@
         if (currentSlug === slug) {
           bodyEl.innerHTML =
             `<p class="ws-error">加载失败（${escapeHtml(err.message)}）—— ` +
-            `<a href="/articles/${enc(slug)}.html">尝试打开原始页面</a></p>`;
+            `<a href="${SITE_ROOT}articles/${enc(slug)}.html">尝试打开原始页面</a></p>`;
         }
         return false;
       }
