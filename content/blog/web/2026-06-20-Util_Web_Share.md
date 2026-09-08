@@ -28,5 +28,11 @@ category: web
   <span class="web-card-title">临时邮件</span>
   <span class="web-card-tag">一次性邮箱</span>
 </a>
+
+<a class="web-card" draggable="false" href="https://www.virustotal.com/gui/file/7eea6ef8806dd74f8e17ffc062339616c7cee51c50f94f140aa74a73e2f30a3b" target="_blank" rel="noopener">
+  <span class="web-card-icon">🛡️</span>
+  <span class="web-card-title">VirusTotal</span>
+  <span class="web-card-tag">文件安全检测</span>
+</a>
   </div>
 </div>

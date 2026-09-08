@@ -190,6 +190,12 @@ category: web
   <span class="web-card-tag">2D 转 3D</span>
 </a>
 
+<a class="web-card" draggable="false" href="https://hailuoai.com/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🎬</span>
+  <span class="web-card-title">海螺 AI</span>
+  <span class="web-card-tag">文生视频</span>
+</a>
+
   </div>
 </div>
 
@@ -208,6 +214,12 @@ category: web
   <span class="web-card-icon">☁️</span>
   <span class="web-card-title">火山引擎</span>
   <span class="web-card-tag">云服务平台</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://ai.gitcode.com/serverless-api" target="_blank" rel="noopener">
+  <span class="web-card-icon">🔌</span>
+  <span class="web-card-title">GitCode AI</span>
+  <span class="web-card-tag">Serverless API</span>
 </a>
 
   </div>

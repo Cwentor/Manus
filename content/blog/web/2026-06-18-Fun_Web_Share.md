@@ -141,6 +141,18 @@ category: web
   <span class="web-card-tag">论文→Galgame</span>
 </a>
 
+<a class="web-card" draggable="false" href="https://minecraft.novaskin.me/wallpapers" target="_blank" rel="noopener">
+  <span class="web-card-icon">🧱</span>
+  <span class="web-card-title">NovaSkin</span>
+  <span class="web-card-tag">Minecraft 壁纸生成</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://aiti.lyihub.com/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🔮</span>
+  <span class="web-card-title">AITI</span>
+  <span class="web-card-tag">AI 人格测试</span>
+</a>
+
   </div>
 </div>
 
