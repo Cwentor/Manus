@@ -37,6 +37,10 @@ const DIR = {
   dist: path.join(ROOT, 'dist'),
 };
 
+/* 草稿目录：content/blog/draft 下的文档与附件永不参与构建（仍正常提交到 Git 仓库），
+   把文件移出该目录即自动发布 */
+const DRAFT_DIR = path.join(DIR.content, 'blog', 'draft');
+
 const HIGHLIGHT_THEME = 'vitesse-dark'; // 构建期高亮主题（github-dark / vitesse-dark 二选一）
 
 // 预加载常用语言，避免构建期反复动态加载
@@ -204,8 +208,9 @@ let highlighter = null;
 /**
  * 读取目录下所有 .md（递归含子目录），剥离 Front-matter，返回原始记录。
  * slug：优先 front-matter 的 slug；其次文件名；重名组整组回退到目录路径派生，保证全局唯一。
+ * excludeDirs：相对 dir 的一级目录名，命中的目录整棵子树跳过（用于草稿区）。
  */
-function readMarkdownFiles(dir) {
+function readMarkdownFiles(dir, { excludeDirs = [] } = {}) {
   if (!fs.existsSync(dir)) {
     console.warn(`目录不存在，跳过：${path.relative(ROOT, dir)}`);
     return [];
@@ -214,7 +219,12 @@ function readMarkdownFiles(dir) {
   const walk = (cur) => {
     for (const name of fs.readdirSync(cur).sort()) {
       const full = path.join(cur, name);
-      if (fs.statSync(full).isDirectory()) { walk(full); continue; }
+      if (fs.statSync(full).isDirectory()) {
+        // 排除目录（草稿区）：整棵子树都不读取
+        if (cur === dir && excludeDirs.includes(name)) continue;
+        walk(full);
+        continue;
+      }
       if (!name.endsWith('.md')) continue;
       const relPath = path.relative(dir, full).replace(/\\/g, '/');
       const raw = fs.readFileSync(full, 'utf8');
@@ -252,6 +262,7 @@ function readMarkdownFiles(dir) {
 /**
  * 复制 content/blog 下的非 Markdown 附件（图片 / 音频 / PDF 等）到 dist/blog/<相对路径>，
  * 与源站 /blog/... 的 URL 结构保持一致，正文中的绝对引用（如 /blog/audio/...）才能命中。
+ * 草稿目录（content/blog/draft）下的附件同样不复制，避免草稿资源被发布。
  */
 function copyBlogAssets() {
   const src = path.join(DIR.content, 'blog');
@@ -259,7 +270,11 @@ function copyBlogAssets() {
   const walk = (cur) => {
     for (const name of fs.readdirSync(cur)) {
       const full = path.join(cur, name);
-      if (fs.statSync(full).isDirectory()) { walk(full); continue; }
+      if (fs.statSync(full).isDirectory()) {
+        if (full === DRAFT_DIR) continue; // 草稿附件不发布
+        walk(full);
+        continue;
+      }
       if (name.endsWith('.md')) continue;
       const rel = path.relative(src, full);
       const dest = path.join(DIR.dist, 'blog', rel);
@@ -314,7 +329,7 @@ const CATEGORY_LABEL = {
   blog: '长文',
   job: '求职',
   knowledge: '知识库',
-  draft: '随笔',
+  draft: '随笔', // 草稿目录不参与构建，此映射仅用于 category: draft 的标签显示
   podcast: '播客',
   relax: '闲聊',
   web: '资源分享',
@@ -418,9 +433,10 @@ async function main() {
     /* -- 3. 读取个人信息配置 -- */
     const profile = readProfile();
 
-    /* -- 4. 读取全部 Markdown 内容 -- */
+    /* -- 4. 读取全部 Markdown 内容（草稿目录 content/blog/draft 整棵子树跳过） -- */
+    log.step('读取内容（已排除草稿目录 content/blog/draft）…');
     const products = readMarkdownFiles(path.join(DIR.content, 'products'));
-    const posts = readMarkdownFiles(path.join(DIR.content, 'blog'));
+    const posts = readMarkdownFiles(path.join(DIR.content, 'blog'), { excludeDirs: ['draft'] });
 
     /* 分类标注（category 由 front-matter 提供，缺省为根目录「长文」） */
     for (const p of posts) {
@@ -578,7 +594,7 @@ async function main() {
       return node;
     };
 
-    const preferredCats = ['knowledge', 'job', 'draft', 'podcast', 'relax', 'web', 'skills', 'about'];
+    const preferredCats = ['knowledge', 'job', 'podcast', 'relax', 'web', 'skills', 'about'];
     for (const c of [...preferredCats, 'blog', 'product']) ensureDir(c);
     for (const p of posts) {
       if (!preferredCats.includes(p.category) && p.category !== 'blog') ensureDir(p.category);

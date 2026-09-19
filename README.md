@@ -40,7 +40,7 @@ ManusNote/
 │       ├── *.md          # 长文（Front-matter: title/date/summary/tags/read_time + 可选 slug/category/featured）
 │       ├── job/          # 求职
 │       ├── knowledge/    # 知识库
-│       ├── draft/        # 随笔
+│       ├── draft/        # ✍️ 草稿区（不参与构建，仅提交到仓库；移出即发布）
 │       ├── podcast/      # 播客
 │       ├── relax/        # 闲聊
 │       ├── web/          # 资源分享
@@ -76,6 +76,11 @@ read_time: "5 min"
 ```
 
 重新 `npm run build` 后：工作台文档归档、`/articles/<slug>.html` 整页会自动生成；标记 `featured: true` 的文章还会出现在主页「精选长文」。
+
+> **草稿模式**：把还没想好要不要发布的文档放进 `content/blog/draft/`（可继续用子目录分组）。
+> 构建时会整棵子树跳过——不生成 `/articles/<slug>.html`、不进主页内容池、不进工作台文档树与搜索索引，
+> 目录里的图片 / PDF 等附件也不会复制到 `dist/`；但文件本身照常提交到 Git 仓库。
+> 想发布时把文件移出 `draft/` 即可，无需改动 Front-matter。
 
 > 知识库批量迁移可用 `node scripts/normalize-blog.js`：自动为旧文档补齐规范 Front-matter（只动元数据，正文逐字节校验零改动），原始 front-matter 备份在 `scripts/normalize-blog.backup.json`。
 
