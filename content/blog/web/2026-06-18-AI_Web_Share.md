@@ -100,6 +100,24 @@ category: web
   <span class="web-card-tag">模型开发 · Notebook</span>
 </a>
 
+<a class="web-card" draggable="false" href="https://y88xm.com/zh-CN" target="_blank" rel="noopener">
+  <span class="web-card-icon">🤖</span>
+  <span class="web-card-title">AI Model Hub</span>
+  <span class="web-card-tag">AI 模型聚合平台</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://console.volcengine.com/ark/region:cn-beijing/openManagement?LLM=%7B%7D&amp;advancedActiveKey=subscribe" target="_blank" rel="noopener">
+  <span class="web-card-icon">🌋</span>
+  <span class="web-card-title">火山方舟</span>
+  <span class="web-card-tag">大模型服务平台</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://www.arenacn.cn/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🏟️</span>
+  <span class="web-card-title">Arena</span>
+  <span class="web-card-tag">AI 模型盲测排行</span>
+</a>
+
   </div>
 </div>
 
@@ -273,6 +291,26 @@ category: web
   <span class="web-card-icon">⚡</span>
   <span class="web-card-title">Skills.sh</span>
   <span class="web-card-tag">Claude Code Skills</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://uumit.org/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🤝</span>
+  <span class="web-card-title">UUMit</span>
+  <span class="web-card-tag">AI 能力交易网络</span>
+</a>
+
+  </div>
+</div>
+
+## Vibe Coding 项目雷达
+
+<div class="web-scroll" markdown="0">
+  <div class="web-card-list">
+
+<a class="web-card" draggable="false" href="https://radar.lyihub.com/" target="_blank" rel="noopener">
+  <span class="web-card-icon">📡</span>
+  <span class="web-card-title">Vibe Coding 雷达</span>
+  <span class="web-card-tag">AI 编程项目推荐榜单</span>
 </a>
 
   </div>
