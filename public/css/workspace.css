@@ -161,6 +161,13 @@
   line-height: 1.6;
 }
 
+/* 侧栏底部访问统计（不蒜子，样式对齐 ws-build-meta） */
+.ws-sidebar-foot .footer-visits {
+  margin-top: var(--space-1);
+  text-align: left;
+  line-height: 1.6;
+}
+
 /* ---- 中栏：阅读区 --------------------------------------------------------- */
 
 .ws-reader {

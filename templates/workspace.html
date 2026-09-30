@@ -75,6 +75,10 @@
       <div class="ws-sidebar-foot">
         <p class="footer-hitokoto" data-hitokoto hidden></p>
         <p class="ws-build-meta">{{BUILD_META}}</p>
+        <p class="footer-visits">
+          <span id="busuanzi_container_site_pv" class="bsz-count">全站访问 <span id="busuanzi_value_site_pv"></span> 人次</span>
+          <span id="busuanzi_container_site_uv" class="bsz-count"> · 访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+        </p>
       </div>
     </aside>
 
@@ -117,6 +121,8 @@
   <!-- 正文搜索索引（构建期生成：slug -> 纯文本正文，前端零请求匹配） -->
   <script type="application/json" id="doc-search-index">{{SEARCH_INDEX}}</script>
 
+  <!-- 不蒜子访问统计（容器由脚本在数据到达后显示，服务不可达时保持隐藏） -->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

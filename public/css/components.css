@@ -1802,6 +1802,17 @@ button.social-pill {
   font-variant-numeric: tabular-nums;
 }
 
+/* 不蒜子访问统计（三类页面页脚共用；容器默认隐藏，脚本取数成功后以内联样式显示） */
+.footer-visits {
+  margin-top: var(--space-2);
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.bsz-count { display: none; }
+
 /* 一言（博客迁移：hitokoto 接口，加载失败保持隐藏） */
 .footer-hitokoto {
   margin-bottom: var(--space-2);
