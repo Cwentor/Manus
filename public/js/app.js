@@ -1160,8 +1160,7 @@
 
   /* ================================================================== */
   /* 15. 邮箱复制按钮（构建期 mailto 渲染为 button，点击复制邮箱地址）    */
-  /* ================================================================== */
-  $$('[data-copy-email]').forEach((btn) => {
+  /* ================================================================== */  $$('[data-copy-email]').forEach((btn) => {
     btn.addEventListener('click', async () => {
       await copyText(btn.dataset.copyEmail);
       btn.classList.add('is-copied');
@@ -1175,6 +1174,21 @@
         }, 1600);
       }
     });
+  });
+
+  /* ================================================================== */
+  /* 16. 访问统计兜底显示（VerCount 兼容不蒜子 ID；个别版本只填值不显示  */
+  /*     容器，检测到数值后手动显示，服务不可达时保持隐藏）               */
+  /* ================================================================== */
+  const bszReveal = () => {
+    $$('.bsz-count').forEach((el) => {
+      const value = el.querySelector('[id^="busuanzi_value_"]');
+      if (value && value.textContent.trim()) el.style.display = 'inline';
+    });
+  };
+  window.addEventListener('load', () => {
+    setTimeout(bszReveal, 800);
+    setTimeout(bszReveal, 3000);
   });
 
   /* ================================================================== */
