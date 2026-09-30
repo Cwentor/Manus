@@ -37,7 +37,6 @@
   --container: 1080px;
   --nav-h: 64px;
   --section-gap: clamp(4rem, 8vw, 7rem);
-  --drawer-w: min(640px, 92vw);
 
   /* ---- 圆角 ---- */
   --radius-sm: 8px;

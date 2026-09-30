@@ -10,8 +10,7 @@
  *    4. markdown-it + shiki（构建期语法高亮）将正文渲染为原生 HTML
  *    5. 排序：产品按 order 升序；博客 / 日记按 date 倒序
  *    6. 将卡片 HTML 片段装配进 templates/index.html 预留槽位
- *    7. 将博客与产品的完整正文以 <template> 内容池形式嵌入页面底部
- *       （点击卡片时前端 JS 即时注入 Drawer，0 延迟秒开阅读）
+ *    7. 卡片直接链接到 /articles/<slug>.html 整页（无阅读抽屉）
  *    8. 输出可直接部署的 dist/index.html
  *
  *  用法：node build.js        （或 npm run build）
@@ -365,7 +364,7 @@ function renderProductCard(tpl, product, index) {
     (repoUrl
       ? `<a class="btn btn-text" href="${escAttr(repoUrl)}" target="_blank" rel="noopener noreferrer">${ICONS.github}<span>GitHub</span></a>`
       : '') +
-    `<button class="btn btn-primary" data-open-article="${escAttr(product.slug)}" type="button"><span>了解详情</span></button>`;
+    `<a class="btn btn-primary" href="articles/${escAttr(product.slug)}.html"><span>了解详情</span></a>`;
 
   return applyTokens(tpl, {
     INDEX: index,
@@ -391,6 +390,7 @@ function renderBlogCard(tpl, post, index) {
   return applyTokens(tpl, {
     INDEX: index,
     SLUG: post.slug,
+    URL: `articles/${post.slug}.html`,
     TITLE: escHtml(post.data.title || 'Untitled'),
     SUMMARY: escHtml(post.data.summary || ''),
     DATE: escHtml(date),
@@ -481,19 +481,7 @@ async function main() {
       .map((t) => `<button class="filter-chip${t === 'all' ? ' is-active' : ''}" data-filter="${escAttr(t)}">${t === 'all' ? '全部' : `#${escHtml(t)}`}</button>`)
       .join('');
 
-    /* -- 10. 内容池：首页精选长文 + 产品的完整正文，嵌入 <template>（0 延迟秒开） -- */
-    const pool = [
-      ...featuredPosts.map((p) =>
-        `<template id="article-${p.slug}" data-kind="blog">` +
-        `<article class="article" data-title="${escAttr(p.data.title || '')}">${p.html}</article>` +
-        `</template>`),
-      ...products.map((p) =>
-        `<template id="article-${p.slug}" data-kind="product">` +
-        `<article class="article" data-title="${escAttr(p.data.title || '')}">${p.html}</article>` +
-        `</template>`),
-    ].join('\n');
-
-    /* -- 11. 装配主模板 -- */
+    /* -- 10. 装配主模板 -- */
     log.step('装配 templates/index.html …');
     const indexTpl = loadTemplate('index.html');
     const socialsHtml = profile.socials
@@ -537,7 +525,6 @@ async function main() {
       PRODUCTS: productCards,
       BLOG: blogCards,
       BLOG_FILTERS: tagChips,
-      CONTENT_POOL: pool,
       BUILD_META: escHtml(buildMeta),
     });
 

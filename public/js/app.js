@@ -1,19 +1,11 @@
 /* ==========================================================================
    app.js — 展厅客户端交互（原生 ES6+，零依赖）
 
-   模块：
-     1) 主题切换（localStorage 持久化 + 系统偏好兜底）
-     2) 阅读抽屉（点击卡片 -> 从内容池 <template> 即时注入，0 延迟秒开）
-     3) 图片灯箱（点击放大预览）
-     4) 动态筛选（产品状态 / 博客标签；工作台查找为 Zensical 风格结果面板）
-     5) 产品卡片 3D 悬浮微光（tilt + 光斑跟随）
-     6) 滚动显现（IntersectionObserver）
-     7) 统一 ESC 键监听
-     —— 以下迁移自 Cat-Drink 博客（Zensical）的 UI/UX，按本站风格适配 ——
-     8) 时段问候语条          9) GitHub 贡献热力图
-     10) Hero 交互网格 Canvas 11) 代码块复制按钮
-     12) 点击爱心漂浮         13) 标签页切换彩蛋
-     14) 页脚一言（hitokoto）
+   首页：开屏 / 主题与暗色星空 / 滚动进度 / Hero（打字机、统计、交互网格） /
+   卡片筛选与 3D 悬浮 / 时段问候 / GitHub 热力图 / 代码块复制 / 页脚一言；
+   文章整页：代码复制、站内资源路径修正；
+   工作台页：查找面板 + 三栏阅读器（15 号模块）。
+   卡片（博客卡 / 产品卡「了解详情」）均为普通链接，直接跳转文章整页。
    ========================================================================== */
 (() => {
   'use strict';
@@ -209,73 +201,7 @@
   }
 
   /* ================================================================== */
-  /* 2. 阅读抽屉（内容来自构建期嵌入的内容池）                           */
-  /* ================================================================== */
-  const drawer = $('#drawer');
-  const drawerOverlay = $('#drawer-overlay');
-  const drawerBody = $('#drawer-body');
-  const drawerTitle = $('#drawer-title');
-  let lastFocused = null;
-
-  /** 从内容池取出某篇文章的完整 HTML（<template> 克隆） */
-  function getArticleContent(slug) {
-    const tpl = document.getElementById(`article-${slug}`);
-    if (!tpl) return null;
-    const fragment = tpl.content.cloneNode(true);
-    return fragment.querySelector('.article');
-  }
-
-  function openDrawer(slug) {
-    const article = getArticleContent(slug);
-    if (!article) return;
-    lastFocused = document.activeElement;
-
-    drawerTitle.textContent = article.dataset.title || '';
-    drawerBody.replaceChildren(article);
-    drawerBody.scrollTop = 0;
-    fixSiteRoots(drawerBody); // 内容池正文的站内资源补站点根前缀
-    decorateCode(drawerBody); // 抽屉正文里的代码块补复制按钮
-
-    body.classList.add('drawer-open', 'scroll-locked');
-    drawer.setAttribute('aria-hidden', 'false');
-    drawerOverlay.setAttribute('aria-hidden', 'false');
-    $('.drawer-close', drawer)?.focus({ preventScroll: true });
-  }
-
-  function closeDrawer() {
-    if (!body.classList.contains('drawer-open')) return;
-    body.classList.remove('drawer-open', 'scroll-locked');
-    drawer.setAttribute('aria-hidden', 'true');
-    drawerOverlay.setAttribute('aria-hidden', 'true');
-    lastFocused?.focus?.({ preventScroll: true });
-  }
-
-  /* ---- 打开入口：产品「了解详情」 / 博客卡片 ---- */
-  document.addEventListener('click', (e) => {
-    const opener = e.target.closest('[data-open-article]');
-    if (opener) {
-      e.preventDefault();
-      openDrawer(opener.dataset.openArticle);
-      return;
-    }
-    const blogCard = e.target.closest('.blog-card');
-    if (blogCard) openDrawer(blogCard.dataset.slug);
-  });
-
-  /* ---- 键盘可达性：博客卡片 / 工作台文档行可回车打开 ---- */
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && e.target.matches?.('.blog-card, .doc-row')) {
-      const opener = e.target.closest('[data-open-article]');
-      if (opener) openDrawer(opener.dataset.openArticle);
-      else e.target.click();
-    }
-  });
-
-  $('.drawer-close')?.addEventListener('click', closeDrawer);
-  drawerOverlay?.addEventListener('click', closeDrawer);
-
-  /* ================================================================== */
-  /* 3. 滚动进度条 + 导航滚动态                                          */
+  /* 2. 滚动进度条 + 导航滚动态                                          */
   /* ================================================================== */
   const progress = $('#scroll-progress');
   const navbar = $('.navbar');
@@ -622,15 +548,7 @@
   });
 
   /* ================================================================== */
-  /* 7. 统一 ESC 键监听                                                  */
-  /* ================================================================== */
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    closeDrawer();
-  });
-
-  /* ================================================================== */
-  /* 8. 时段问候语条（博客迁移：按钟点切换问候与 emoji）                  */
+  /* 6. 时段问候语条（博客迁移：按钟点切换问候与 emoji）                  */
   /* ================================================================== */
   const greetingEl = $('#hero-greeting');
   if (greetingEl) {
