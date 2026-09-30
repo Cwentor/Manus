@@ -19,7 +19,6 @@
   "socials": [
     { "label": "GitHub", "url": "https://github.com/Cwentor", "icon": "github" },
     { "label": "X / Twitter", "url": "https://x.com/cwenta00330", "icon": "twitter" },
-    { "label": "Email", "url": "mailto:2738035238@qq.com", "icon": "mail" },
-    { "label": "Blog RSS", "url": "/feed.xml", "icon": "rss" }
+    { "label": "Email", "url": "mailto:2738035238@qq.com", "icon": "mail" }
   ]
 }

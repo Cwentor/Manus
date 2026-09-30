@@ -591,6 +591,17 @@
   color: var(--accent);
 }
 
+/* mailto 渲染出的复制按钮（button 元素需要 Reset 表单默认样式） */
+button.social-pill {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.social-pill.is-copied {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* --------------------------------------------------------------------------
  * GitHub 贡献热力图（博客迁移：玻璃卡片 + SVG 热力格 + 箭头 tooltip）
  * 格子用 5 档主题色阶（CSS 控制，明暗主题自动跟随）

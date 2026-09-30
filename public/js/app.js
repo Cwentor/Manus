@@ -34,6 +34,25 @@
   })();
 
   /**
+   * 复制文本到剪贴板：优先 Clipboard API，
+   * 不可用（非安全上下文等）时退回 execCommand
+   */
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+  }
+
+  /**
    * 正文重写：构建期正文里的站内资源以根绝对路径书写（/blog/、/assets/），
    * 在子路径部署下需补上站点根前缀。正文同时被内容池、工作台、文章整页复用，
    * 相对路径无法两全，故统一运行时处理。
@@ -814,20 +833,7 @@
       btn.innerHTML = ICON_COPY + ICON_CHECK;
       btn.addEventListener('click', async () => {
         const code = pre.querySelector('code');
-        const text = code ? code.innerText : pre.innerText;
-        try {
-          await navigator.clipboard.writeText(text);
-        } catch {
-          // 剪贴板 API 不可用（非安全上下文等）时退回 execCommand
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          ta.style.position = 'fixed';
-          ta.style.opacity = '0';
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          ta.remove();
-        }
+        await copyText(code ? code.innerText : pre.innerText);
         btn.classList.add('is-copied');
         setTimeout(() => btn.classList.remove('is-copied'), 1600);
       });
@@ -1151,6 +1157,25 @@
     const initial = slugFromHash() || flatOrder[0];
     if (initial && docIndex.has(initial)) openDoc(initial);
   }
+
+  /* ================================================================== */
+  /* 15. 邮箱复制按钮（构建期 mailto 渲染为 button，点击复制邮箱地址）    */
+  /* ================================================================== */
+  $$('[data-copy-email]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      await copyText(btn.dataset.copyEmail);
+      btn.classList.add('is-copied');
+      const label = btn.querySelector('span');
+      if (label) {
+        const original = label.textContent;
+        label.textContent = '已复制';
+        setTimeout(() => {
+          label.textContent = original;
+          btn.classList.remove('is-copied');
+        }, 1600);
+      }
+    });
+  });
 
   /* ================================================================== */
   /* 启动                                                               */
