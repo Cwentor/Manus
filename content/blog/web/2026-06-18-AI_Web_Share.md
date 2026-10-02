@@ -156,6 +156,12 @@ category: web
   <span class="web-card-tag">AI Bot 平台</span>
 </a>
 
+<a class="web-card" draggable="false" href="https://muse.ai/access" target="_blank" rel="noopener">
+  <span class="web-card-icon">🎭</span>
+  <span class="web-card-title">Muse</span>
+  <span class="web-card-tag">AI Agent 平台</span>
+</a>
+
   </div>
 </div>
 

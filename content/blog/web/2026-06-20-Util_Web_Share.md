@@ -34,5 +34,11 @@ category: web
   <span class="web-card-title">VirusTotal</span>
   <span class="web-card-tag">文件安全检测</span>
 </a>
+
+<a class="web-card" draggable="false" href="https://ikuuu.top/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🛫</span>
+  <span class="web-card-title">iKuuu</span>
+  <span class="web-card-tag">VPN 机场</span>
+</a>
   </div>
 </div>
