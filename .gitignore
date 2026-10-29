@@ -9,6 +9,9 @@ dist/
 
 # AI 助手本地工作记录（项目记忆，不入库）
 .workbuddy-ai/
+# .workbuddy/ 含 AI 工作日志与本地技能缓存，整目录不入库
+# （若要提交项目级 skills，需改用 .workbuddy/memory/ 的按子目录忽略写法）
+.workbuddy/
 
 # 日志与系统文件
 *.log
