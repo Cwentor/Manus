@@ -1,7 +1,7 @@
 {
   "name": "manus-showcase",
   "version": "1.0.0",
-  "description": "内容与 UI 彻底分离的静态个人主页展厅（Markdown 驱动，零打包工具，含工作台与文章页）",
+  "description": "内容与 UI 彻底分离的静态个人主页展厅（Markdown 驱动，零打包工具，含工作台、文章页与开源集邮册）",
   "private": true,
   "type": "commonjs",
   "engines": {
@@ -10,7 +10,9 @@
   "scripts": {
     "build": "node build.js",
     "dev": "node build.js && node scripts/serve.js",
-    "serve": "node scripts/serve.js"
+    "serve": "node scripts/serve.js",
+    "test:stamps": "node --test \"tests/stamps/*.test.mjs\"",
+    "stamps:parse": "node tools/stamp-album/parse-repos.mjs tools/stamp-album/links.txt"
   },
   "keywords": [
     "markdown",

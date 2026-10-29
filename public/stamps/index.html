@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开源集邮册 · 陈文涛</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://avatars.githubusercontent.com" crossorigin>
+<link rel="dns-prefetch" href="https://github.com">
+<!-- 字体样式表走非阻塞加载：它曾是唯一阻塞首屏的请求（实测 0.5–5.7s 波动），
+     本地资源只要几毫秒。media=print → 加载完再切回 all，期间先用系统衬线兜底 -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap"></noscript>
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <!-- 返回主页：../index.html 与主页导航里的 stamps/index.html 构成双向入口，
+         相对路径在 GitHub Pages 子路径部署下同样成立 -->
+    <a class="back-home" href="../index.html" aria-label="返回主页">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+      </svg>
+      <span>返回主页</span>
+    </a>
+    <div class="brand">
+      <span class="brand-mark">✦</span>
+      <div>
+        <div class="brand-name">开源集邮册</div>
+        <div class="brand-sub">OPEN SOURCE STAMP ALBUM</div>
+      </div>
+    </div>
+    <div class="toolbar">
+      <input id="search" class="ctl search" type="search" placeholder="搜索票名 / 简介…">
+      <select id="lang" class="ctl select"><option value="">全部票种</option></select>
+      <select id="sort" class="ctl select">
+        <option value="stars">按面值 ★</option>
+        <option value="name">按票名</option>
+        <option value="created">按发行年份</option>
+      </select>
+    </div>
+    <div id="count" class="count"></div>
+  </header>
+
+  <main id="grid" class="album"></main>
+  <div id="empty" class="empty" hidden>册子里没有匹配的邮票</div>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-mask" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close aria-label="关闭">×</button>
+      <div class="modal-head">
+        <div class="modal-vig"><img id="m-avatar" alt="" onerror="this.style.visibility='hidden'"></div>
+        <div>
+          <div id="m-name" class="modal-name"></div>
+          <div id="m-owner" class="modal-owner"></div>
+        </div>
+      </div>
+      <p id="m-zh" class="modal-zh"></p>
+      <p id="m-en" class="modal-en"></p>
+      <div id="m-topics" class="modal-topics"></div>
+      <div class="modal-stats">
+        <div class="stat"><b id="m-stars"></b><span>面值 ★</span></div>
+        <div class="stat"><b id="m-forks"></b><span>Forks</span></div>
+        <div class="stat"><b id="m-lang"></b><span>票种</span></div>
+        <div class="stat"><b id="m-created"></b><span>发行年份</span></div>
+      </div>
+      <div class="pm-picker">
+        <span class="pm-picker-label">邮戳</span>
+        <div id="pm-options" class="pm-options" role="group" aria-label="选择邮戳样式"></div>
+      </div>
+      <div class="modal-links">
+        <a id="m-repo" class="btn-ink" target="_blank" rel="noopener">打开仓库 ↗</a>
+        <a id="m-ownerlink" class="btn-ink ghost" target="_blank" rel="noopener">作者主页 ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

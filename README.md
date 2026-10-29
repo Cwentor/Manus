@@ -15,6 +15,9 @@
   霞鹜文楷字体、时段问候语条、多句循环打字机、GitHub 贡献热力图、Hero 交互网格 Canvas、
   代码块复制按钮、标签页切换彩蛋、页脚一言、菱形分隔线 / 渐变引用等文章排版
 - **阅读体验**：主页抽屉秒开（内容池 `<template>` 预载）、亮 / 暗双主题、响应式、`prefers-reduced-motion` 无障碍降级
+- **开源集邮册**（`/stamps/index.html`，独立页面）：把收藏的开源项目做成纪念邮票墙——纯 CSS 齿孔票、
+  票名 / 面值（★ 数）/ 票种、四种可切换邮戳（localStorage 持久化）、归档仓库盖「注销」封存章、
+  搜索 / 票种筛选 / 三种排序、末行「待收集」空位池化补齐；主页导航「集邮册」进、页面左上角「返回主页」出
 
 ## 🚀 快速开始
 
@@ -49,7 +52,10 @@ ManusNote/
 │       └── …非 .md 附件  # 图片 / 音频 / PDF 等，构建时复制到 dist/blog/<相对路径>
 ├── templates/            # 页面骨架（index / workspace / article / 卡片模板）
 ├── public/               # 静态资源（css / js / 图片），构建时原样复制
+│   └── stamps/           # 开源集邮册独立页（index.html + css + js 模块 + data/*.json）
 ├── scripts/              # serve.js 本地预览 · normalize-blog.js 知识库迁移整理工具
+├── tools/stamp-album/    # 集邮册数据工具：parse-repos.mjs 由 links.txt 生成 collection.json
+├── tests/stamps/         # 集邮册模块契约测试（node --test，npm run test:stamps）
 └── dist/                 # 构建产物（git 忽略，部署它即可）
 ```
 
