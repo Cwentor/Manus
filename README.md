@@ -21,8 +21,10 @@
 
 - **点击特效**（`public/js/click-fx.js` + `public/js/vendor/ba-click-fx.slim.js`，MIT）：
   主页 / 工作台 / 文章页生效，蔚蓝档案风格点击爆闪与光标拖尾。202 KB 的 vendor 模块懒加载
-  （load 后空闲预热或首次指针交互才拉取，不进首屏关键路径），只在暗色主题启用
-  （浅色底上 screen 合成几乎不可见），触屏与 `prefers-reduced-motion` 直接跳过，标签页隐藏自动暂停
+  （load 后空闲预热或首次指针交互才拉取，不进首屏关键路径）。暗色用库默认的 `screen` 加亮混合，
+  浅色底没有增亮空间，由 `components.css` 用 `mix-blend-mode: multiply` 覆盖（白底 × 蓝光 = 蓝，
+  光弧保色），跟随 `<html data-theme>` 自动切换。触屏与 `prefers-reduced-motion` 直接跳过，
+  标签页隐藏自动暂停
 
 ## 🚀 快速开始
 

@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="个人主页展厅 — 内容与 UI 彻底分离架构">
+  <!-- 主题预置：CSS 解析前就定下 data-theme，避免先按模板默认的 dark 绘制一帧再被脚本纠正（跳页闪暗） -->
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('showcase-theme');
+        document.documentElement.dataset.theme =
+          saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      } catch (_) { /* 隐私模式禁用存储时沿用模板默认值 */ }
+    })();
+  </script>
   <title>{{PROFILE_NAME}} · Showcase</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +26,7 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body class="no-select">
 
   <!-- 入场开屏（首次进入播放，会话内后续跳转自动跳过） -->
   <div id="splash" class="splash" aria-hidden="true">

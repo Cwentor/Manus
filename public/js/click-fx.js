@@ -4,9 +4,10 @@
    设计约束（对应本项目「零打包工具 + 首屏优先」的取舍）：
      1. 懒加载：202 KB 的 vendor 模块不进首屏关键路径。首次指针交互立刻拉，
         或 load 之后空闲时后台补拉，两条路径都只执行一次。
-     2. 只在暗色主题启用：精简版固定用 screen 合成，压在浅色背景上会被冲成
-        一层几乎看不见的白雾，不如不开。主题切换时同步启停（与星空 canvas
-        共用 <html data-theme> 这一信号）。
+     2. 暗 / 浅两种主题都启用。库内部固定 screen（加亮）混合，浅色底没有增亮
+        空间，所以由 components.css 按 <html data-theme> 把覆盖层改成 multiply
+        + 提饱和（白底 × 蓝光 = 蓝，光弧保色）。混合方式在 CSS 里，切换主题
+        无需重建实例，因此这里不再监听主题做 destroy。
      3. 门控：prefers-reduced-motion 或触屏（pointer: coarse）直接不加载；
         没有 WebGL2 也放弃。
      4. 省电：标签页隐藏时 setPaused(true)，回来再恢复，不空转 GPU 帧。
@@ -30,7 +31,7 @@
     if (disabled || loading || fx) return false;
     if (reducedMotion.matches || coarsePointer.matches) return false;
     if (typeof WebGL2RenderingContext === 'undefined') return false;
-    return root.dataset.theme === 'dark';
+    return true;
   }
 
   function setPaused(next) {
@@ -52,8 +53,8 @@
     try {
       const mod = await import('./vendor/ba-click-fx.slim.js');
       const ClickFX = mod.BAClickFX || mod.default;
-      // 加载期间环境可能已变（切到浅色 / 开了减少动效），构造前再判一次
-      if (reducedMotion.matches || root.dataset.theme !== 'dark') return;
+      // 加载期间环境可能已变（用户打开了「减少动效」），构造前再判一次
+      if (reducedMotion.matches || coarsePointer.matches) return;
       fx = new ClickFX({
         onError(err) {
           // 精简版只有 WebGL2 一条路：初始化失败就彻底放弃，控制台留一条记录
@@ -64,6 +65,7 @@
       });
       paused = false;
       if (document.hidden) setPaused(true);
+      syncLightCompositing();
     } catch (err) {
       disabled = true;
       console.warn('[click-fx] 模块加载失败，已停用：', err && err.message);
@@ -93,11 +95,26 @@
   if (document.readyState === 'complete') warmUp();
   else window.addEventListener('load', warmUp, { once: true });
 
-  /* ---- 主题切换：暗色启用 / 浅色销毁（浅色底上光效不可见，留着只是白耗 GPU） ---- */
-  new MutationObserver(() => {
-    if (root.dataset.theme === 'dark') start();
-    else teardown();
-  }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  /* ---- 主题切换：混合方式由 components.css 按 data-theme 自动接管 ----
+     CSS 用 :has() 命中覆盖层容器。极老的浏览器不支持 :has()，此时退化为
+     JS 直接给容器打内联 !important，保证浅色主题不会退回看不见的 screen。 */
+  const supportsHas = (() => {
+    try { return CSS.supports('selector(:has(*))'); } catch { return false; }
+  })();
+
+  function syncLightCompositing() {
+    if (supportsHas || !fx) return;
+    const wrap = fx.canvas && fx.canvas.parentElement;
+    if (!wrap) return;
+    const light = root.dataset.theme === 'light';
+    wrap.style.setProperty('mix-blend-mode', light ? 'multiply' : 'screen', 'important');
+    wrap.style.setProperty('filter', light ? 'saturate(2.2) brightness(0.72)' : 'none', 'important');
+  }
+
+  new MutationObserver(syncLightCompositing).observe(root, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
 
   /* ---- 省电：页面不可见时暂停渲染 ---- */
   document.addEventListener('visibilitychange', () => setPaused(document.hidden));

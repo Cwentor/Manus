@@ -1827,3 +1827,43 @@ button.social-pill {
   margin-left: 0.5em;
 }
 
+
+/* ========================================================================
+   ba-click-fx 覆盖层：主题相关的合成方式
+   ------------------------------------------------------------------------
+   库内置固定 screen 混合。screen 是「加亮」，暗底上漂亮，但浅色底没有继续
+   增亮的空间，光效会被冲成一层几乎看不见的白雾（见 README「纯白背景上的
+   颜色变淡」）。库内部合成不可配置（精简版无 updateConfig），只能在外层
+   覆盖层上改混合模式 —— 浅色改用 multiply：白底 × 蓝光 = 蓝，光弧保留颜色，
+   再轻微提饱和把 Bloom 的辉光收得住一点。
+   目标是用 :has() 命中库注入的覆盖层容器（只认它带 2147483646 的 z-index），
+   随 <html data-theme> 自动切换，无需 JS 参与。
+   ======================================================================== */
+html[data-theme="light"] div:has(> canvas[style*="2147483646"]) {
+  mix-blend-mode: multiply !important;
+  filter: saturate(2.2) brightness(0.72);
+}
+
+/* ========================================================================
+   首页锁定鼠标选取
+   ------------------------------------------------------------------------
+   首页是纯展示页（无表单、无正文阅读区），拖动会选中大标题与卡片文字，
+   破坏版式观感，因此整页禁用选取与图片拖拽。表单元素与可编辑区仍保留
+   选取能力，避免将来加搜索框时被这条规则废掉。
+   ======================================================================== */
+body.no-select,
+body.no-select * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body.no-select img,
+body.no-select svg {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+body.no-select :is(input, textarea, select, [contenteditable="true"]) {
+  -webkit-user-select: text;
+  user-select: text;
+}
