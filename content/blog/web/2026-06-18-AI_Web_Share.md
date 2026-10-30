@@ -192,6 +192,12 @@ category: web
   <span class="web-card-tag">个人助理 Agent · 短信 / 通话代操作</span>
 </a>
 
+<a class="web-card" draggable="false" href="https://www.anysearch.com/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🔎</span>
+  <span class="web-card-title">AnySearch</span>
+  <span class="web-card-tag">Agent 搜索基础设施 · MCP / API</span>
+</a>
+
   </div>
 </div>
 
