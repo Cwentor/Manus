@@ -26,6 +26,12 @@ category: web
   <span class="web-card-tag">OpenAI AI 助手</span>
 </a>
 
+<a class="web-card" draggable="false" href="https://grok.com/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🛸</span>
+  <span class="web-card-title">Grok</span>
+  <span class="web-card-tag">xAI 大模型对话 · Personal Agent</span>
+</a>
+
 <a class="web-card" draggable="false" href="https://www.kimi.com/" target="_blank" rel="noopener">
   <span class="web-card-icon">🤖</span>
   <span class="web-card-title">Kimi</span>
@@ -42,6 +48,18 @@ category: web
   <span class="web-card-icon">💎</span>
   <span class="web-card-title">腾讯元宝</span>
   <span class="web-card-tag">AI 对话</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🔍</span>
+  <span class="web-card-title">Perplexity</span>
+  <span class="web-card-tag">AI 搜索问答</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://poe.com/login?redirect_url=%2F" target="_blank" rel="noopener">
+  <span class="web-card-icon">💬</span>
+  <span class="web-card-title">Poe</span>
+  <span class="web-card-tag">AI 对话聚合平台</span>
 </a>
 
 <a class="web-card" draggable="false" href="https://www.anthropic.com/" target="_blank" rel="noopener">
@@ -64,10 +82,16 @@ category: web
   <span class="web-card-tag">AI 构建平台</span>
 </a>
 
-<a class="web-card" draggable="false" href="https://platform.agnes-ai.com/subscribe/subscription" target="_blank" rel="noopener">
-  <span class="web-card-icon">🤖</span>
-  <span class="web-card-title">Agnes AI</span>
-  <span class="web-card-tag">AI 平台</span>
+<a class="web-card" draggable="false" href="https://platform.agnes-ai.com/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🌐</span>
+  <span class="web-card-title">Agnes AI（国际站）</span>
+  <span class="web-card-tag">AI 平台 · 国际站</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://platform.agnes-ai.cn/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🇨🇳</span>
+  <span class="web-card-title">Agnes AI（国内站）</span>
+  <span class="web-card-tag">AI 平台 · 国内站</span>
 </a>
 
 <a class="web-card" draggable="false" href="https://cloud.siliconflow.com/me/models" target="_blank" rel="noopener">
@@ -162,6 +186,12 @@ category: web
   <span class="web-card-tag">AI Agent 平台</span>
 </a>
 
+<a class="web-card" draggable="false" href="https://instinct.com/" target="_blank" rel="noopener">
+  <span class="web-card-icon">📱</span>
+  <span class="web-card-title">Instinct</span>
+  <span class="web-card-tag">个人助理 Agent · 短信 / 通话代操作</span>
+</a>
+
   </div>
 </div>
 
@@ -188,7 +218,45 @@ category: web
   <span class="web-card-tag">AI 编码</span>
 </a>
 
-  </div>
+<a class="web-card" draggable="false" href="https://antigravity.google/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🛰️</span>
+  <span class="web-card-title">Antigravity</span>
+  <span class="web-card-tag">Google · Agent 优先 IDE</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://devin.ai/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🧠</span>
+  <span class="web-card-title">Devin</span>
+  <span class="web-card-tag">自主 AI 软件工程师</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://kilo.ai/" target="_blank" rel="noopener">
+  <span class="web-card-icon">⚡</span>
+  <span class="web-card-title">Kilo</span>
+  <span class="web-card-tag">开源 AI 编码 Agent</span>
+</a>
+
+<a class="web-card" draggable="false" href="https://www.verdent.ai/zh-CN" target="_blank" rel="noopener">
+  <span class="web-card-icon">🤖</span>
+  <span class="web-card-title">Verdent</span>
+  <span class="web-card-tag">多智能体并行编程</span>
+</a>
+
+</div>
+</div>
+
+## AI 设计工具
+
+<div class="web-scroll" markdown="0">
+  <div class="web-card-list">
+
+<a class="web-card" draggable="false" href="https://open-design.ai/zh/" target="_blank" rel="noopener">
+  <span class="web-card-icon">🎨</span>
+  <span class="web-card-title">Open Design</span>
+  <span class="web-card-tag">开源 · 本地 AI 设计平台</span>
+</a>
+
+</div>
 </div>
 
 ## AI 媒体生成
