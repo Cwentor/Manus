@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="404" viewBox="0 0 900 404" font-family="'Segoe UI','Microsoft YaHei',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="midGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,1 L8,5 L0,9 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,1 L8,5 L0,9 z" fill="#0f766e"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="404" fill="#ffffff"/>
+
+  <!-- 左侧四种输入形态 -->
+  <g>
+    <rect x="24" y="26" width="252" height="62" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="42" y="50" font-size="14" font-weight="600" fill="#0f172a">参考音频 + 精确转写</text>
+    <text x="42" y="72" font-size="12" fill="#64748b">Voice Clone · 零样本音色克隆</text>
+
+    <rect x="24" y="102" width="252" height="62" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="42" y="126" font-size="14" font-weight="600" fill="#0f172a">自然语言描述音色</text>
+    <text x="42" y="148" font-size="12" fill="#64748b">Voice Design · 无需参考音频</text>
+
+    <rect x="24" y="178" width="252" height="62" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="42" y="202" font-size="14" font-weight="600" fill="#0f172a">克隆音色 + 表演指令</text>
+    <text x="42" y="224" font-size="12" fill="#64748b">Voice Direction · 情绪/语速/语气</text>
+
+    <rect x="24" y="254" width="252" height="62" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="42" y="278" font-size="14" font-weight="600" fill="#0f172a">内联事件标签</text>
+    <text x="42" y="300" font-size="12" fill="#64748b">(laugh) (sigh) [笑] [叹气]</text>
+  </g>
+
+  <!-- 连线 -->
+  <g stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)" fill="none">
+    <path d="M276 57 L332 57 L332 120"/>
+    <path d="M276 133 L332 133"/>
+    <path d="M276 209 L332 209"/>
+    <path d="M276 285 L332 285 L332 240"/>
+  </g>
+
+  <!-- 中间：单一权重 -->
+  <rect x="338" y="56" width="212" height="240" rx="16" fill="url(#midGrad)"/>
+  <text x="444" y="132" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">Breeze TTS 2</text>
+  <text x="444" y="158" font-size="12.5" fill="#ccfbf1" text-anchor="middle">单一 checkpoint</text>
+  <text x="444" y="180" font-size="12.5" fill="#ccfbf1" text-anchor="middle">3.48B 参数 · bf16 约 7.68 GB</text>
+  <line x1="378" y1="200" x2="510" y2="200" stroke="#5eead4" stroke-width="1" opacity="0.6"/>
+  <text x="444" y="226" font-size="12.5" fill="#ccfbf1" text-anchor="middle">中英双语共用一套权重</text>
+  <text x="444" y="248" font-size="12.5" fill="#ccfbf1" text-anchor="middle">无需微调 / 无需切换模型</text>
+
+  <path d="M556 176 L604 176" stroke="#0f766e" stroke-width="1.8" fill="none" marker-end="url(#arrowTeal)"/>
+
+  <!-- 右侧：输出 -->
+  <rect x="612" y="96" width="264" height="160" rx="14" fill="#f0fdfa" stroke="#99f6e4"/>
+  <text x="632" y="126" font-size="14" font-weight="600" fill="#0f766e">流式音频输出</text>
+  <text x="632" y="156" font-size="12.5" fill="#334155">24 kHz · 单声道 PCM</text>
+  <text x="632" y="180" font-size="12.5" fill="#334155">TTFA p50 133.6 ms</text>
+  <text x="632" y="204" font-size="12.5" fill="#334155">RTF 0.32（约 3.1× 实时）</text>
+  <text x="632" y="228" font-size="12.5" fill="#334155">H100 预热路径 &lt; 40 ms</text>
+
+  <text x="24" y="366" font-size="12" fill="#94a3b8">四种用法共享同一份权重：克隆靠“抄”，设计靠“描述”，导演靠“指令”，事件靠“标签”。</text>
+  <text x="24" y="388" font-size="12" fill="#94a3b8">数据来源：BreezeBlue 官方模型卡与仓库 README（延迟为厂商自测，未获第三方独立复现）。</text>
+</svg>

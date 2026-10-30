@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="376" viewBox="0 0 900 376" font-family="'Segoe UI','Microsoft YaHei',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="latMain" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0e7490"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="376" fill="#ffffff"/>
+
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#0f172a">首包延迟实测｜NVIDIA H100，单位毫秒（越低越好）</text>
+  <text x="24" y="56" font-size="12" fill="#94a3b8">官方自测数据，未获第三方复现；同轴对比对象为 ElevenLabs Flash v2.5、Fish Audio S2.1 Pro 等实时语音 API</text>
+
+  <g stroke="#eef2f6" stroke-width="1">
+    <line x1="397" y1="74" x2="397" y2="248"/>
+    <line x1="498" y1="74" x2="498" y2="248"/>
+    <line x1="599" y1="74" x2="599" y2="248"/>
+    <line x1="700" y1="74" x2="700" y2="248"/>
+  </g>
+  <line x1="296" y1="248" x2="760" y2="248" stroke="#d8e0e8" stroke-width="1"/>
+
+  <!-- 最快路径 -->
+  <rect x="296" y="80" width="80.8" height="28" rx="4" fill="#f0fdfa" stroke="#5eead4" stroke-dasharray="4 3"/>
+  <text x="386" y="99" font-size="13" font-weight="700" fill="#0f766e">&lt; 40</text>
+
+  <rect x="296" y="124" width="241.2" height="28" rx="4" fill="url(#latMain)"/>
+  <text x="545" y="143" font-size="13" fill="#0e7490" font-weight="600">119.4</text>
+
+  <rect x="296" y="168" width="269.9" height="28" rx="4" fill="url(#latMain)"/>
+  <text x="574" y="187" font-size="13" fill="#0e7490" font-weight="600">133.6</text>
+
+  <rect x="296" y="212" width="329.9" height="28" rx="4" fill="url(#latMain)" opacity="0.55"/>
+  <text x="634" y="231" font-size="13" fill="#0e7490" font-weight="600">163.3</text>
+
+  <!-- 进度线：实时对话阈值 -->
+  <line x1="700" y1="70" x2="700" y2="252" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 4"/>
+
+  <g font-size="13" fill="#334155" text-anchor="end">
+    <text x="280" y="99" font-weight="600" fill="#0f172a">最快路径 · 预热</text>
+    <text x="280" y="143">首字节 TTFB · p50</text>
+    <text x="280" y="187">首包音频 TTFA · p50</text>
+    <text x="280" y="231">首包音频 TTFA · p95</text>
+  </g>
+
+  <g font-size="11" fill="#94a3b8" text-anchor="middle">
+    <text x="397" y="268">50</text>
+    <text x="498" y="268">100</text>
+    <text x="599" y="268">150</text>
+    <text x="700" y="268">200</text>
+  </g>
+
+  <text x="24" y="306" font-size="12" fill="#64748b">橙色虚线 = 200 ms，实时对话的体感上限；越过这条线，用户就会听出「它愣了一下」。</text>
+  <text x="24" y="330" font-size="12" fill="#64748b">RTF 0.32 ≈ 3.1× 实时：说 10 秒的话只需约 3.2 秒算完，这才是流式对话真正吃得下的余量。</text>
+  <text x="24" y="354" font-size="12" fill="#64748b">代价写在显存上：eager 推理约 7.7 GiB（12 GB 卡可跑），fast path 约 14.4 GiB（建议 24 GB 卡）。</text>
+</svg>
