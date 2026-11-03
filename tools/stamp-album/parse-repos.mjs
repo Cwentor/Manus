@@ -12,6 +12,8 @@
  *       覆盖表读取（full_name → 语言），可由人工/Agent 维护；未覆盖则为 null。
  * 中文简介：构建期不写入；zh 由站点运行时从 public/stamps/data/zh-descriptions.json 合并
  *           （见 public/stamps/js/app.js）。
+ * 弃用标记：GitHub 没有「弃用」这个状态，由 tools/stamp-album/deprecated.json 人工维护，
+ *           命中则写入 is_deprecated + deprecated_note（票面盖弃用章）。
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -22,6 +24,7 @@ import { extractRepo, finalizeRepo } from './lib/parse-page.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = path.join(ROOT, 'public', 'stamps', 'data', 'collection.json');
 const LANG_MAP = path.join(ROOT, 'tools', 'stamp-album', 'repo-languages.json');
+const DEPRECATED_MAP = path.join(ROOT, 'tools', 'stamp-album', 'deprecated.json');
 const DELAY_MS = 1200;
 
 // 收集链接：文件按行展开，其余按 URL 处理
@@ -44,6 +47,8 @@ if (uniq.length === 0) {
 }
 
 const langOverrides = fs.existsSync(LANG_MAP) ? JSON.parse(fs.readFileSync(LANG_MAP, 'utf8')) : {};
+// 弃用清单：键以下划线开头的是注释项，参与匹配前先剔掉
+const deprecatedNotes = fs.existsSync(DEPRECATED_MAP) ? JSON.parse(fs.readFileSync(DEPRECATED_MAP, 'utf8')) : {};
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 async function main() {
@@ -57,8 +62,14 @@ async function main() {
       const html = await res.text();
       const raw = extractRepo(html);
       if (!raw) { console.warn(`[${i + 1}/${uniq.length}] ${link} → 无法解析（不是仓库页？），跳过`); continue; }
-      items.push(finalizeRepo(raw, langOverrides));
-      console.log(`[${i + 1}/${uniq.length}] ✔ ${raw.full_name} ★${raw.stars}${raw.language ? ' · ' + raw.language : ''}`);
+      const item = finalizeRepo(raw, langOverrides);
+      const note = deprecatedNotes[item.full_name];
+      if (typeof note === 'string' && note) {
+        item.is_deprecated = true;
+        item.deprecated_note = note;
+      }
+      items.push(item);
+      console.log(`[${i + 1}/${uniq.length}] ✔ ${raw.full_name} ★${raw.stars}${raw.language ? ' · ' + raw.language : ''}${item.is_deprecated ? ' · 弃用' : ''}`);
     } catch (e) {
       console.warn(`[${i + 1}/${uniq.length}] ${link} → 失败（${e.message}），跳过`);
     }

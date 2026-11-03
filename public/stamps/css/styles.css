@@ -25,6 +25,7 @@
   --en-text: #93855f;     /* 弹层英文简介 */
   --topic-text: #7a6c46;
   --seal-ink: #3f4f52;   /* 归档封存章的冷灰墨色 */
+  --deprecate-ink: #7a4a38; /* 弃用章的暖褐墨色：与冷灰归档章一眼可分 */
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
@@ -196,6 +197,38 @@ body {
   letter-spacing: .1em; text-indent: .1em; opacity: .9;
 }
 
+/* ===== 弃用章（is_deprecated → 票面左侧盖「DEPRECATED / 已弃用」章） =====
+   与归档章同一套橡皮章语言，但墨色换成暖褐、纵向排在归档章下方：
+   同一张票既归档又弃用时两章叠列而不叠字。样式量刻意与 .seal-archived 保持对称。 */
+.stamp.is-deprecated .s-head { background: var(--deprecate-ink); color: var(--cream); }
+.stamp.is-deprecated .art { filter: sepia(.12) saturate(.78); }  /* 略褪色，仍看得清图案 */
+/* 归档 + 弃用同现时，弃用色压过归档冷灰：两种状态里「别用」更要紧 */
+.stamp.is-archived.is-deprecated .s-head { background: var(--deprecate-ink); }
+.stamp.is-archived.is-deprecated .art { filter: sepia(.16) saturate(.5) contrast(.97); }
+.seal-deprecated {
+  /* DEPRECATED 比 ARCHIVED 长两个字母，字号与字距都要比归档章收一档，
+     否则旋转后包围盒会探出票纸左缘——章盖到票外就不像盖章了 */
+  position: absolute; left: clamp(5px, 2.4cqw, 7px); top: clamp(56px, 28cqw, 66px); z-index: 4;
+  transform: rotate(-6deg);
+  padding: clamp(3px, 1.5cqw, 4px) clamp(3.4px, 2.1cqw, 5.4px) clamp(2.4px, 1.3cqw, 3.2px);
+  text-align: center; pointer-events: none;
+  color: rgba(122, 74, 56, .86);
+  background: rgba(252, 246, 234, .78);
+  border: clamp(1.2px, .66cqw, 1.6px) solid rgba(122, 74, 56, .7);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 .8px rgba(122, 74, 56, .44);
+}
+.seal-deprecated b {
+  display: block; font-family: var(--ff-serif); font-weight: 700;
+  font-size: clamp(5.2px, 3.1cqw, 7.4px); line-height: 1;
+  letter-spacing: .1em; text-indent: .1em;
+}
+.seal-deprecated span {
+  display: block; margin-top: clamp(1.8px, 1.1cqw, 2.6px);
+  font-size: clamp(4.2px, 2.1cqw, 5px); line-height: 1;
+  letter-spacing: .08em; text-indent: .08em; opacity: .9;
+}
+
 /* 待收集空位 */
 .stamp.empty-slot { cursor: default; opacity: .5; }
 .stamp.empty-slot:hover { transform: none; }
@@ -227,6 +260,15 @@ body {
 .modal-archive-tag { display: inline-block; padding: 1px 7px 2px;
   border: 1px solid rgba(58, 74, 77, .55); border-radius: 3px; background: rgba(58, 74, 77, .1);
   color: var(--seal-ink); font-size: 9px; font-weight: 700; letter-spacing: 1.3px; white-space: nowrap; }
+/* 弹层里的弃用徽章：与票面弃用章同款暖褐墨 */
+.modal-deprecated-tag { display: inline-block; padding: 1px 7px 2px;
+  border: 1px solid rgba(122, 74, 56, .58); border-radius: 3px; background: rgba(122, 74, 56, .12);
+  color: var(--deprecate-ink); font-size: 9px; font-weight: 700; letter-spacing: 1.3px; white-space: nowrap; }
+/* 弃用理由：左侧一道褐墨竖条，读起来像贴在说明卡上的便签 */
+.modal-deprecated { margin: 12px 0 0; padding: 7px 10px; border-left: 2px solid rgba(122, 74, 56, .55);
+  background: rgba(122, 74, 56, .06); border-radius: 0 5px 5px 0;
+  font-size: 12px; line-height: 1.6; color: var(--deprecate-ink); }
+.modal-deprecated[hidden] { display: none; }
 .modal-zh { font-size: 14px; line-height: 1.7; color: var(--text-warm); margin: 16px 0 4px; }
 .modal-en { font-size: 12px; line-height: 1.6; font-style: italic; color: var(--en-text); margin: 0; }
 .modal-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }

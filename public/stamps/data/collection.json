@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-03T05:10:24.291Z",
+  "generatedAt": "2026-11-03T05:29:43.105Z",
   "source": "user-provided repo links",
-  "total": 223,
+  "total": 224,
   "items": [
     {
       "full_name": "bilawalsidhu/gods-eye-view",
@@ -4770,6 +4770,24 @@
       "repo_url": "https://github.com/alejandrobujan/tendedero",
       "owner_url": "https://github.com/alejandrobujan",
       "avatar_url": "https://github.com/alejandrobujan.png?size=120"
+    },
+    {
+      "full_name": "NanmiCoder/MediaCrawler",
+      "description": "小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫  | 知乎问答文章｜评论爬虫",
+      "stars": 69969,
+      "forks": 13276,
+      "topics": [],
+      "created_at": "2023-06-09T12:14:34.000Z",
+      "license": null,
+      "language": "Python",
+      "is_archived": false,
+      "owner": "NanmiCoder",
+      "name": "MediaCrawler",
+      "repo_url": "https://github.com/NanmiCoder/MediaCrawler",
+      "owner_url": "https://github.com/NanmiCoder",
+      "avatar_url": "https://github.com/NanmiCoder.png?size=120",
+      "is_deprecated": true,
+      "deprecated_note": "批量抓取小红书、抖音、微博等平台内容与评论，踩在各平台用户协议与个人信息保护的灰线上；仓库本身仍在更新，但作为选型不再推荐——做同类数据采集优先走官方开放平台 API。"
     }
   ]
 }

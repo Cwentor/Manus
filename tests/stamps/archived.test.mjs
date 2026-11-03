@@ -40,7 +40,8 @@ test('app.js：封存章只在归档分支输出，并带到无障碍标签', ()
   assert.match(app, /const ARCHIVE_SEAL =/, '缺少封存章标记常量');
   assert.match(app, /isArchived\(it\)/, 'stampHTML 未调用 isArchived 判定');
   assert.match(app, /archived \? ARCHIVE_SEAL : ''/, '封存章应仅在归档时插入');
-  assert.match(app, /class="stamp\$\{archived \? ' is-archived' : ''\}"/, '归档票缺少 is-archived 类');
+  // 状态类已改为拼装（归档 / 弃用可同时存在），这里只认「按 archived 拼出 is-archived」这一点
+  assert.match(app, /\$\{archived \? ' is-archived' : ''\}/, '归档票缺少 is-archived 类');
   assert.match(app, /该仓库已归档/, '无障碍标签未说明归档状态');
   assert.match(app, /modal-archive-tag/, '弹层缺少归档徽章');
   assert.match(css, /\.modal-archive-tag\s*\{/, '弹层归档徽章缺少样式');

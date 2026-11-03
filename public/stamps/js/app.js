@@ -1,7 +1,7 @@
 /* 开源集邮册 · Demo 渲染逻辑（原生 JS，无依赖）—— 5 列邮票墙 */
 'use strict';
 
-import { fmtNum, langAbbr, yearOf, postmarkDate, mergeZh, filterSort, padCount, isArchived } from './lib/stamps.mjs';
+import { fmtNum, langAbbr, yearOf, postmarkDate, mergeZh, filterSort, padCount, isArchived, isDeprecated } from './lib/stamps.mjs';
 import {
   POSTMARK_STYLES, POSTMARK_NONE, parsePostmarks, resolvePostmark, applyPostmark, serializePostmarks,
 } from './lib/postmarks.mjs';
@@ -62,12 +62,18 @@ function visible() {
    与右上角的邮戳分居两侧，互不遮挡；纯文字 + 边框，任意缩放都清晰 */
 const ARCHIVE_SEAL = '<div class="seal-archived" aria-hidden="true"><b>ARCHIVED</b><span>已归档 · 不再维护</span></div>';
 
+/* 弃用章：仓库还活着，但站长判定「不要再用了」（合规风险、生态迁移、作者态度等）。
+   与归档章同贴左侧、纵向排在归档章下方——两章同时出现也不会叠字；暖褐墨与冷灰墨一眼可分 */
+const DEPRECATED_SEAL = '<div class="seal-deprecated" aria-hidden="true"><b>DEPRECATED</b><span>已弃用 · 不再推荐</span></div>';
+
 /* 票面骨架（不含邮戳：邮戳随「首票默认章」变化，单独增量同步） */
 function stampHTML(it) {
   const archived = isArchived(it);
+  const deprecated = isDeprecated(it);
+  const ariaState = (archived ? '（该仓库已归档）' : '') + (deprecated ? '（该仓库已弃用）' : '');
   return `
-    <div class="stamp${archived ? ' is-archived' : ''}" data-full="${esc(it.full_name)}" title="${esc(it.full_name)}"
-         tabindex="0" role="button" aria-label="查看 ${esc(it.full_name)} 详情${archived ? '（该仓库已归档）' : ''}">
+    <div class="stamp${archived ? ' is-archived' : ''}${deprecated ? ' is-deprecated' : ''}" data-full="${esc(it.full_name)}" title="${esc(it.full_name)}"
+         tabindex="0" role="button" aria-label="查看 ${esc(it.full_name)} 详情${ariaState}">
       <div class="art">
         <div class="s-head ff">GITHUB · OPEN SOURCE</div>
         <div class="s-vig"><img src="${esc(it.avatar_url)}" alt="${esc(it.full_name)} 头像"
@@ -80,7 +86,7 @@ function stampHTML(it) {
           <span class="s-value">★ ${fmtNum(it.stars)}</span>
         </div>
       </div>
-      ${archived ? ARCHIVE_SEAL : ''}
+      ${archived ? ARCHIVE_SEAL : ''}${deprecated ? DEPRECATED_SEAL : ''}
     </div>`;
 }
 
@@ -181,11 +187,17 @@ function openModal(full) {
   $('m-name').textContent = it.full_name;
   // 归档仓库在弹层里也要说清楚：只读、不再接受更新，避免用户点进去才发现
   const archived = isArchived(it);
+  const deprecated = isDeprecated(it);
   const meta = [it.license ? it.license + ' License' : null,
     it.created_at ? '发行于 ' + it.created_at.slice(0, 10) : null].filter(Boolean).join(' · ');
   $('m-owner').innerHTML =
     (archived ? '<span class="modal-archive-tag">ARCHIVED · 已归档 · 只读</span>' : '') +
+    (deprecated ? '<span class="modal-deprecated-tag">DEPRECATED · 已弃用 · 不再推荐</span>' : '') +
     `<span>${esc(meta || ' ')}</span>`;
+  // 弃用理由：只在被弃用时才占位，避免所有卡片都多一行空段
+  const depNote = deprecated ? String(it.deprecated_note || '').trim() : '';
+  $('m-deprecated').textContent = depNote;
+  $('m-deprecated').hidden = !depNote;
   $('m-zh').innerHTML = it.zh ? zhRich(it.zh) : '（暂无中文简介——可在 zh-descriptions.json 中补充）';
   $('m-zh').style.opacity = it.zh ? 1 : 0.55;
   $('m-en').textContent = it.description || '';

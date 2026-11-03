@@ -1,0 +1,4 @@
+{
+  "_comment": "full_name → 弃用理由。命中即盖「DEPRECATED / 已弃用」章。GitHub 没有这个状态（archived 只是只读），这里是站长的人工结论：合规风险、生态迁移、作者态度等。值会写进 collection.json 的 deprecated_note，在详情弹层里展示。",
+  "NanmiCoder/MediaCrawler": "批量抓取小红书、抖音、微博等平台内容与评论，踩在各平台用户协议与个人信息保护的灰线上；仓库本身仍在更新，但作为选型不再推荐——做同类数据采集优先走官方开放平台 API。"
+}

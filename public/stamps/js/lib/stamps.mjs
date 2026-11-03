@@ -22,6 +22,13 @@ export const isArchived = (it) => {
   return v === true || v === 1 || v === 'true' || v === '1';
 };
 
+/* 弃用判定：GitHub 没有这个状态，是站长的人工结论（合规风险、生态迁移、作者态度等），
+   来自 tools/stamp-album/deprecated.json。同样只在明确为「是」时才认，避免脏数据误盖弃用章 */
+export const isDeprecated = (it) => {
+  const v = it && it.is_deprecated;
+  return v === true || v === 1 || v === 'true' || v === '1';
+};
+
 export function mergeZh(items, zhMap) {
   if (!zhMap || typeof zhMap !== 'object') return items.map(i => ({ ...i }));
   return items.map(it => {
