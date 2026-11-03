@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-26T05:53:36.852Z",
+  "generatedAt": "2026-11-03T05:10:24.291Z",
   "source": "user-provided repo links",
-  "total": 217,
+  "total": 223,
   "items": [
     {
       "full_name": "bilawalsidhu/gods-eye-view",
@@ -4653,6 +4653,123 @@
       "repo_url": "https://github.com/0xsline/awesome-deepseek-harness",
       "owner_url": "https://github.com/0xsline",
       "avatar_url": "https://github.com/0xsline.png?size=120"
+    },
+    {
+      "full_name": "Fisfzy/dsh-ego-browser",
+      "description": "DSH（DeepSeek Harness）插件：把 ego-lite 浏览器（给 AI Agent 用的 Chromium）接入 HARNESS——13 个结构化 ego_* 工具（文本语义快照、语义定位点击、表单填充、截图、CDP 控制、任务空间隔离），内置 ego 运行时，Linux + Chrome 开箱即用，无需克隆官方仓库或手动构建。",
+      "stars": 403,
+      "forks": 49,
+      "topics": [
+        "agent-browser",
+        "browser-automation",
+        "cordis",
+        "deepseek-harness",
+        "dsh",
+        "dsh-better-sidebar",
+        "dsh-plugin",
+        "dshfind"
+      ],
+      "created_at": "2026-08-07T08:13:54.000Z",
+      "license": null,
+      "language": "TypeScript",
+      "is_archived": false,
+      "owner": "Fisfzy",
+      "name": "dsh-ego-browser",
+      "repo_url": "https://github.com/Fisfzy/dsh-ego-browser",
+      "owner_url": "https://github.com/Fisfzy",
+      "avatar_url": "https://github.com/Fisfzy.png?size=120"
+    },
+    {
+      "full_name": "moon09300731/dsh-approval-gate",
+      "description": "DeepSeek Harness 自动审批门控：Flash 预判不可回补操作，安全自动批准、危险转人工（fail-safe）",
+      "stars": 109,
+      "forks": 21,
+      "topics": [
+        "deepseek-harness",
+        "dsh-plugin"
+      ],
+      "created_at": "2026-08-14T07:29:27.000Z",
+      "license": "MIT",
+      "language": "JavaScript",
+      "is_archived": false,
+      "owner": "moon09300731",
+      "name": "dsh-approval-gate",
+      "repo_url": "https://github.com/moon09300731/dsh-approval-gate",
+      "owner_url": "https://github.com/moon09300731",
+      "avatar_url": "https://github.com/moon09300731.png?size=120"
+    },
+    {
+      "full_name": "lanxiuyun/Catrace",
+      "description": "Catrace: Every notify is a Plugin! Catrace 是一个桌面小窗系统，由插件决定小窗的展示方式与交互形式。 VSCode 提供代码视窗，插件提供能力；Catrace 提供小窗视窗，插件提供内容。久坐提醒是 Catrace 的首个插件，未来还将有更多能力以插件的形式接入。",
+      "stars": 275,
+      "forks": 20,
+      "topics": [
+        "activity",
+        "activity-tracking",
+        "breaks",
+        "desktop-app",
+        "linux",
+        "macos",
+        "notifications",
+        "notify"
+      ],
+      "created_at": "2026-05-24T04:24:16.000Z",
+      "license": "AGPL-3.0",
+      "language": "Rust",
+      "is_archived": false,
+      "owner": "lanxiuyun",
+      "name": "Catrace",
+      "repo_url": "https://github.com/lanxiuyun/Catrace",
+      "owner_url": "https://github.com/lanxiuyun",
+      "avatar_url": "https://github.com/lanxiuyun.png?size=120"
+    },
+    {
+      "full_name": "xiaomi-research/Xiaomi-OCR-0",
+      "description": "A unified 0.8B vision-language model for document parsing and OCR-centric understanding, built from Qwen3.5-0.8B.",
+      "stars": 798,
+      "forks": 49,
+      "topics": [],
+      "created_at": "2026-09-28T11:47:13.000Z",
+      "license": "Apache-2.0",
+      "language": "Python",
+      "is_archived": false,
+      "owner": "xiaomi-research",
+      "name": "Xiaomi-OCR-0",
+      "repo_url": "https://github.com/xiaomi-research/Xiaomi-OCR-0",
+      "owner_url": "https://github.com/xiaomi-research",
+      "avatar_url": "https://github.com/xiaomi-research.png?size=120"
+    },
+    {
+      "full_name": "Zagitta/gpu-unlock",
+      "description": "Your GeForce runs AI at half speed. This fixes it for 20/30/40 series cards. Up to 2× FP16 / BF16 / TF32 tensor throughput",
+      "stars": 14763,
+      "forks": 1428,
+      "topics": [],
+      "created_at": "2026-10-18T01:28:31.000Z",
+      "license": null,
+      "language": "C",
+      "is_archived": false,
+      "owner": "Zagitta",
+      "name": "gpu-unlock",
+      "repo_url": "https://github.com/Zagitta/gpu-unlock",
+      "owner_url": "https://github.com/Zagitta",
+      "avatar_url": "https://github.com/Zagitta.png?size=120"
+    },
+    {
+      "full_name": "alejandrobujan/tendedero",
+      "description": "Screenshots, hung out to dry. A tiny native macOS app that hangs every screenshot on a line at the top of your screen.",
+      "stars": 2943,
+      "forks": 260,
+      "topics": [],
+      "created_at": "2026-10-07T01:29:54.000Z",
+      "license": null,
+      "language": "Swift",
+      "is_archived": false,
+      "owner": "alejandrobujan",
+      "name": "tendedero",
+      "repo_url": "https://github.com/alejandrobujan/tendedero",
+      "owner_url": "https://github.com/alejandrobujan",
+      "avatar_url": "https://github.com/alejandrobujan.png?size=120"
     }
   ]
 }

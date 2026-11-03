@@ -219,3 +219,9 @@ https://github.com/wangxinleo/wechat-public-account-push
 https://github.com/codecrafters-io/build-your-own-x
 https://github.com/prakhar1989/awesome-courses
 https://github.com/0xsline/awesome-deepseek-harness
+https://github.com/Fisfzy/dsh-ego-browser
+https://github.com/moon09300731/dsh-approval-gate
+https://github.com/lanxiuyun/Catrace
+https://github.com/xiaomi-research/Xiaomi-OCR-0
+https://github.com/Zagitta/gpu-unlock
+https://github.com/alejandrobujan/tendedero

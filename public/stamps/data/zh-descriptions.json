@@ -216,5 +216,11 @@
   "wangxinleo/wechat-public-account-push": "是什么：基于微信公众号模板消息的定时推送机器人（仓库已归档，仅存档参考）。有什么用：把每日天气、纪念日倒计时、一句情话等自动推到微信，当年常见用法是给女朋友做每日问候。",
   "codecrafters-io/build-your-own-x": "是什么：把「从零手写」拆成上百条教程链接的合集，从写一个 Git、数据库、编译器到操作系统、神经网络都有对应指引。有什么用：想搞懂某个工具内部怎么实现时按图索骥，跟着一步步把轮子造出来，比读文档更快建立直觉。",
   "prakhar1989/awesome-courses": "是什么：一份按学校与主题整理的计算机科学公开课清单（伯克利、MIT、斯坦福等）。有什么用：自学 CS 时按图找课，从数据结构、操作系统到编译原理、机器学习都有免费课程与作业可用。",
-  "0xsline/awesome-deepseek-harness": "是什么：DeepSeek Harness（DSH）生态的精选清单，汇总 dsh-external/hub 与 dsh-plugin 话题下的插件、工具与配套基础设施。有什么用：给 DSH 加扩展时按需查表——想接新模型、换编码助手、补工具链，先看这里有什么现成的，不用自己从零拼。"
+  "0xsline/awesome-deepseek-harness": "是什么：DeepSeek Harness（DSH）生态的精选清单，汇总 dsh-external/hub 与 dsh-plugin 话题下的插件、工具与配套基础设施。有什么用：给 DSH 加扩展时按需查表——想接新模型、换编码助手、补工具链，先看这里有什么现成的，不用自己从零拼。",
+  "Fisfzy/dsh-ego-browser": "是什么：DeepSeek Harness 的浏览器插件，把 ego-lite（专给 Agent 用的 Chromium）接进 HARNESS。有什么用：提供 13 个结构化 ego_* 工具——语义快照、按语义定位点击、填表、截图、CDP 控制、任务空间隔离，装好 Chrome 即用，不必克隆官方仓库或手动构建。",
+  "moon09300731/dsh-approval-gate": "是什么：DeepSeek Harness 的自动审批门控插件。有什么用：用 Flash 先判断哪些操作不可回补，安全的自动放行、危险的转人工确认，把逐条点「同意」的噪音压掉，同时不放松危险操作的把关。",
+  "lanxiuyun/Catrace": "是什么：插件化的桌面小窗系统，小窗显示什么、怎么交互全由插件决定。有什么用：VSCode 是代码视窗、它要做通知视窗——首个插件是久坐提醒，后续任何提醒类能力都能以插件形式挂进来。",
+  "xiaomi-research/Xiaomi-OCR-0": "是什么：小米开源的 0.8B 视觉语言模型，从 Qwen3.5-0.8B 起步，专攻文档解析与 OCR 理解，训练语料约 1.7 亿条。有什么用：Real5-OmniDocBench 95.24 居首，公式、表格、古籍手写体识别都在第一梯队，参数量小到能在本地跑文档流水线。",
+  "Zagitta/gpu-unlock": "是什么：在 NVIDIA 驱动加载前解除 GeForce 显卡 Tensor Core 的半速限制，让消费卡跑出专业卡级别的 FP16/BF16/TF32 算力。有什么用：RTX 20/30/40 系 AI 训练与推理最高提速 2 倍，LLM prefill 提升 25–55%，不用刷 VBIOS、也不用改驱动。",
+  "alejandrobujan/tendedero": "是什么：macOS 原生小应用，把每张截图像衣服一样晾在屏幕顶部的一条绳上。有什么用：截图不再散落桌面或埋进角落，随手从顶部取用，晾一排就是一份临时的视觉剪贴板。"
 }
