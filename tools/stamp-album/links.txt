@@ -226,3 +226,7 @@ https://github.com/xiaomi-research/Xiaomi-OCR-0
 https://github.com/Zagitta/gpu-unlock
 https://github.com/alejandrobujan/tendedero
 https://github.com/NanmiCoder/MediaCrawler
+https://github.com/LYiHub/pub-local-jarvis
+https://github.com/rrrjqy66/BlackHoleTrash
+https://github.com/HKUDS/nanobot
+https://github.com/gavinkhung/machine-learning-visualized

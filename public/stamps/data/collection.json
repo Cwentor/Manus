@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-03T05:29:43.105Z",
+  "generatedAt": "2026-11-05T07:50:11.323Z",
   "source": "user-provided repo links",
-  "total": 224,
+  "total": 228,
   "items": [
     {
       "full_name": "bilawalsidhu/gods-eye-view",
@@ -4788,6 +4788,93 @@
       "avatar_url": "https://github.com/NanmiCoder.png?size=120",
       "is_deprecated": true,
       "deprecated_note": "批量抓取小红书、抖音、微博等平台内容与评论，踩在各平台用户协议与个人信息保护的灰线上；仓库本身仍在更新，但作为选型不再推荐——做同类数据采集优先走官方开放平台 API。"
+    },
+    {
+      "full_name": "LYiHub/pub-local-jarvis",
+      "description": "Windows 本地多模态 AI 桌面桌宠，支持屏幕与音频感知。",
+      "stars": 521,
+      "forks": 98,
+      "topics": [
+        "ai-assistants",
+        "cuda",
+        "desktop-assistant",
+        "local-ai",
+        "minicpm"
+      ],
+      "created_at": "2026-07-24T07:07:31.000Z",
+      "license": "MIT",
+      "language": "Python",
+      "is_archived": false,
+      "owner": "LYiHub",
+      "name": "pub-local-jarvis",
+      "repo_url": "https://github.com/LYiHub/pub-local-jarvis",
+      "owner_url": "https://github.com/LYiHub",
+      "avatar_url": "https://github.com/LYiHub.png?size=120"
+    },
+    {
+      "full_name": "rrrjqy66/BlackHoleTrash",
+      "description": "A compact Windows black-hole Recycle Bin with real-time gravitational lensing",
+      "stars": 163,
+      "forks": 19,
+      "topics": [],
+      "created_at": "2026-07-23T09:43:07.000Z",
+      "license": "MIT",
+      "language": "Rust",
+      "is_archived": false,
+      "owner": "rrrjqy66",
+      "name": "BlackHoleTrash",
+      "repo_url": "https://github.com/rrrjqy66/BlackHoleTrash",
+      "owner_url": "https://github.com/rrrjqy66",
+      "avatar_url": "https://github.com/rrrjqy66.png?size=120"
+    },
+    {
+      "full_name": "HKUDS/nanobot",
+      "description": "Your lightweight open-source personal agent.",
+      "stars": 49837,
+      "forks": 8714,
+      "topics": [
+        "agent-framework",
+        "ai-agent",
+        "ai-agents",
+        "chatbot",
+        "chatops",
+        "discord-bot",
+        "llm-agents",
+        "llms"
+      ],
+      "created_at": "2026-02-01T07:16:15.000Z",
+      "license": "MIT",
+      "language": "Python",
+      "is_archived": false,
+      "owner": "HKUDS",
+      "name": "nanobot",
+      "repo_url": "https://github.com/HKUDS/nanobot",
+      "owner_url": "https://github.com/HKUDS",
+      "avatar_url": "https://github.com/HKUDS.png?size=120"
+    },
+    {
+      "full_name": "gavinkhung/machine-learning-visualized",
+      "description": "ML algorithms implemented and derived from first-principles in Jupyter Notebooks and NumPy",
+      "stars": 2094,
+      "forks": 198,
+      "topics": [
+        "book",
+        "jupyter-notebook",
+        "latex",
+        "machine-learning",
+        "neural-network",
+        "numpy",
+        "python"
+      ],
+      "created_at": "2025-03-15T22:31:42.000Z",
+      "license": "MIT",
+      "language": "TeX",
+      "is_archived": false,
+      "owner": "gavinkhung",
+      "name": "machine-learning-visualized",
+      "repo_url": "https://github.com/gavinkhung/machine-learning-visualized",
+      "owner_url": "https://github.com/gavinkhung",
+      "avatar_url": "https://github.com/gavinkhung.png?size=120"
     }
   ]
 }

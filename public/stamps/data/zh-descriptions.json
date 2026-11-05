@@ -223,5 +223,9 @@
   "xiaomi-research/Xiaomi-OCR-0": "是什么：小米开源的 0.8B 视觉语言模型，从 Qwen3.5-0.8B 起步，专攻文档解析与 OCR 理解，训练语料约 1.7 亿条。有什么用：Real5-OmniDocBench 95.24 居首，公式、表格、古籍手写体识别都在第一梯队，参数量小到能在本地跑文档流水线。",
   "Zagitta/gpu-unlock": "是什么：在 NVIDIA 驱动加载前解除 GeForce 显卡 Tensor Core 的半速限制，让消费卡跑出专业卡级别的 FP16/BF16/TF32 算力。有什么用：RTX 20/30/40 系 AI 训练与推理最高提速 2 倍，LLM prefill 提升 25–55%，不用刷 VBIOS、也不用改驱动。",
   "alejandrobujan/tendedero": "是什么：macOS 原生小应用，把每张截图像衣服一样晾在屏幕顶部的一条绳上。有什么用：截图不再散落桌面或埋进角落，随手从顶部取用，晾一排就是一份临时的视觉剪贴板。",
-  "NanmiCoder/MediaCrawler": "是什么：多平台内容爬虫合集，用 Playwright 驱动真实浏览器抓小红书、抖音、快手、B 站、微博、贴吧、知乎的笔记、视频与评论。有什么用：作为各平台采集链路的实现参考仍然完整，但它踩在平台协议与个人信息合规的灰线上——这张票盖了弃用章，只当史料看，别再拿去线上跑采集。"
+  "NanmiCoder/MediaCrawler": "是什么：多平台内容爬虫合集，用 Playwright 驱动真实浏览器抓小红书、抖音、快手、B 站、微博、贴吧、知乎的笔记、视频与评论。有什么用：作为各平台采集链路的实现参考仍然完整，但它踩在平台协议与个人信息合规的灰线上——这张票盖了弃用章，只当史料看，别再拿去线上跑采集。",
+  "LYiHub/pub-local-jarvis": "是什么：Windows 上的本地多模态桌宠助手，用本机模型持续读屏并听系统播放的声音。有什么用：游戏里用透明弹幕给提示、网课结束自动生成带关键画面与知识点的 Markdown 笔记；原始画面与音频不写入长期记忆，双击桌宠即停止感知。",
+  "rrrjqy66/BlackHoleTrash": "是什么：桌面上一颗能吞文件的黑洞，实时渲染引力透镜、光子环与相对论吸积盘，同时是 Windows 回收站的真入口。有什么用：把文件、文件夹拖进事件视界，走 IFileOperation 安全送进回收站且没有永久删除的后备路径；8 种外观预设，吞噬越多长得越大。",
+  "HKUDS/nanobot": "是什么：港大数据智能实验室开源的极轻量自托管个人 Agent，Python 编写，命令行一行装完。有什么用：在 WebUI、终端或 Telegram/Slack/微信里读写 PDF、Word、Excel、PPT，调用 shell、MCP、定时任务与长期记忆，还能对外提供 OpenAI 兼容 API。",
+  "gavinkhung/machine-learning-visualized": "是什么：一本 Jupyter Book 形态的机器学习可视化教材，每个算法都从第一性原理推导、用 NumPy 手写实现，并配 Marimo 交互笔记本。有什么用：亲眼看着神经网络、自编码器、PCA、K-Means、逻辑回归在训练中一步步收敛到最优权重。"
 }
