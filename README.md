@@ -11,7 +11,7 @@
 - **双页架构**：主页展示个人形象；工作台（Workspace）是仿文档站的三栏阅读器——左侧分类文档树（每个文件夹首位是自动生成的「Wiki 导览」，列出本目录全部子目录与文章；文件夹可折叠、计数、状态持久化）、中间当前文档阅读区（面包屑可点击跳转到对应文件夹导览 + 标签 + 上一篇/下一篇）、右侧本文目录（TOC 滚动跟随高亮），支持 `Ctrl+K` 全文查找（Zensical 风格结果面板：结果计数 + 分类/日期面包屑 + 标题与正文摘要关键词高亮，`↑↓` 选择、回车打开），`#/slug` hash 路由可直接分享定位
 - **文章整页**：每篇长文 / 产品 / 导览构建为独立静态页（`/articles/<slug>.html`），可分享、可收藏，也是工作台阅读器的按需取用数据源
 - **沉浸式动效**：入场开屏、暗色流体极光 + 动态星空（闪烁 / 视差 / 流星）、头像 3D 翻转、卡片光斑跟随、滚动进度条
-- **博客迁移设计**（借鉴自 Cat-Drink 的 Zensical 博客，按本站风格适配，无 Zensical 依赖）：
+- **博客迁移设计**（沿用旧博客 Zensical-CatDrink-Blog 的版式设计，按本站风格适配，无 Zensical 依赖）：
   霞鹜文楷字体、时段问候语条、多句循环打字机、GitHub 贡献热力图、Hero 交互网格 Canvas、
   代码块复制按钮、标签页切换彩蛋、页脚一言、菱形分隔线 / 渐变引用等文章排版
 - **阅读体验**：主页抽屉秒开（内容池 `<template>` 预载）、亮 / 暗双主题、响应式、`prefers-reduced-motion` 无障碍降级
@@ -19,7 +19,7 @@
   票名 / 面值（★ 数）/ 票种、四种可切换邮戳（localStorage 持久化）、归档仓库盖「注销」封存章、
   搜索 / 票种筛选 / 三种排序、末行「待收集」空位池化补齐；主页导航「集邮册」进、页面左上角「返回主页」出
 
-- **点击特效**（`public/js/click-fx.js` + `public/js/vendor/ba-click-fx.slim.js`，MIT）：
+- **点击特效**（`public/js/click-fx.js` + `public/js/vendor/ba-click-fx.slim.js`，源自 [ba-click-fx](https://github.com/CialloKing/ba-click-fx)，MIT，详见文末「致谢」）：
   主页 / 工作台 / 文章页生效，蔚蓝档案风格点击爆闪与光标拖尾。202 KB 的 vendor 模块懒加载
   （load 后空闲预热或首次指针交互才拉取，不进首屏关键路径）。暗色用库默认的 `screen` 加亮混合，
   浅色底没有增亮空间，由 `components.css` 用 `mix-blend-mode: multiply` 覆盖（白底 × 蓝光 = 蓝，
@@ -63,6 +63,7 @@ ManusNote/
 ├── scripts/              # serve.js 本地预览 · normalize-blog.js 知识库迁移整理工具
 ├── tools/stamp-album/    # 集邮册数据工具：parse-repos.mjs 由 links.txt 生成 collection.json
 ├── tests/stamps/         # 集邮册模块契约测试（node --test，npm run test:stamps）
+├── docs/                 # README 用图（点击特效效果图等），不参与构建
 └── dist/                 # 构建产物（git 忽略，部署它即可）
 ```
 
@@ -153,6 +154,37 @@ git push origin master
 ```
 
 然后在 GitHub 仓库的 **Settings → Pages** 中将 **Source** 改为 `Deploy from a branch`，分支选择 `master`，目录选择 `/ (root)`。
+
+## 🙏 致谢
+
+站点的观感不是从零长出来的，其中相当一部分来自开源社区。
+
+### 点击特效：ba-click-fx
+
+- 仓库：[CialloKing/ba-click-fx](https://github.com/CialloKing/ba-click-fx)（作者 CialloKing）
+- 在线演示：[ba-click-fx.cialloking.top](https://ba-click-fx.cialloking.top)
+- 许可：MIT，原始许可文本与版权声明见 `public/js/vendor/LICENSE-ba-click-fx.txt`
+- 本项目使用官方 **v1.3.15 精简版** `ba-click-fx.slim-webgl2-128.js`（WebGL2 + 128² DOM，主 JS 约 192 KiB），本地存放为 `public/js/vendor/ba-click-fx.slim.js`，**库代码未作任何修改**
+
+页面效果（暗色主题，点击页面空白处）：
+
+![点击特效：蔚蓝档案风格光环爆闪与箭头碎片](docs/click-fx.png)
+
+浅色主题同样生效：库内部固定 `screen`（加亮）混合，白底没有增亮空间，因此由本站 `components.css` 按 `<html data-theme>` 改为 `multiply` 加饱和压亮度（白底 × 蓝光 = 蓝，光弧保色），效果比暗色含蓄。
+
+库之外的一层薄封装 `public/js/click-fx.js` 是本项目自己写的，负责四件事：
+
+| 行为 | 说明 |
+|------|------|
+| 懒加载 | 首次指针交互立即拉取，或在 `load` 后空闲时预热；202 KB 不进首屏关键路径 |
+| 门控 | `prefers-reduced-motion`、触屏（`pointer: coarse`）、无 WebGL2 时直接不加载；系统运行中开启「减少动效」会销毁实例 |
+| 主题适配 | 混合方式交给 CSS（`:has()` 命中覆盖层），老浏览器由 JS 打内联 `!important` 兜底 |
+| 省电 | 标签页隐藏时 `setPaused(true)`，回来恢复，不空转 GPU |
+
+### 排版与灵感
+
+- 旧博客 Zensical-CatDrink-Blog（作者 [@Cwentor](https://github.com/Cwentor)）：工作台的文档树 / 搜索面板与文章排版（霞鹜文楷、时段问候、打字机、GitHub 贡献热力图、代码复制按钮、页脚一言等）沿用其版式设计，按本站风格重写，不引入 [Zensical](https://zensical.org) 运行时依赖。
+- 构建期依赖：[gray-matter](https://github.com/jonschlinkert/gray-matter)、[markdown-it](https://github.com/markdown-it/markdown-it)、[shiki](https://github.com/shikijs/shiki)。
 
 ## License
 
