@@ -9,7 +9,7 @@ slug: about
 category: about
 ---
 
-# 关于 Zensical-CatDrink-Blog
+# 关于 Manus · 个人主页展厅
 
 ## 项目简介
 
@@ -21,15 +21,15 @@ category: about
 
 ## 作者
 
-**CatDrink**
+**陈文涛**
 
-- GitHub: [@CatDrink](https://github.com/Cat-Drink)
-- Email: [catdrink@qq.com](2738035238@qq.com)
+- GitHub: [@Cwentor](https://github.com/Cwentor)
+- Email: [2738035238@qq.com](mailto:2738035238@qq.com)
 
 
 ## License
 
-Copyright (c) 2026-2027 CatDrink
+Copyright (c) 2026-2027 Cwentor
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

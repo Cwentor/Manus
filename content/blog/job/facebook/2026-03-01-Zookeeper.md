@@ -121,7 +121,7 @@ paxos 算法主要分为三个阶段：
 
 ## ※※※Zab协议
 
-![img](https://raw.githubusercontent.com/Cat-Drink/docs_photos/main/2026/03/upgit_20260311_1773161024.png)
+![img](https://raw.githubusercontent.com/Cwentor/docs_photos/main/2026/03/upgit_20260311_1773161024.png)
 
 zab协议借鉴了paxos算法，是专门为zookeeper设计的支持崩溃恢复的**原子广播协议**。  
 
