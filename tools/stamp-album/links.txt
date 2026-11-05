@@ -230,3 +230,7 @@ https://github.com/LYiHub/pub-local-jarvis
 https://github.com/rrrjqy66/BlackHoleTrash
 https://github.com/HKUDS/nanobot
 https://github.com/gavinkhung/machine-learning-visualized
+
+https://github.com/YizhengWw/HachimoDock
+https://github.com/Niko1221/Strata
+https://github.com/tdcq9594/dsh-roost
