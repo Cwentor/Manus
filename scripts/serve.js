@@ -68,14 +68,19 @@ const server = http.createServer((req, res) => {
 
     fs.stat(filePath, (err, stat) => {
       if (!err && stat.isFile()) return serveFile(filePath);
-      // 目录或未命中 -> 回退 index.html（SPA 友好）
-      fs.stat(path.join(DIST, 'index.html'), (err2, stat2) => {
-        if (err2) {
-          res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-          res.end('404 Not Found — 请先运行 npm run build 生成 dist/');
-          return;
-        }
-        serveFile(path.join(DIST, 'index.html'));
+      // 目录优先补 index.html（/stamps/ 要指向集邮册自己的入口，不能落到根首页）
+      const dirIndex = path.join(filePath, 'index.html');
+      fs.stat(dirIndex, (errDir, statDir) => {
+        if (!errDir && statDir.isFile()) return serveFile(dirIndex);
+        // 未命中 -> 回退根 index.html（SPA 友好）
+        fs.stat(path.join(DIST, 'index.html'), (err2) => {
+          if (err2) {
+            res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+            res.end('404 Not Found — 请先运行 npm run build 生成 dist/');
+            return;
+          }
+          serveFile(path.join(DIST, 'index.html'));
+        });
       });
     });
   } catch (err) {

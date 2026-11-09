@@ -54,7 +54,8 @@ body {
 .brand-name { font-family: var(--ff-serif); font-size: 20px; font-weight: 700; letter-spacing: 3px; color: var(--text-strong); }
 .brand-sub { font-size: 8px; letter-spacing: 2.5px; color: var(--dim); margin-top: 1px; }
 
-/* ===== 返回主页（与主页导航的「集邮册」入口互为往返） ===== */
+/* ===== 站点导航（主页 / 集邮册 / 工作台，三页互通） ===== */
+.page-links { display: flex; align-items: center; gap: 8px; flex: none; }
 .back-home {
   display: inline-flex; align-items: center; gap: 6px; flex: none;
   padding: 6px 13px 6px 10px;
@@ -65,7 +66,15 @@ body {
 }
 .back-home:hover { background: var(--cream); border-color: var(--ink); color: var(--ink); transform: translateX(-2px); }
 .back-home:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) { .back-home:hover { transform: none; } }
+/* 当前页（集邮册）：实心墨色，不可点也不位移 */
+.back-home.is-current,
+.back-home.is-current:hover {
+  background: var(--ink-dark); border-color: var(--ink-dark); color: var(--cream);
+  cursor: default; transform: none;
+}
+/* 「工作台」入口在右侧，悬停方向朝右，保持语义一致 */
+.back-home.forward:hover { transform: translateX(2px); }
+@media (prefers-reduced-motion: reduce) { .back-home:hover, .back-home.forward:hover { transform: none; } }
 .toolbar { display: flex; gap: 8px; flex: 1; min-width: 260px; }
 .search { flex: 1; max-width: 330px; }
 .ctl { background: rgba(255,253,246,.95); border: 1px solid rgba(107,90,44,.4);

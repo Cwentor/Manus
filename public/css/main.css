@@ -125,8 +125,34 @@ body::before {
 
 /* 手机 */
 @media (max-width: 560px) {
+  /* 导航不隐藏：主页 / 集邮册 / 工作台 是三个主页面，手机上必须可达，
+     改为压缩字号与内边距，三枚入口与主题按钮仍能并排放下 */
+  .nav-inner {
+    padding-inline: 0.75rem;
+    gap: var(--space-2);
+  }
+
+  .nav-logo {
+    font-size: 0.95rem;
+    flex: none;
+  }
+
+  .nav-links {
+    gap: 0;
+    min-width: 0;
+    flex-wrap: nowrap;
+  }
+
   .nav-link {
-    display: none; /* 导航收敛为 Logo + 主题切换 */
+    font-size: 0.72rem;
+    padding: 3px 4px;
+    white-space: nowrap;
+  }
+
+  .theme-toggle {
+    width: 30px;
+    height: 30px;
+    margin-left: 2px;
   }
 
   .hero-tagline {
