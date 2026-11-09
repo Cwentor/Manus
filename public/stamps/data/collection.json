@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-05T08:19:02.130Z",
+  "generatedAt": "2026-11-07T15:23:39.224Z",
   "source": "user-provided repo links",
-  "total": 231,
+  "total": 232,
   "items": [
     {
       "full_name": "bilawalsidhu/gods-eye-view",
@@ -4932,6 +4932,28 @@
       "repo_url": "https://github.com/tdcq9594/dsh-roost",
       "owner_url": "https://github.com/tdcq9594",
       "avatar_url": "https://github.com/tdcq9594.png?size=120"
+    },
+    {
+      "full_name": "wnby/photo-relic-editorial",
+      "description": "A Codex skill for transforming real photos into Photo Relic artworks: truthful photographs paired with quiet paper-memory prints.",
+      "stars": 450,
+      "forks": 36,
+      "topics": [
+        "codex-skill",
+        "editorial-design",
+        "generative-art-toolkit",
+        "image-generation",
+        "photo-editing"
+      ],
+      "created_at": "2026-08-05T02:29:53.000Z",
+      "license": "MIT",
+      "language": null,
+      "is_archived": false,
+      "owner": "wnby",
+      "name": "photo-relic-editorial",
+      "repo_url": "https://github.com/wnby/photo-relic-editorial",
+      "owner_url": "https://github.com/wnby",
+      "avatar_url": "https://github.com/wnby.png?size=120"
     }
   ]
 }
