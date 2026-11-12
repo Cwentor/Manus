@@ -1,0 +1,296 @@
+/* ==========================================================================
+   effects.css — 主页两段独立交互区（鼠标轨迹画廊 / 可甩动卡堆）
+
+   只在 index.html 引入，与全局设计系统解耦：
+   玻璃拟态页面里插入两块硬边贴纸风，作为视觉上的「异质章节」。
+   样式全部以 .fx- 前缀命名，不与 components.css 的既有选择器冲突。
+   ========================================================================== */
+
+.fx-trail,
+.fx-disk {
+  --fx-pink: #fe0990;
+  --fx-mint: #7cffe8;
+  --fx-on-mint: #111111;
+  --fx-line: rgb(255 255 255 / 0.86);
+  --fx-hard: rgb(0 0 0 / 0.42);
+  --fx-display: 'Arial Black', 'Helvetica Neue', Impact, var(--font-sans);
+}
+
+/* 浅色主题：荧光薄荷在浅底读不出，压深并翻转块上的字色 */
+:root[data-theme='light'] .fx-trail,
+:root[data-theme='light'] .fx-disk {
+  --fx-mint: #00b39b;
+  --fx-on-mint: #ffffff;
+  --fx-line: rgb(15 23 42 / 0.8);
+  --fx-hard: rgb(15 23 42 / 0.18);
+}
+
+/* --------------------------------------------------------------------------
+ * 通用零件
+ * ------------------------------------------------------------------------ */
+.fx-eyebrow {
+  margin: 0 0 clamp(10px, 1.6vw, 18px);
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1vw, 12.5px);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fx-mint);
+}
+
+/* 描边大字：只有轮廓，卡片压在上面 */
+.fx-outline {
+  margin: 0;
+  font-family: var(--fx-display);
+  font-size: clamp(22px, 5vw, 74px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: transparent;
+  -webkit-text-stroke: clamp(1.5px, 0.26vw, 3.5px) var(--fx-pink);
+  user-select: none;
+  pointer-events: none;
+}
+
+.fx-hint {
+  margin: 0;
+  padding: 14px 1rem 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+ * 1. 鼠标轨迹画廊
+ * ------------------------------------------------------------------------ */
+.fx-trail {
+  position: relative;
+  border-top: 1px solid var(--border);
+}
+
+.fx-trail__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: min(68vh, 620px);
+  min-height: 360px;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  overflow: hidden;
+}
+
+.fx-trail__stage .fx-eyebrow {
+  position: absolute;
+  top: clamp(18px, 3vw, 40px);
+  left: clamp(1rem, 4vw, 2rem);
+  margin: 0;
+}
+
+.fx-trail__cards {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.fx-trail-card {
+  position: absolute;
+  width: var(--w, 240px);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-soft);
+  border: 1.5px solid var(--fx-line);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.45);
+  will-change: transform, opacity;
+  animation: fx-card-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.fx-trail-card.is-out {
+  animation: fx-card-out 0.45s ease forwards;
+}
+
+@keyframes fx-card-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--r)) scale(0.55);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--r)) scale(1);
+  }
+}
+
+@keyframes fx-card-out {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--r)) scale(0.86);
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * 2. 可甩动卡堆
+ * ------------------------------------------------------------------------ */
+.fx-disk {
+  position: relative;
+  padding-block: var(--section-gap) 0;
+  border-top: 1px solid var(--border);
+}
+
+.fx-disk__head {
+  margin-bottom: clamp(18px, 2.6vw, 34px);
+}
+
+.fx-disk__head .fx-outline {
+  text-align: left;
+}
+
+.fx-disk__stack {
+  position: relative;
+  width: min(720px, 100%);
+  margin: 0 auto;
+  aspect-ratio: 16 / 10;
+}
+
+.fx-disk__card {
+  position: absolute;
+  left: var(--x, 0%);
+  top: var(--y, 0%);
+  z-index: var(--z, 1);
+  width: 34%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-soft);
+  border: 1.5px solid var(--fx-line);
+  transform:
+    translate3d(var(--dx, 0px), var(--dy, 0px), 0)
+    rotate(calc(var(--r, 0deg) + var(--rr, 0deg)))
+    scale(var(--sc, 1));
+  box-shadow: 0 10px 28px rgb(0 0 0 / 0.5);
+  transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+  will-change: transform;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.fx-disk__card:hover {
+  box-shadow: 0 16px 34px rgb(0 0 0 / 0.55);
+}
+
+.fx-disk__card.is-dragging {
+  transition: none;
+  cursor: grabbing;
+  --sc: 1.05;
+  box-shadow: 0 28px 56px rgb(0 0 0 / 0.6);
+}
+
+/* 落位：五张照片散开，不互相压住主体 */
+.fx-disk__card:nth-child(1) {
+  --x: 2%;
+  --y: 8%;
+  --r: -7deg;
+  --z: 1;
+}
+
+.fx-disk__card:nth-child(2) {
+  --x: 26%;
+  --y: 1%;
+  --r: 5deg;
+  --z: 3;
+}
+
+.fx-disk__card:nth-child(3) {
+  --x: 50%;
+  --y: 9%;
+  --r: -4deg;
+  --z: 2;
+}
+
+.fx-disk__card:nth-child(4) {
+  --x: 16%;
+  --y: 46%;
+  --r: 6deg;
+  --z: 4;
+}
+
+.fx-disk__card:nth-child(5) {
+  --x: 42%;
+  --y: 50%;
+  --r: -6deg;
+  --z: 5;
+}
+
+.fx-disk__label {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  z-index: 20;
+  translate: -50% -50%;
+  padding: 0.34em 0.62em 0.4em;
+  background: var(--fx-pink);
+  color: #111;
+  font-family: var(--fx-display);
+  font-size: clamp(13px, 1.9vw, 26px);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  transform: rotate(-2deg);
+  box-shadow: 5px 5px 0 var(--fx-hard);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+ * 响应式
+ * ------------------------------------------------------------------------ */
+@media (max-width: 720px) {
+  .fx-trail__stage {
+    height: 56vh;
+    min-height: 320px;
+  }
+
+  .fx-disk__stack {
+    aspect-ratio: 1 / 1;
+  }
+
+  .fx-disk__card {
+    width: 48%;
+  }
+
+  .fx-disk__card:nth-child(1) {
+    --x: 1%;
+    --y: 4%;
+  }
+
+  .fx-disk__card:nth-child(2) {
+    --x: 50%;
+    --y: 0%;
+  }
+
+  .fx-disk__card:nth-child(3) {
+    --x: 4%;
+    --y: 32%;
+  }
+
+  .fx-disk__card:nth-child(4) {
+    --x: 48%;
+    --y: 29%;
+  }
+
+  .fx-disk__card:nth-child(5) {
+    --x: 25%;
+    --y: 58%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-trail-card {
+    animation: none;
+  }
+
+  .fx-disk__card {
+    transition: none;
+  }
+}

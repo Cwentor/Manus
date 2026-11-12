@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/main.css">
+  <!-- 主页两段独立交互区（鼠标轨迹画廊 / 可甩动卡堆），与全局设计系统解耦 -->
+  <link rel="stylesheet" href="css/effects.css">
 </head>
 <body class="no-select">
 
@@ -93,6 +95,18 @@
   </section>
 
   <!-- ================================================================== -->
+  <!-- 鼠标轨迹画廊 —— 光标扫过，作品卡跟随生成并消散                        -->
+  <!-- ================================================================== -->
+  <section class="fx-trail" id="mouse-trail" aria-label="鼠标轨迹画廊">
+    <div class="fx-trail__stage" id="trailStage">
+      <p class="fx-eyebrow">// MOUSE TRAIL</p>
+      <h2 class="fx-outline">WHAT I HAVE DONE</h2>
+      <div class="fx-trail__cards" id="trailCards" aria-hidden="true"></div>
+    </div>
+    <p class="fx-hint">移动光标 — 卡片跟随，然后消散</p>
+  </section>
+
+  <!-- ================================================================== -->
   <!-- GitHub 贡献热力图（博客迁移：玻璃卡 + SVG 热力格，app.js 拉取渲染） -->
   <!-- ================================================================== -->
   <section class="github-section" id="github" data-github-section>
@@ -141,6 +155,27 @@
   </section>
 
   <!-- ================================================================== -->
+  <!-- 照片卡堆 —— 抓起一张甩出去，双击全部归位                              -->
+  <!-- ================================================================== -->
+  <section class="fx-disk" id="card-stack" aria-label="作品卡堆">
+    <div class="container">
+      <div class="fx-disk__head">
+        <p class="fx-eyebrow">// DRAG &amp; THROW</p>
+        <h2 class="fx-outline">PICK A CARD</h2>
+      </div>
+      <div class="fx-disk__stack">
+        <img class="fx-disk__card" src="assets/products/videogettool.svg" alt="VideoGetTool" draggable="false" loading="lazy">
+        <img class="fx-disk__card" src="assets/products/dataagent.svg" alt="DataAgent" draggable="false" loading="lazy">
+        <img class="fx-disk__card" src="assets/products/autoclicker.svg" alt="AutoClicker" draggable="false" loading="lazy">
+        <img class="fx-disk__card" src="assets/products/password-safer.svg" alt="password-safer" draggable="false" loading="lazy">
+        <img class="fx-disk__card" src="assets/products/photo-get-skill.svg" alt="photo-get-skill" draggable="false" loading="lazy">
+        <span class="fx-disk__label" aria-hidden="true">DRAG ME</span>
+      </div>
+    </div>
+    <p class="fx-hint">抓起一张甩出去 — 双击空白处全部归位</p>
+  </section>
+
+  <!-- ================================================================== -->
   <!-- 精选长文 —— 博客卡片列表                                           -->
   <!-- ================================================================== -->
   <section id="blog" class="section">
@@ -173,6 +208,8 @@
   <!-- 访问统计 VerCount（不蒜子兼容接口；容器在数据到达后显示，服务不可达时保持隐藏） -->
   <script async src="https://events.vercount.one/js"></script>
   <script src="js/app.js" defer></script>
+  <!-- 主页两段交互（轨迹画廊 / 卡堆），与 app.js 无耦合 -->
+  <script src="js/effects.js" defer></script>
   <!-- 点击特效（ba-click-fx 精简版，模块自懒加载，不进首屏关键路径） -->
   <script type="module" src="js/click-fx.js"></script>
 </body>
