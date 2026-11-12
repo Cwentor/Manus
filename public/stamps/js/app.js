@@ -10,6 +10,31 @@ let ITEMS = [];
 let GENERATED_AT = null;
 const state = { q: '', lang: '', sort: 'stars' };
 
+/* ---------- 亮暗主题（与主页 / 工作台共用 showcase-theme，跨页保持一致） ---------- */
+const THEME_KEY = 'showcase-theme';
+
+function readStoredTheme() {
+  try { return localStorage.getItem(THEME_KEY); } catch { return null; }
+}
+
+function initTheme() {
+  const root = document.documentElement;
+  const btn = document.querySelector('.theme-toggle');
+  btn?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem(THEME_KEY, next); } catch { /* 隐私模式：仅本次会话生效 */ }
+  });
+
+  // 用户没手动选过时跟随系统；选过就尊重选择（与主页行为一致）
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (readStoredTheme()) return;
+    root.dataset.theme = e.matches ? 'dark' : 'light';
+  });
+}
+
+initTheme();
+
 /* ---------- 邮戳盖印 ---------- */
 const PM_KEY = 'stamp-album-postmarks';
 let postmarks = {};        // full_name → 邮戳样式 id

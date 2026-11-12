@@ -1,127 +1,329 @@
-/* ===== 开源集邮册 · 邮票墙（5 列） ===== */
+/* ==========================================================================
+   styles.css — 开源集邮册
+   视觉层已并入站点设计系统：配色 / 字体 / 圆角 / 玻璃 / 亮暗主题
+   都与主页、工作台一致（令牌来自 variables.css，背景纹理来自 main.css）。
+
+   保留集邮册自己的语言：齿孔遮罩、邮戳、归档与弃用橡皮章。
+   只把「米黄纸张 + 砖红墨」换成「卡面 + 强调色」。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+ * 1. 票面令牌：把纸张 / 墨色映射到站点主题变量
+ * ------------------------------------------------------------------------ */
 :root {
-  --ink: #8a3324;        /* 砖红墨色（题头/票名/面值） */
-  --ink-dark: #6b3121;   /* 深墨（弹层标题/按钮） */
-  --paper: #fdf6e8;      /* 票纸 */
-  --paper-deep: #f3dfb6; /* 票芯底 */
-  --gold: #b3933f;
-  --text: #3d3628;
-  --muted: #8a7a5c;
-  --page-bg-1: #f0e9d6;
-  --page-bg-2: #ddd3b8;
-  --page-bg-mid: #e6ddc4; /* body 渐变中点 */
-  --rule: rgba(107, 90, 44, .3);
-  --ff-serif: "Playfair Display", Georgia, serif;
-  --ff-num: "Times New Roman", Times, serif;
-  --cream: #f7ecd4;       /* 题头/按钮字色 */
-  --dim: #9a8c68;
-  --text-strong: #4a3520;
-  --paper-light: #fdf1d9; /* 票芯渐变亮端 */
-  --panel-1: #fbf5e6;     /* 弹层渐变 */
-  --panel-2: #efe5cd;
-  --ink-deep: #6b2418;    /* 按钮渐变深端 */
-  --text-soft: #4a4030;
-  --text-warm: #55492f;
-  --en-text: #93855f;     /* 弹层英文简介 */
-  --topic-text: #7a6c46;
-  --seal-ink: #3f4f52;   /* 归档封存章的冷灰墨色 */
-  --deprecate-ink: #7a4a38; /* 弃用章的暖褐墨色：与冷灰归档章一眼可分 */
+  --paper: #17171d;                /* 票纸底色 */
+  --paper-deep: #1e1e26;           /* 图框底 */
+  --paper-light: #26262f;          /* 图框渐变亮端 */
+  --ink: var(--accent);            /* 题条 / 票名 / 面值 */
+  --ink-dark: var(--accent);
+  --cream: #0b0b0e;                /* 强调色块上的字 */
+  --on-accent: #0b0b0e;
+  --stamp-shadow: 0 4px 14px rgb(0 0 0 / 0.45);
+  --stamp-shadow-hover: 0 12px 26px rgb(0 0 0 / 0.55);
+  --perf-line: color-mix(in srgb, var(--accent) 26%, transparent);
+  --stamp-hairline: color-mix(in srgb, var(--accent) 42%, transparent);
 }
-* { box-sizing: border-box; }
-html, body { margin: 0; }
+
+:root[data-theme='light'] {
+  --paper: #edebf6;
+  --paper-deep: #e2dff0;
+  --paper-light: #f7f5fd;
+  --cream: #ffffff;
+  --on-accent: #ffffff;
+  --stamp-shadow: 0 3px 10px rgb(15 23 42 / 0.16), 0 1px 2px rgb(15 23 42 / 0.1);
+  --stamp-shadow-hover: 0 12px 24px rgb(15 23 42 / 0.22);
+}
+
 body {
-  min-height: 100vh;
-  background:
-    repeating-linear-gradient(0deg, transparent 0 27px, rgba(120,100,60,.055) 27px 28px),
-    radial-gradient(circle at 50% 0%, var(--page-bg-1), var(--page-bg-mid) 55%, var(--page-bg-2));
-  font-family: Georgia, "Times New Roman", "Microsoft YaHei", serif;
+  padding-top: var(--nav-h);
+  padding-bottom: 72px;
+}
+
+/* --------------------------------------------------------------------------
+ * 2. 导航栏（与 components.css 的 .navbar 同款：玻璃条 + 渐变字标）
+ * ------------------------------------------------------------------------ */
+.navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: var(--nav-h);
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: var(--container);
+  margin-inline: auto;
+  height: 100%;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.nav-logo {
+  font-size: var(--text-lg);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.nav-link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+
+.nav-link:hover {
   color: var(--text);
-  padding-bottom: 60px;
+  background: var(--surface-2);
 }
-.ff { font-family: var(--ff-serif); }
-.fn { font-family: var(--ff-num); }
 
-/* ===== 顶栏 ===== */
-.topbar {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
-  padding: 20px 30px 12px;
-  border-bottom: 1px solid var(--rule);
-  background: linear-gradient(180deg, rgba(255,252,240,.8), rgba(255,252,240,0));
-  user-select: none; -webkit-user-select: none;
+.nav-link.is-active {
+  color: var(--text);
+  background: var(--surface-2);
 }
-.brand { display: flex; align-items: center; gap: 10px; }
-.brand-mark { color: var(--ink); font-size: 17px; }
-.brand-name { font-family: var(--ff-serif); font-size: 20px; font-weight: 700; letter-spacing: 3px; color: var(--text-strong); }
-.brand-sub { font-size: 8px; letter-spacing: 2.5px; color: var(--dim); margin-top: 1px; }
 
-/* ===== 站点导航（主页 / 集邮册 / 工作台，三页互通） ===== */
-.page-links { display: flex; align-items: center; gap: 8px; flex: none; }
-.back-home {
-  display: inline-flex; align-items: center; gap: 6px; flex: none;
-  padding: 6px 13px 6px 10px;
-  border: 1px solid rgba(107, 90, 44, .42); border-radius: 999px;
-  background: rgba(255, 253, 246, .92); color: var(--ink-dark);
-  font-size: 12px; letter-spacing: 1px; text-decoration: none;
-  transition: background .15s, border-color .15s, color .15s, transform .15s;
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-left: var(--space-2);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
 }
-.back-home:hover { background: var(--cream); border-color: var(--ink); color: var(--ink); transform: translateX(-2px); }
-.back-home:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-/* 当前页（集邮册）：实心墨色，不可点也不位移 */
-.back-home.is-current,
-.back-home.is-current:hover {
-  background: var(--ink-dark); border-color: var(--ink-dark); color: var(--cream);
-  cursor: default; transform: none;
-}
-/* 「工作台」入口在右侧，悬停方向朝右，保持语义一致 */
-.back-home.forward:hover { transform: translateX(2px); }
-@media (prefers-reduced-motion: reduce) { .back-home:hover, .back-home.forward:hover { transform: none; } }
-.toolbar { display: flex; gap: 8px; flex: 1; min-width: 260px; }
-.search { flex: 1; max-width: 330px; }
-.ctl { background: rgba(255,253,246,.95); border: 1px solid rgba(107,90,44,.4);
-  border-radius: 7px; padding: 7px 11px; font: inherit; font-size: 13px; color: var(--text-strong); outline: none; }
-.ctl:focus { border-color: var(--ink); }
-.select { cursor: pointer; }
-.count { font-size: 11.5px; color: var(--dim); letter-spacing: .5px; }
-.empty { text-align: center; color: var(--dim); padding: 60px 0; font-size: 14px; }
 
-/* ===== 5 列邮票墙 ===== */
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92) rotate(-12deg);
+}
+
+:root[data-theme='dark'] .icon-sun {
+  display: none;
+}
+
+:root[data-theme='light'] .icon-moon {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+ * 3. 页面头：馆名 + 检索工具
+ * ------------------------------------------------------------------------ */
+.album-head {
+  max-width: 1320px;
+  margin: clamp(1.2rem, 2.6vw, 2rem) auto 0;
+  padding: clamp(1rem, 2vw, 1.4rem) clamp(1rem, 2.4vw, 1.6rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-5);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  box-shadow: var(--shadow-md);
+}
+
+.album-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: none;
+}
+
+.album-mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-accent);
+  color: var(--on-accent);
+  font-size: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.album-name {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.album-sub {
+  margin: 2px 0 0;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: var(--text-faint);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  flex: 1 1 320px;
+}
+
+.ctl {
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+  outline: none;
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+
+.ctl::placeholder {
+  color: var(--text-faint);
+}
+
+.ctl:hover {
+  border-color: var(--border-strong);
+}
+
+.ctl:focus {
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+
+.search {
+  flex: 1 1 200px;
+  max-width: 340px;
+}
+
+.select {
+  cursor: pointer;
+  padding-right: 12px;
+}
+
+.count {
+  flex: none;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-faint);
+  padding: 80px 0;
+  font-size: var(--text-sm);
+}
+
+/* --------------------------------------------------------------------------
+ * 4. 邮票墙
+ * ------------------------------------------------------------------------ */
 .album {
-  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 36px 30px; padding: 32px 30px 12px;
-  max-width: 1320px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 36px 30px;
+  padding: 32px clamp(1rem, 2.4vw, 1.6rem) 12px;
+  max-width: 1320px;
+  margin: 0 auto;
 }
-.cell { display: flex; flex-direction: column; align-items: center; min-width: 0;
-  contain: layout style; }   /* 隔离邮票内部重排，不让变更冒泡到整墙 */
-.cell[hidden] { display: none; }   /* 筛选走 display 切换，不销毁节点 */
 
-@media (max-width: 1100px) { .album { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px 26px; } }
-@media (max-width: 740px)  { .album { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px 20px; } }
-@media (max-width: 480px)  { .album { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 18px; } }
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  contain: layout style; /* 隔离邮票内部重排，不让变更冒泡到整墙 */
+}
 
-/* ===== 邮票（齿孔边 = 四边矢量遮罩取交集，非位图，任意缩放都清晰） ===== */
+.cell[hidden] {
+  display: none; /* 筛选走 display 切换，不销毁节点 */
+}
+
+@media (max-width: 1100px) {
+  .album {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 34px 26px;
+  }
+}
+
+@media (max-width: 740px) {
+  .album {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .album {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 18px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * 5. 邮票本体
+ *   齿孔 = 四边矢量遮罩取交集（非位图，任意缩放都清晰）
+ * ------------------------------------------------------------------------ */
 .stamp {
   /* 齿孔参数（随票宽等比缩放：1cqw = 票宽的 1%，故任意列数下齿孔密度恒定）：
-     --perf-tooth  相邻齿孔中心距（间距，越小齿越密；6.2cqw ≈ 每边 16 齿）
-     --perf-hole   齿孔直径（齿的大小），咬入深度 = 直径 / 2 = 2cqw
-     --perf-corner 四角圆角半径（圆角程度）
-     --perf-inset  印刷安全边：票面图案距切边距离，须大于咬入深度 */
+     --perf-tooth   相邻齿孔中心距（6.2cqw ≈ 每边 16 齿）
+     --perf-hole    齿孔直径，咬入深度 = 直径 / 2 = 2cqw
+     --perf-corner  四角圆角半径
+     --perf-inset   印刷安全边，须大于咬入深度 */
   container-type: inline-size;
   --perf-tooth: 6.2cqw;
   --perf-hole: 4cqw;
   --perf-corner: 1.4cqw;
   --perf-inset: 4.4cqw;
 
-  position: relative; width: 100%; aspect-ratio: 5 / 6; display: block;
-  transition: transform .22s ease; cursor: pointer;
-  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 6;
+  transition: transform var(--dur) var(--ease);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
+
 /* 票纸：四条边各一排半圆缺口，四层遮罩取交集 → 沿外轮廓的均匀齿孔 */
 .stamp::before {
-  content: ''; position: absolute; inset: 0;
-  background: var(--paper, #fdf6e8);
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
   border-radius: var(--perf-corner);
   --perf-r: calc(var(--perf-hole) / 2);
-  --perf-edge: transparent calc(var(--perf-r) - .7px), #000 var(--perf-r);
+  --perf-edge: transparent calc(var(--perf-r) - 0.7px), #000 var(--perf-r);
   -webkit-mask:
     radial-gradient(circle at 50% 0, var(--perf-edge)) 0 0 / var(--perf-tooth) 100% repeat-x,
     radial-gradient(circle at 50% 100%, var(--perf-edge)) 0 0 / var(--perf-tooth) 100% repeat-x,
@@ -135,197 +337,686 @@ body {
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
+
 /* 投影单独一层：遮罩会把阴影一并咬掉，所以阴影不参与遮罩 */
-.stamp::after { content: ''; position: absolute; inset: 0; z-index: -1;
-  border-radius: var(--perf-corner); box-shadow: 0 4px 11px rgba(90,60,25,.26); }
-.stamp:hover { transform: translateY(-3px) rotate(-1.2deg); }
-.stamp:hover::after { box-shadow: 0 9px 18px rgba(90,60,25,.34); }
-.art { position: absolute; inset: var(--perf-inset); z-index: 1; display: flex; flex-direction: column;
-  border: 1px solid rgba(138,51,36,.35); }
-/* 不支持容器查询单位时退回固定像素，齿孔照常生效（只是不再随笔宽缩放） */
+.stamp::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--perf-corner);
+  box-shadow: var(--stamp-shadow);
+}
+
+.stamp:hover {
+  transform: translateY(-3px) rotate(-1.2deg);
+}
+
+.stamp:hover::after {
+  box-shadow: var(--stamp-shadow-hover);
+}
+
+.art {
+  position: absolute;
+  inset: var(--perf-inset);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--perf-line);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+/* 不支持容器查询单位时退回固定像素，齿孔照常生效 */
 @supports not (container-type: inline-size) {
-  .stamp { --perf-tooth: 11.8px; --perf-hole: 7.6px; --perf-corner: 2.7px; --perf-inset: 8.4px; }
+  .stamp {
+    --perf-tooth: 11.8px;
+    --perf-hole: 7.6px;
+    --perf-corner: 2.7px;
+    --perf-inset: 8.4px;
+  }
 }
 
-.s-head { background: var(--ink); color: var(--cream); font-size: 7px; letter-spacing: 2.4px;
-  text-align: center; padding: 5px 0 4px; font-weight: 600; flex: none; }
-.s-vig { flex: 1; margin: 8px 9px; border: 1px solid rgba(138,51,36,.45);
-  outline: 1px solid rgba(138,51,36,.2); outline-offset: -4px;
-  display: flex; align-items: center; justify-content: center;
-  background: repeating-linear-gradient(0deg, rgba(138,51,36,.035) 0 1px, transparent 1px 3px),
-              radial-gradient(circle at 42% 32%, var(--paper-light), var(--paper-deep));
-  background-color: var(--paper-deep); min-height: 0; }
-.s-vig img { width: 52px; height: 52px; border-radius: 6px; box-shadow: 0 1px 3px rgba(90,50,30,.3); }
-.s-name { text-align: center; font-family: var(--ff-serif);
-  font-size: 14.5px; font-weight: 700; color: var(--ink); letter-spacing: .5px;
-  padding: 0 8px; line-height: 1.15; overflow-wrap: break-word; flex: none; }
-.s-sub { text-align: center; font-family: var(--ff-serif); font-style: italic;
-  font-size: 7.5px; color: var(--muted); margin-top: 2px; padding: 0 10px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: none; }
-.s-foot { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 9px 8px; flex: none; }
-.s-type { font-family: var(--ff-serif); font-size: 6.5px; letter-spacing: 1.1px; color: var(--muted); }
-.s-value { font-family: var(--ff-num); font-size: 11.5px; font-weight: 700; color: var(--ink); }
+.s-head {
+  flex: none;
+  padding: 5px 0 4px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-align: center;
+}
 
-/* 邮戳（默认盖在首票，可由用户逐票改章）—— 旋转后包围盒仍留在列间距内，窄屏不压邻票 */
-.postmark { position: absolute; width: 60px; height: 60px; right: -8px; top: -8px;
-  border: 1.6px solid rgba(60,48,26,.55); border-radius: 50%;
-  transform: rotate(-10deg); display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: rgba(253,246,232,.25); z-index: 3; pointer-events: none; }
-.postmark::before { content: ''; position: absolute; inset: 3.5px; border: .8px solid rgba(60,48,26,.45); border-radius: 50%; }
-.postmark span { font-family: var(--ff-serif); font-size: 4.8px; letter-spacing: .2px;
-  color: rgba(60,48,26,.68); text-align: center; line-height: 1.7; }
-.postmark i { font-style: normal; font-size: 7px; line-height: 1; display: inline-block;
-  transform: translateY(.5px); }
+.s-vig {
+  flex: 1;
+  min-height: 0;
+  margin: 8px 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--perf-line);
+  border-radius: 2px;
+  outline: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
+  outline-offset: -4px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--accent) 5%, transparent) 0 1px,
+      transparent 1px 3px
+    ),
+    radial-gradient(circle at 42% 32%, var(--paper-light), var(--paper-deep));
+}
 
-/* ===== 归档封存章（is_archived → 票面左上角盖「注销／封存」章） =====
-   与右上角邮戳分居两角，不抢同一块地方；只用文字 + 边框，无位图，任意缩放都清晰。
-   全尺寸走 px（不跟票宽缩）：这枚章是「标记」而非票面装饰，宁可稳定也不要跟着列数变大小。 */
-.stamp.is-archived .art { filter: saturate(.55) contrast(.97); opacity: .94; }  /* 归档＝失色，但图案不变 */
-/* 题头条从砖红换成本章同款的冷灰墨：整排扫视时先看到"这票的票头不一样" */
-.stamp.is-archived .s-head { background: var(--seal-ink); color: var(--cream); }
+.s-vig img {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+
+.s-name {
+  flex: none;
+  padding: 0 8px;
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: center;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+.s-sub {
+  flex: none;
+  margin-top: 3px;
+  padding: 0 10px;
+  font-size: 8px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.s-foot {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 5px 9px 8px;
+  gap: 6px;
+}
+
+.s-type {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.s-value {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+ * 6. 邮戳（默认盖在首票，可逐票改章）
+ *    旋转后包围盒仍留在列间距内，窄屏不压邻票
+ * ------------------------------------------------------------------------ */
+.postmark {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  z-index: 3;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1.6px solid color-mix(in srgb, var(--text) 58%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--paper) 45%, transparent);
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+.postmark::before {
+  content: '';
+  position: absolute;
+  inset: 3.5px;
+  border: 0.8px solid color-mix(in srgb, var(--text) 42%, transparent);
+  border-radius: 50%;
+}
+
+.postmark span {
+  font-family: var(--font-mono);
+  font-size: 4.8px;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+  text-align: center;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+
+.postmark i {
+  display: inline-block;
+  font-style: normal;
+  font-size: 7px;
+  line-height: 1;
+  transform: translateY(0.5px);
+}
+
+.postmark.pm-wavy {
+  overflow: visible;
+}
+
+/* 波浪压在票面上向左延伸，不越过票边挤占相邻列 */
+.pm-waves {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 58px;
+  height: 22px;
+  margin-right: 2px;
+  color: var(--text);
+  transform: translateY(-50%);
+}
+
+.postmark.pm-star {
+  border-width: 3px;
+  border-style: double;
+}
+
+.postmark.pm-star::before {
+  display: none;
+}
+
+.postmark.pm-avion .pm-plane {
+  display: block;
+  margin-bottom: 1px;
+  font-size: 13px;
+  line-height: 1;
+}
+
+@keyframes stampIn {
+  0% {
+    transform: rotate(-10deg) scale(1.7);
+    opacity: 0;
+  }
+  62% {
+    transform: rotate(-10deg) scale(0.94);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-10deg) scale(1);
+  }
+}
+
+.postmark.pm-new {
+  animation: stampIn 0.32s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+ * 7. 状态章（归档 / 弃用）
+ *    归档用冷灰、弃用用暖琥珀，与主题里的 badge 令牌对齐；只靠文字 + 边框，无位图
+ * ------------------------------------------------------------------------ */
+.stamp.is-archived .art {
+  filter: saturate(0.55) contrast(0.97);
+  opacity: 0.94;
+}
+
+.stamp.is-archived .s-head {
+  background: var(--badge-archived-fg);
+  color: var(--cream);
+}
+
 .seal-archived {
-  /* 尺寸随票宽等比缩放（cqw），并夹在上下限内：窄屏不占半张票，宽屏不至于糊成一团 */
-  position: absolute; left: clamp(3px, 1.8cqw, 5px); top: clamp(24px, 13.2cqw, 31px); z-index: 4;
-  transform: rotate(-8deg);
+  position: absolute;
+  left: clamp(3px, 1.8cqw, 5px);
+  top: clamp(24px, 13.2cqw, 31px);
+  z-index: 4;
   padding: clamp(3px, 1.6cqw, 4.2px) clamp(4px, 2.6cqw, 6.2px) clamp(2.4px, 1.3cqw, 3.2px);
-  text-align: center; pointer-events: none;
-  color: rgba(58, 74, 77, .84);
-  background: rgba(252, 246, 234, .74);   /* 盖住图框线，章体才干净 */
-  border: clamp(1.2px, .66cqw, 1.6px) solid rgba(58, 74, 77, .68);
+  text-align: center;
+  transform: rotate(-8deg);
+  pointer-events: none;
+  color: var(--badge-archived-fg);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border: clamp(1.2px, 0.66cqw, 1.6px) solid var(--badge-archived-fg);
   border-radius: 2px;
-  box-shadow: inset 0 0 0 .8px rgba(58, 74, 77, .42);   /* 内框：模仿橡皮章的双线油墨边 */
-}
-.seal-archived b {
-  display: block; font-family: var(--ff-serif); font-weight: 700;
-  font-size: clamp(6.4px, 3.75cqw, 8.6px); line-height: 1;
-  letter-spacing: .16em; text-indent: .16em;
-}
-.seal-archived span {
-  display: block; margin-top: clamp(1.8px, 1.1cqw, 2.6px);
-  font-size: clamp(4.2px, 2.2cqw, 5.1px); line-height: 1;
-  letter-spacing: .1em; text-indent: .1em; opacity: .9;
+  box-shadow: inset 0 0 0 0.8px color-mix(in srgb, var(--badge-archived-fg) 60%, transparent);
 }
 
-/* ===== 弃用章（is_deprecated → 票面左侧盖「DEPRECATED / 已弃用」章） =====
-   与归档章同一套橡皮章语言，但墨色换成暖褐、纵向排在归档章下方：
-   同一张票既归档又弃用时两章叠列而不叠字。样式量刻意与 .seal-archived 保持对称。 */
-.stamp.is-deprecated .s-head { background: var(--deprecate-ink); color: var(--cream); }
-.stamp.is-deprecated .art { filter: sepia(.12) saturate(.78); }  /* 略褪色，仍看得清图案 */
+.seal-archived b {
+  display: block;
+  font-weight: 800;
+  font-size: clamp(6.4px, 3.75cqw, 8.6px);
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+}
+
+.seal-archived span {
+  display: block;
+  margin-top: clamp(1.8px, 1.1cqw, 2.6px);
+  font-size: clamp(4.2px, 2.2cqw, 5.1px);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-indent: 0.06em;
+  opacity: 0.9;
+}
+
+.stamp.is-deprecated .s-head {
+  background: var(--badge-beta-fg);
+  color: var(--cream);
+}
+
+.stamp.is-deprecated .art {
+  filter: sepia(0.12) saturate(0.78);
+}
+
 /* 归档 + 弃用同现时，弃用色压过归档冷灰：两种状态里「别用」更要紧 */
-.stamp.is-archived.is-deprecated .s-head { background: var(--deprecate-ink); }
-.stamp.is-archived.is-deprecated .art { filter: sepia(.16) saturate(.5) contrast(.97); }
+.stamp.is-archived.is-deprecated .s-head {
+  background: var(--badge-beta-fg);
+}
+
+.stamp.is-archived.is-deprecated .art {
+  filter: sepia(0.16) saturate(0.5) contrast(0.97);
+}
+
 .seal-deprecated {
-  /* DEPRECATED 比 ARCHIVED 长两个字母，字号与字距都要比归档章收一档，
-     否则旋转后包围盒会探出票纸左缘——章盖到票外就不像盖章了 */
-  position: absolute; left: clamp(5px, 2.4cqw, 7px); top: clamp(56px, 28cqw, 66px); z-index: 4;
-  transform: rotate(-6deg);
+  /* DEPRECATED 比 ARCHIVED 长，字号与字距收一档，旋转后包围盒才不会探出票纸左缘 */
+  position: absolute;
+  left: clamp(5px, 2.4cqw, 7px);
+  top: clamp(56px, 28cqw, 66px);
+  z-index: 4;
   padding: clamp(3px, 1.5cqw, 4px) clamp(3.4px, 2.1cqw, 5.4px) clamp(2.4px, 1.3cqw, 3.2px);
-  text-align: center; pointer-events: none;
-  color: rgba(122, 74, 56, .86);
-  background: rgba(252, 246, 234, .78);
-  border: clamp(1.2px, .66cqw, 1.6px) solid rgba(122, 74, 56, .7);
+  text-align: center;
+  transform: rotate(-6deg);
+  pointer-events: none;
+  color: var(--badge-beta-fg);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border: clamp(1.2px, 0.66cqw, 1.6px) solid var(--badge-beta-fg);
   border-radius: 2px;
-  box-shadow: inset 0 0 0 .8px rgba(122, 74, 56, .44);
+  box-shadow: inset 0 0 0 0.8px color-mix(in srgb, var(--badge-beta-fg) 62%, transparent);
 }
+
 .seal-deprecated b {
-  display: block; font-family: var(--ff-serif); font-weight: 700;
-  font-size: clamp(5.2px, 3.1cqw, 7.4px); line-height: 1;
-  letter-spacing: .1em; text-indent: .1em;
+  display: block;
+  font-weight: 800;
+  font-size: clamp(5.2px, 3.1cqw, 7.4px);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-indent: 0.06em;
 }
+
 .seal-deprecated span {
-  display: block; margin-top: clamp(1.8px, 1.1cqw, 2.6px);
-  font-size: clamp(4.2px, 2.1cqw, 5px); line-height: 1;
-  letter-spacing: .08em; text-indent: .08em; opacity: .9;
+  display: block;
+  margin-top: clamp(1.8px, 1.1cqw, 2.6px);
+  font-size: clamp(4.2px, 2.1cqw, 5px);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-indent: 0.04em;
+  opacity: 0.9;
 }
 
 /* 待收集空位 */
-.stamp.empty-slot { cursor: default; opacity: .5; }
-.stamp.empty-slot:hover { transform: none; }
-.empty-slot .art { border: 1px dashed var(--dim); display: flex; align-items: center; justify-content: center;
-  font-size: 10px; letter-spacing: 3px; color: var(--dim); }
+.stamp.empty-slot {
+  cursor: default;
+  opacity: 0.45;
+}
 
-/* ===== 详情弹层 ===== */
-.modal { position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; }
-.modal[hidden] { display: none; }
-.modal-mask { position: absolute; inset: 0; background: rgba(46,38,22,.55); }
-.modal-panel { position: relative; width: min(490px, calc(100vw - 40px));
-  background: linear-gradient(165deg, var(--panel-1), var(--panel-2));
-  border-radius: 14px; padding: 26px 28px 24px;
-  box-shadow: 0 30px 70px rgba(30,22,8,.55), inset 0 1px 0 rgba(255,255,255,.85); }
-.modal-close { position: absolute; top: 10px; right: 14px; border: none; background: none;
-  font-size: 22px; color: var(--dim); cursor: pointer; line-height: 1; }
-.modal-close:hover { color: var(--ink-dark); }
-.modal-head { display: flex; gap: 16px; align-items: center; }
-.modal-vig { width: 64px; height: 64px; flex: none;
-  border: 1px solid rgba(138,51,36,.45); outline: 1px solid rgba(138,51,36,.2); outline-offset: -3px;
+.stamp.empty-slot:hover {
+  transform: none;
+}
+
+.empty-slot .art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border-strong);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--text-faint);
+}
+
+/* --------------------------------------------------------------------------
+ * 8. 详情弹层
+ * ------------------------------------------------------------------------ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-mask {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.modal-panel {
+  position: relative;
+  width: min(490px, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  padding: 26px 28px 24px;
+  background: color-mix(in srgb, var(--bg-soft) 88%, transparent);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-faint);
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text);
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.modal-vig {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--perf-line);
+  border-radius: var(--radius-md);
   background: radial-gradient(circle at 42% 32%, var(--paper-light), var(--paper-deep));
-  display: flex; align-items: center; justify-content: center; }
-.modal-vig img { width: 44px; height: 44px; border-radius: 6px; box-shadow: 0 1px 3px rgba(90,50,30,.3); }
-.modal-name { font-family: var(--ff-serif); font-size: 24px; font-weight: 700; color: var(--ink-dark); overflow-wrap: break-word; }
+}
+
+.modal-vig img {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.3);
+}
+
+.modal-name {
+  font-family: var(--font-sans);
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+
 /* 徽章与元信息各自成块，窄屏整体换行，不在词中间硬断 */
-.modal-owner { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px;
-  font-size: 11.5px; color: var(--muted); margin-top: 3px; letter-spacing: .5px; }
-/* 弹层里的归档徽章：与票面印章同一套冷灰墨色，形成呼应 */
-.modal-archive-tag { display: inline-block; padding: 1px 7px 2px;
-  border: 1px solid rgba(58, 74, 77, .55); border-radius: 3px; background: rgba(58, 74, 77, .1);
-  color: var(--seal-ink); font-size: 9px; font-weight: 700; letter-spacing: 1.3px; white-space: nowrap; }
-/* 弹层里的弃用徽章：与票面弃用章同款暖褐墨 */
-.modal-deprecated-tag { display: inline-block; padding: 1px 7px 2px;
-  border: 1px solid rgba(122, 74, 56, .58); border-radius: 3px; background: rgba(122, 74, 56, .12);
-  color: var(--deprecate-ink); font-size: 9px; font-weight: 700; letter-spacing: 1.3px; white-space: nowrap; }
-/* 弃用理由：左侧一道褐墨竖条，读起来像贴在说明卡上的便签 */
-.modal-deprecated { margin: 12px 0 0; padding: 7px 10px; border-left: 2px solid rgba(122, 74, 56, .55);
-  background: rgba(122, 74, 56, .06); border-radius: 0 5px 5px 0;
-  font-size: 12px; line-height: 1.6; color: var(--deprecate-ink); }
-.modal-deprecated[hidden] { display: none; }
-.modal-zh { font-size: 14px; line-height: 1.7; color: var(--text-warm); margin: 16px 0 4px; }
-.modal-en { font-size: 12px; line-height: 1.6; font-style: italic; color: var(--en-text); margin: 0; }
-.modal-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.modal-topics:empty { display: none; }
-.topic { font-size: 10px; padding: 3px 9px; border: 1px solid rgba(107,90,44,.4); border-radius: 999px; color: var(--topic-text); background: rgba(255,253,246,.65); }
-.modal-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 18px 0; text-align: center; }
-.stat { background: rgba(255,253,246,.7); border: 1px solid rgba(107,90,44,.3); border-radius: 9px; padding: 9px 4px; }
-.stat b { display: block; font-family: "Times New Roman", serif; font-size: 14px; color: var(--ink-dark); }
-.stat span { font-size: 9px; letter-spacing: 1.5px; color: var(--dim); }
-.modal-links { display: flex; gap: 10px; }
-.btn-ink { display: inline-block; text-decoration: none; text-align: center; flex: 1;
-  background: linear-gradient(160deg, var(--ink), var(--ink-deep)); color: var(--cream);
-  border-radius: 8px; padding: 9px 14px; font-size: 13px; letter-spacing: 1.5px;
-  box-shadow: 0 2px 5px rgba(90,40,20,.35), inset 0 1px 0 rgba(255,255,255,.18); }
-.btn-ink:hover { filter: brightness(1.1); }
-.btn-ink.ghost { background: none; color: var(--ink-dark); box-shadow: inset 0 0 0 1px rgba(107,90,44,.5); }
+.modal-owner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
 
-/* ===== 可访问性 ===== */
-.ctl:focus-visible, .stamp:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.modal-archive-tag {
+  display: inline-block;
+  padding: 1px 8px 2px;
+  border: 1px solid color-mix(in srgb, var(--badge-archived-fg) 55%, transparent);
+  border-radius: var(--radius-pill);
+  background: var(--badge-archived-bg);
+  color: var(--badge-archived-fg);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.modal-deprecated-tag {
+  display: inline-block;
+  padding: 1px 8px 2px;
+  border: 1px solid color-mix(in srgb, var(--badge-beta-fg) 58%, transparent);
+  border-radius: var(--radius-pill);
+  background: var(--badge-beta-bg);
+  color: var(--badge-beta-fg);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* 弃用理由：左侧一道琥珀竖条，读起来像贴在说明卡上的便签 */
+.modal-deprecated {
+  margin: 14px 0 0;
+  padding: 8px 11px;
+  border-left: 2px solid var(--badge-beta-fg);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--badge-beta-bg);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.modal-deprecated[hidden] {
+  display: none;
+}
+
+.modal-zh {
+  margin: 16px 0 6px;
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.modal-zh b {
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.modal-en {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text-faint);
+}
+
+.modal-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.modal-topics:empty {
+  display: none;
+}
+
+.topic {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 18px 0;
+  text-align: center;
+}
+
+.stat {
+  padding: 9px 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.stat b {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.stat span {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+}
+
+.modal-links {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-ink {
+  flex: 1;
+  display: inline-block;
+  padding: 9px 14px;
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--on-accent);
+  background: var(--gradient-accent);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: filter var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.btn-ink:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn-ink.ghost {
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+
+.btn-ink.ghost:hover {
+  background: var(--surface-2);
+}
+
+/* --------------------------------------------------------------------------
+ * 9. 盖印选择
+ * ------------------------------------------------------------------------ */
+.pm-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 16px 0 14px;
+}
+
+.pm-picker-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-faint);
+}
+
+.pm-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pm-btn {
+  flex: none;
+  padding: 4px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
+}
+
+.pm-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.pm-btn.active {
+  background: var(--accent-solid);
+  border-color: var(--accent-solid);
+  color: var(--on-accent);
+}
+
+/* --------------------------------------------------------------------------
+ * 10. 可访问性
+ * ------------------------------------------------------------------------ */
+.ctl:focus-visible,
+.stamp:focus-visible,
+.pm-btn:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .stamp { transition: none; }
-  .stamp:hover { transform: none; }
-  .postmark.pm-new { animation: none; }
+  .stamp {
+    transition: none;
+  }
+
+  .stamp:hover {
+    transform: none;
+  }
+
+  .postmark.pm-new {
+    animation: none;
+  }
 }
 
-/* 中文简介「是什么：/有什么用：」加粗标签（仅弹层展示） */
-.modal-zh b { font-weight: 700; color: var(--ink-dark); }
+@media (max-width: 720px) {
+  .album-head {
+    margin-inline: clamp(0.75rem, 3vw, 1rem);
+    gap: var(--space-3);
+  }
 
-/* ===== 邮戳变体与盖印选择 ===== */
-.postmark.pm-wavy { overflow: visible; }
-/* 波浪压在票面上向左延伸，不再越过票边挤占相邻列 */
-.pm-waves { position: absolute; right: 100%; margin-right: 2px; top: 50%; transform: translateY(-50%);
-  width: 58px; height: 22px; color: var(--text); }
-.postmark.pm-star { border-width: 3px; border-style: double; }
-.postmark.pm-star::before { display: none; }
-.postmark.pm-avion .pm-plane { display: block; font-size: 13px; line-height: 1; margin-bottom: 1px; }
-@keyframes stampIn {
-  0% { transform: rotate(-10deg) scale(1.7); opacity: 0; }
-  62% { transform: rotate(-10deg) scale(.94); opacity: 1; }
-  100% { transform: rotate(-10deg) scale(1); }
+  .toolbar {
+    flex: 1 1 100%;
+  }
+
+  .search {
+    max-width: none;
+  }
+
+  .count {
+    font-size: 10.5px;
+  }
 }
-.postmark.pm-new { animation: stampIn .32s ease-out; }
-.pm-picker { margin: 16px 0 14px; display: flex; flex-direction: column; gap: 7px; }
-.pm-picker-label { font-size: 9px; letter-spacing: 3px; color: var(--dim); }
-.pm-options { display: flex; gap: 6px; flex-wrap: wrap; }
-.pm-btn { padding: 4px 13px; font-size: 11px; border: 1px solid rgba(107,90,44,.4); border-radius: 999px;
-  background: rgba(255,253,246,.7); cursor: pointer; color: var(--topic-text); font-family: inherit;
-  white-space: nowrap; flex: none; transition: all .15s; }
-.pm-btn:hover { border-color: var(--ink); color: var(--ink); }
-.pm-btn.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
-.pm-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
