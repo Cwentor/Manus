@@ -56,6 +56,7 @@ ManusNote/
 │       ├── *.md          # 长文（Front-matter: title/date/summary/tags/read_time + 可选 slug/category/featured）
 │       ├── job/          # 求职
 │       ├── knowledge/    # 知识库
+│       │   └── 教资备考/ # 小学教资笔记 46 篇（scripts/import-teacher-notes.js 从本地笔记迁移）
 │       ├── draft/        # ✍️ 草稿区（不参与构建，仅提交到仓库；移出即发布）
 │       ├── podcast/      # 播客
 │       ├── relax/        # 闲聊
@@ -66,7 +67,7 @@ ManusNote/
 ├── templates/            # 页面骨架（index / workspace / article / 卡片模板）
 ├── public/               # 静态资源（css / js / 图片），构建时原样复制
 │   └── stamps/           # 开源集邮册独立页（index.html + css + js 模块 + data/*.json）
-├── scripts/              # serve.js 本地预览 · normalize-blog.js 知识库迁移整理工具
+├── scripts/              # serve.js 本地预览 · normalize-blog.js 知识库迁移整理 · import-teacher-notes.js 教资笔记导入
 ├── tools/stamp-album/    # 集邮册数据工具：parse-repos.mjs 由 links.txt 生成 collection.json
 ├── tests/stamps/         # 集邮册模块契约测试（node --test，npm run test:stamps）
 ├── docs/                 # README 用图（点击特效效果图等），不参与构建
